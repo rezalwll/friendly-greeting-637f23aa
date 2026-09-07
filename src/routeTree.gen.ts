@@ -34,6 +34,7 @@ import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authe
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as EnAboutRouteImport } from './routes/en.about'
 import { Route as EnServicesRouteImport } from './routes/en.services'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
@@ -219,6 +220,11 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
 const EnIndexRoute = EnIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnAboutRoute = EnAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => EnRoute,
 } as any)
 const EnServicesRoute = EnServicesRouteImport.update({
@@ -590,6 +596,7 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/about': typeof EnAboutRoute
   '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/integrations/$slug': typeof IntegrationsSlugRoute
@@ -667,6 +674,7 @@ export interface FileRoutesByTo {
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/about': typeof EnAboutRoute
   '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/integrations/$slug': typeof IntegrationsSlugRoute
@@ -756,6 +764,7 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/about': typeof EnAboutRoute
   '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
   '/integrations/$slug': typeof IntegrationsSlugRoute
@@ -845,6 +854,7 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/blog/$slug'
+    | '/en/about'
     | '/en/services'
     | '/industries/$slug'
     | '/integrations/$slug'
@@ -922,6 +932,7 @@ export interface FileRouteTypes {
     | '/technologies'
     | '/why-rycode'
     | '/blog/$slug'
+    | '/en/about'
     | '/en/services'
     | '/industries/$slug'
     | '/integrations/$slug'
@@ -1010,6 +1021,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/blog/$slug'
+    | '/en/about'
     | '/en/services'
     | '/industries/$slug'
     | '/integrations/$slug'
@@ -1274,6 +1286,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/en/'
       preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/about': {
+      id: '/en/about'
+      path: '/about'
+      fullPath: '/en/about'
+      preLoaderRoute: typeof EnAboutRouteImport
       parentRoute: typeof EnRoute
     }
     '/en/services': {
@@ -1870,11 +1889,13 @@ const BlogRouteChildren: BlogRouteChildren = {
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
 interface EnRouteChildren {
+  EnAboutRoute: typeof EnAboutRoute
   EnServicesRoute: typeof EnServicesRoute
   EnIndexRoute: typeof EnIndexRoute
 }
 
 const EnRouteChildren: EnRouteChildren = {
+  EnAboutRoute: EnAboutRoute,
   EnServicesRoute: EnServicesRoute,
   EnIndexRoute: EnIndexRoute,
 }
