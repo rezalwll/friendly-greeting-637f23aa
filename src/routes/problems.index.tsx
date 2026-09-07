@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { HubOutro, ProblemsHubIntro } from "@/components/site/hubs";
 import { ContentListPage } from "@/components/site/kind-pages";
 
 const title = "مشکلات رایج پروژه‌های دیجیتال | رای‌کد";
 const description =
-  "مشکلات رایج سایت، فروشگاه و نرم‌افزار؛ از پروژه نیمه‌کاره و باگ تا افت سرعت و افت سئو، همراه با مسیر حل.";
+  "لازم نیست اسم راه‌حل را بدانید؛ از نشانه شروع کنید: پروژه متوقف، سایت کند، سیستم‌های جدا و گزارش‌نداشتن.";
 
 export const Route = createFileRoute("/problems/")({
   head: () => ({
@@ -26,11 +27,13 @@ function Page() {
       kind="problem"
       detailTo="/problems/$slug"
       eyebrow="مشکلات"
-      title="مشکل شما چیست؟"
-      lead="ورودی مشتریانی که پروژه‌شان متوقف، کند یا ناقص مانده است؛ هر مشکل صفحه راه‌حل مستقل دارد."
+      title="مشکلات ثبت‌شده"
+      lead="هر مشکل صفحه راه‌حل مستقل دارد؛ فهرست از مدیریت محتوای داخلی خوانده می‌شود."
       searchLabel="جستجو در مشکلات"
       emptyTitle="هنوز موردی منتشر نشده است"
       emptyHint="فهرست مشکلات را در مدیریت محتوا بسازید تا این صفحه به‌صورت خودکار پر شود."
+      intro={<ProblemsHubIntro />}
+      outro={<HubOutro>اگر مطمئن نیستید مشکل از کجاست، بررسی فنی رایگان نقطه شروع خوبی است.</HubOutro>}
     />
   );
 }

@@ -7,6 +7,7 @@ const STATIC_PATHS = [
   "/solutions",
   "/problems",
   "/industries",
+  "/integrations",
   "/projects",
   "/blog",
   "/about",
@@ -18,6 +19,10 @@ const STATIC_PATHS = [
   "/start-project",
   "/technical-review",
   "/seo-audit",
+  "/en",
+  "/en/services",
+  "/en/about",
+  "/en/contact",
 ];
 
 const KIND_PREFIX: Record<string, string> = {
@@ -26,6 +31,7 @@ const KIND_PREFIX: Record<string, string> = {
   problem: "/problems",
   industry: "/industries",
   case_study: "/projects",
+  integration: "/integrations",
 };
 
 export const Route = createFileRoute("/api/public/sitemap")({

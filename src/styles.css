@@ -4,6 +4,15 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* Local IranYekan — no external font service. */
+@font-face {
+  font-family: "IRANYekan";
+  src: url("/fonts/iranyekan/iranyekan.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
 /*
  * RYCODE design system.
  * Palette: graphite / near-black, warm white, RYCODE orange (accent only).
@@ -18,8 +27,15 @@
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
 
-  --font-sans: "Vazirmatn", "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Manrope", "Vazirmatn", ui-sans-serif, sans-serif;
+  --font-sans:
+    "IRANYekan", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, ui-sans-serif, system-ui,
+    sans-serif;
+  --font-display:
+    "IRANYekan", -apple-system, BlinkMacSystemFont, "Segoe UI Semibold", Roboto, ui-sans-serif,
+    sans-serif;
+  --font-latin:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, ui-sans-serif,
+    sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -182,6 +198,12 @@
 
   [dir="rtl"] body {
     letter-spacing: 0;
+  }
+
+  [dir="ltr"] body,
+  [lang="en"] body {
+    font-family: var(--font-latin);
+    letter-spacing: -0.01em;
   }
 
   h1,

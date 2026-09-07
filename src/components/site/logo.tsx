@@ -1,5 +1,7 @@
 import { cn } from "@/lib/utils";
-import logoAsset from "@/assets/rycode-logo.png.asset.json";
+
+/** Official RYCODE brand asset, stored locally in the project. */
+export const LOGO_SRC = "/brand/rycode-logo.jpg";
 
 /**
  * RYCODE logo: official mark + wordmark (RY graphite, CODE orange).
@@ -7,7 +9,7 @@ import logoAsset from "@/assets/rycode-logo.png.asset.json";
 export function Logo({ className }: { className?: string }) {
   return (
     <span dir="ltr" className={cn("inline-flex select-none items-center gap-2", className)}>
-      <img src={logoAsset.url} alt="RYCODE" className="h-[1.4em] w-auto" />
+      <img src={LOGO_SRC} alt="RYCODE" width={40} height={30} className="h-[1.4em] w-auto" />
       <span className="font-display text-[1.35rem] font-extrabold leading-none tracking-[-0.04em]">
         <span className="text-foreground">RY</span>
         <span className="text-brand">CODE</span>
@@ -19,8 +21,10 @@ export function Logo({ className }: { className?: string }) {
 export function LogoMark({ className }: { className?: string }) {
   return (
     <img
-      src={logoAsset.url}
+      src={LOGO_SRC}
       alt="RYCODE"
+      width={32}
+      height={32}
       className={cn("size-8 object-contain", className)}
       aria-hidden
     />

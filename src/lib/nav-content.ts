@@ -4,6 +4,7 @@ export type AppPath =
   | "/solutions"
   | "/problems"
   | "/industries"
+  | "/integrations"
   | "/projects"
   | "/blog"
   | "/about"
@@ -36,8 +37,8 @@ export const serviceGroups: NavGroup[] = [
     title: "توسعه",
     items: [
       { label: "نرم‌افزار اختصاصی", href: "/services" },
-      { label: "API", href: "/services" },
-      { label: "یکپارچه‌سازی", href: "/services" },
+      { label: "API", href: "/integrations" },
+      { label: "یکپارچه‌سازی", href: "/integrations" },
       { label: "توسعه پروژه موجود", href: "/services" },
       { label: "پنل و Dashboard", href: "/services" },
     ],
@@ -154,6 +155,7 @@ export const footerNav: NavGroup[] = [
       { label: "راهکارها", href: "/solutions" },
       { label: "مشکلات رایج", href: "/problems" },
       { label: "صنایع", href: "/industries" },
+      { label: "یکپارچه‌سازی", href: "/integrations" },
     ],
   },
   {

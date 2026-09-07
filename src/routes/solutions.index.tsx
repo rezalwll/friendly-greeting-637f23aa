@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { HubOutro, SolutionsHubIntro } from "@/components/site/hubs";
 import { ContentListPage } from "@/components/site/kind-pages";
 
 const title = "راهکارهای رای‌کد | نرم‌افزار، پنل و پلتفرم اختصاصی";
 const description =
-  "راهکارهای آماده رای‌کد برای فروش، عملیات، پلتفرم و خدمات پس از فروش؛ ساخته‌شده روی نیاز واقعی کسب‌وکار.";
+  "کاوشگر راهکارها: فروش و مشتری، عملیات، رزرو و خدمات، پس از فروش، پلتفرم و داده و گزارش.";
 
 export const Route = createFileRoute("/solutions/")({
   head: () => ({
@@ -31,6 +32,8 @@ function Page() {
       searchLabel="جستجو در راهکارها"
       emptyTitle="هنوز راهکاری منتشر نشده است"
       emptyHint="راهکارها را در بخش مدیریت محتوا بسازید تا اینجا با جستجو و صفحه‌بندی نمایش داده شوند."
+      intro={<SolutionsHubIntro />}
+      outro={<HubOutro />}
     />
   );
 }

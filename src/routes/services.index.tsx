@@ -1,10 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 
+import { HubOutro, ServicesHubIntro } from "@/components/site/hubs";
 import { ContentListPage } from "@/components/site/kind-pages";
 
 const title = "خدمات رای‌کد | ساخت، توسعه، حل مسئله، رشد و پشتیبانی";
 const description =
-  "همه خدمات رای‌کد در پنج گروه ساخت، توسعه، حل مشکل، رشد و پشتیبانی؛ از طراحی سایت تا نرم‌افزار اختصاصی و سئو.";
+  "نقشه توانمندی رای‌کد: از وضعیت فعلی خود شروع کنید — ساخت، توسعه پروژه موجود، یکپارچه‌سازی، رشد یا پشتیبانی.";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -27,10 +28,12 @@ function Page() {
       detailTo="/services/$slug"
       eyebrow="خدمات"
       title="خدمات رای‌کد"
-      lead="فهرست خدمات از مدیریت محتوای داخلی خوانده می‌شود؛ هر خدمت صفحه اختصاصی خود را دارد."
+      lead="هر خدمت صفحه اختصاصی خود را دارد؛ فهرست از مدیریت محتوای داخلی خوانده می‌شود."
       searchLabel="جستجو در خدمات"
       emptyTitle="هنوز خدمتی منتشر نشده است"
       emptyHint="پس از ثبت خدمات در بخش مدیریت محتوا، همین‌جا با جستجو و صفحه‌بندی نمایش داده می‌شوند."
+      intro={<ServicesHubIntro />}
+      outro={<HubOutro />}
     />
   );
 }
