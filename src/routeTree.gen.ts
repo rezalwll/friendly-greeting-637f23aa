@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -26,10 +27,63 @@ import { Route as StartProjectRouteImport } from './routes/start-project'
 import { Route as TechnicalReviewRouteImport } from './routes/technical-review'
 import { Route as TechnologiesRouteImport } from './routes/technologies'
 import { Route as WhyRycodeRouteImport } from './routes/why-rycode'
+import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
+import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
+import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminArticlesRouteImport } from './routes/_authenticated/admin/articles'
+import { Route as AuthenticatedAdminAuthorsRouteImport } from './routes/_authenticated/admin/authors'
+import { Route as AuthenticatedAdminCategoriesRouteImport } from './routes/_authenticated/admin/categories'
+import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin/customers'
+import { Route as AuthenticatedAdminFaqsRouteImport } from './routes/_authenticated/admin/faqs'
+import { Route as AuthenticatedAdminInstallmentsRouteImport } from './routes/_authenticated/admin/installments'
+import { Route as AuthenticatedAdminInvoicesRouteImport } from './routes/_authenticated/admin/invoices'
+import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authenticated/admin/leads'
+import { Route as AuthenticatedAdminLogsRouteImport } from './routes/_authenticated/admin/logs'
+import { Route as AuthenticatedAdminMessagesRouteImport } from './routes/_authenticated/admin/messages'
+import { Route as AuthenticatedAdminPaymentsRouteImport } from './routes/_authenticated/admin/payments'
+import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
+import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
+import { Route as AuthenticatedAdminTagsRouteImport } from './routes/_authenticated/admin/tags'
+import { Route as AuthenticatedAdminTicketsRouteImport } from './routes/_authenticated/admin/tickets'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
+import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
+import { Route as AuthenticatedDashboardFilesRouteImport } from './routes/_authenticated/dashboard/files'
+import { Route as AuthenticatedDashboardNotificationsRouteImport } from './routes/_authenticated/dashboard/notifications'
+import { Route as AuthenticatedDashboardPaymentsRouteImport } from './routes/_authenticated/dashboard/payments'
+import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard/profile'
+import { Route as AuthenticatedDashboardRequestsRouteImport } from './routes/_authenticated/dashboard/requests'
+import { Route as AuthenticatedDashboardSupportRouteImport } from './routes/_authenticated/dashboard/support'
+import { Route as AuthenticatedAdminAnalyticsIndexRouteImport } from './routes/_authenticated/admin/analytics/index'
+import { Route as AuthenticatedAdminAnalyticsAcquisitionRouteImport } from './routes/_authenticated/admin/analytics/acquisition'
+import { Route as AuthenticatedAdminAnalyticsBehaviorRouteImport } from './routes/_authenticated/admin/analytics/behavior'
+import { Route as AuthenticatedAdminAnalyticsConversionsRouteImport } from './routes/_authenticated/admin/analytics/conversions'
+import { Route as AuthenticatedAdminAnalyticsFormsRouteImport } from './routes/_authenticated/admin/analytics/forms'
+import { Route as AuthenticatedAdminAnalyticsIndustriesRouteImport } from './routes/_authenticated/admin/analytics/industries'
+import { Route as AuthenticatedAdminAnalyticsJourneysRouteImport } from './routes/_authenticated/admin/analytics/journeys'
+import { Route as AuthenticatedAdminAnalyticsPagesRouteImport } from './routes/_authenticated/admin/analytics/pages'
+import { Route as AuthenticatedAdminAnalyticsSearchRouteImport } from './routes/_authenticated/admin/analytics/search'
+import { Route as AuthenticatedAdminAnalyticsServicesRouteImport } from './routes/_authenticated/admin/analytics/services'
+import { Route as AuthenticatedAdminContentCase_studyRouteImport } from './routes/_authenticated/admin/content/case_study'
+import { Route as AuthenticatedAdminContentIndustryRouteImport } from './routes/_authenticated/admin/content/industry'
+import { Route as AuthenticatedAdminContentIntegrationRouteImport } from './routes/_authenticated/admin/content/integration'
+import { Route as AuthenticatedAdminContentProblemRouteImport } from './routes/_authenticated/admin/content/problem'
+import { Route as AuthenticatedAdminContentServiceRouteImport } from './routes/_authenticated/admin/content/service'
+import { Route as AuthenticatedAdminContentSolutionRouteImport } from './routes/_authenticated/admin/content/solution'
+import { Route as AuthenticatedAdminProjectsIndexRouteImport } from './routes/_authenticated/admin/projects/index'
+import { Route as AuthenticatedAdminProjectsIdRouteImport } from './routes/_authenticated/admin/projects/$id'
+import { Route as AuthenticatedAdminSeoHealthRouteImport } from './routes/_authenticated/admin/seo/health'
+import { Route as AuthenticatedAdminSeoMetadataRouteImport } from './routes/_authenticated/admin/seo/metadata'
+import { Route as AuthenticatedAdminSeoRedirectsRouteImport } from './routes/_authenticated/admin/seo/redirects'
+import { Route as AuthenticatedDashboardProjectsIndexRouteImport } from './routes/_authenticated/dashboard/projects/index'
+import { Route as AuthenticatedDashboardProjectsIdRouteImport } from './routes/_authenticated/dashboard/projects/$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -112,6 +166,292 @@ const WhyRycodeRoute = WhyRycodeRouteImport.update({
   path: '/why-rycode',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AuthenticatedAdminRouteRoute = AuthenticatedAdminRouteRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRouteRoute =
+  AuthenticatedDashboardRouteRouteImport.update({
+    id: '/dashboard',
+    path: '/dashboard',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminArticlesRoute =
+  AuthenticatedAdminArticlesRouteImport.update({
+    id: '/articles',
+    path: '/articles',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAuthorsRoute =
+  AuthenticatedAdminAuthorsRouteImport.update({
+    id: '/authors',
+    path: '/authors',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCategoriesRoute =
+  AuthenticatedAdminCategoriesRouteImport.update({
+    id: '/categories',
+    path: '/categories',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminCustomersRoute =
+  AuthenticatedAdminCustomersRouteImport.update({
+    id: '/customers',
+    path: '/customers',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminFaqsRoute = AuthenticatedAdminFaqsRouteImport.update({
+  id: '/faqs',
+  path: '/faqs',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminInstallmentsRoute =
+  AuthenticatedAdminInstallmentsRouteImport.update({
+    id: '/installments',
+    path: '/installments',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminInvoicesRoute =
+  AuthenticatedAdminInvoicesRouteImport.update({
+    id: '/invoices',
+    path: '/invoices',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminLeadsRoute = AuthenticatedAdminLeadsRouteImport.update({
+  id: '/leads',
+  path: '/leads',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminLogsRoute = AuthenticatedAdminLogsRouteImport.update({
+  id: '/logs',
+  path: '/logs',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminMessagesRoute =
+  AuthenticatedAdminMessagesRouteImport.update({
+    id: '/messages',
+    path: '/messages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminPaymentsRoute =
+  AuthenticatedAdminPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminSettingsRoute =
+  AuthenticatedAdminSettingsRouteImport.update({
+    id: '/settings',
+    path: '/settings',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminTagsRoute = AuthenticatedAdminTagsRouteImport.update({
+  id: '/tags',
+  path: '/tags',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedAdminTicketsRoute =
+  AuthenticatedAdminTicketsRouteImport.update({
+    id: '/tickets',
+    path: '/tickets',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
+const AuthenticatedDashboardIndexRoute =
+  AuthenticatedDashboardIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardFilesRoute =
+  AuthenticatedDashboardFilesRouteImport.update({
+    id: '/files',
+    path: '/files',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardNotificationsRoute =
+  AuthenticatedDashboardNotificationsRouteImport.update({
+    id: '/notifications',
+    path: '/notifications',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardPaymentsRoute =
+  AuthenticatedDashboardPaymentsRouteImport.update({
+    id: '/payments',
+    path: '/payments',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardProfileRoute =
+  AuthenticatedDashboardProfileRouteImport.update({
+    id: '/profile',
+    path: '/profile',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardRequestsRoute =
+  AuthenticatedDashboardRequestsRouteImport.update({
+    id: '/requests',
+    path: '/requests',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardSupportRoute =
+  AuthenticatedDashboardSupportRouteImport.update({
+    id: '/support',
+    path: '/support',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsIndexRoute =
+  AuthenticatedAdminAnalyticsIndexRouteImport.update({
+    id: '/analytics/',
+    path: '/analytics/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsAcquisitionRoute =
+  AuthenticatedAdminAnalyticsAcquisitionRouteImport.update({
+    id: '/analytics/acquisition',
+    path: '/analytics/acquisition',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsBehaviorRoute =
+  AuthenticatedAdminAnalyticsBehaviorRouteImport.update({
+    id: '/analytics/behavior',
+    path: '/analytics/behavior',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsConversionsRoute =
+  AuthenticatedAdminAnalyticsConversionsRouteImport.update({
+    id: '/analytics/conversions',
+    path: '/analytics/conversions',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsFormsRoute =
+  AuthenticatedAdminAnalyticsFormsRouteImport.update({
+    id: '/analytics/forms',
+    path: '/analytics/forms',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsIndustriesRoute =
+  AuthenticatedAdminAnalyticsIndustriesRouteImport.update({
+    id: '/analytics/industries',
+    path: '/analytics/industries',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsJourneysRoute =
+  AuthenticatedAdminAnalyticsJourneysRouteImport.update({
+    id: '/analytics/journeys',
+    path: '/analytics/journeys',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsPagesRoute =
+  AuthenticatedAdminAnalyticsPagesRouteImport.update({
+    id: '/analytics/pages',
+    path: '/analytics/pages',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsSearchRoute =
+  AuthenticatedAdminAnalyticsSearchRouteImport.update({
+    id: '/analytics/search',
+    path: '/analytics/search',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminAnalyticsServicesRoute =
+  AuthenticatedAdminAnalyticsServicesRouteImport.update({
+    id: '/analytics/services',
+    path: '/analytics/services',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentCase_studyRoute =
+  AuthenticatedAdminContentCase_studyRouteImport.update({
+    id: '/content/case_study',
+    path: '/content/case_study',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentIndustryRoute =
+  AuthenticatedAdminContentIndustryRouteImport.update({
+    id: '/content/industry',
+    path: '/content/industry',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentIntegrationRoute =
+  AuthenticatedAdminContentIntegrationRouteImport.update({
+    id: '/content/integration',
+    path: '/content/integration',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentProblemRoute =
+  AuthenticatedAdminContentProblemRouteImport.update({
+    id: '/content/problem',
+    path: '/content/problem',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentServiceRoute =
+  AuthenticatedAdminContentServiceRouteImport.update({
+    id: '/content/service',
+    path: '/content/service',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminContentSolutionRoute =
+  AuthenticatedAdminContentSolutionRouteImport.update({
+    id: '/content/solution',
+    path: '/content/solution',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProjectsIndexRoute =
+  AuthenticatedAdminProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminProjectsIdRoute =
+  AuthenticatedAdminProjectsIdRouteImport.update({
+    id: '/projects/$id',
+    path: '/projects/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSeoHealthRoute =
+  AuthenticatedAdminSeoHealthRouteImport.update({
+    id: '/seo/health',
+    path: '/seo/health',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSeoMetadataRoute =
+  AuthenticatedAdminSeoMetadataRouteImport.update({
+    id: '/seo/metadata',
+    path: '/seo/metadata',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedAdminSeoRedirectsRoute =
+  AuthenticatedAdminSeoRedirectsRouteImport.update({
+    id: '/seo/redirects',
+    path: '/seo/redirects',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
+const AuthenticatedDashboardProjectsIndexRoute =
+  AuthenticatedDashboardProjectsIndexRouteImport.update({
+    id: '/projects/',
+    path: '/projects/',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
+const AuthenticatedDashboardProjectsIdRoute =
+  AuthenticatedDashboardProjectsIdRouteImport.update({
+    id: '/projects/$id',
+    path: '/projects/$id',
+    getParentRoute: () => AuthenticatedDashboardRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -131,6 +471,55 @@ export interface FileRoutesByFullPath {
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/admin/articles': typeof AuthenticatedAdminArticlesRoute
+  '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
+  '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/admin/faqs': typeof AuthenticatedAdminFaqsRoute
+  '/admin/installments': typeof AuthenticatedAdminInstallmentsRoute
+  '/admin/invoices': typeof AuthenticatedAdminInvoicesRoute
+  '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/admin/logs': typeof AuthenticatedAdminLogsRoute
+  '/admin/messages': typeof AuthenticatedAdminMessagesRoute
+  '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/tags': typeof AuthenticatedAdminTagsRoute
+  '/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/dashboard/files': typeof AuthenticatedDashboardFilesRoute
+  '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
+  '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/admin/': typeof AuthenticatedAdminIndexRoute
+  '/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
+  '/admin/analytics/behavior': typeof AuthenticatedAdminAnalyticsBehaviorRoute
+  '/admin/analytics/conversions': typeof AuthenticatedAdminAnalyticsConversionsRoute
+  '/admin/analytics/forms': typeof AuthenticatedAdminAnalyticsFormsRoute
+  '/admin/analytics/industries': typeof AuthenticatedAdminAnalyticsIndustriesRoute
+  '/admin/analytics/journeys': typeof AuthenticatedAdminAnalyticsJourneysRoute
+  '/admin/analytics/pages': typeof AuthenticatedAdminAnalyticsPagesRoute
+  '/admin/analytics/search': typeof AuthenticatedAdminAnalyticsSearchRoute
+  '/admin/analytics/services': typeof AuthenticatedAdminAnalyticsServicesRoute
+  '/admin/content/case_study': typeof AuthenticatedAdminContentCase_studyRoute
+  '/admin/content/industry': typeof AuthenticatedAdminContentIndustryRoute
+  '/admin/content/integration': typeof AuthenticatedAdminContentIntegrationRoute
+  '/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
+  '/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
+  '/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
+  '/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
+  '/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
+  '/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
+  '/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/admin/analytics/': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/admin/projects/': typeof AuthenticatedAdminProjectsIndexRoute
+  '/dashboard/projects/': typeof AuthenticatedDashboardProjectsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -150,10 +539,58 @@ export interface FileRoutesByTo {
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/admin/articles': typeof AuthenticatedAdminArticlesRoute
+  '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
+  '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
+  '/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/admin/faqs': typeof AuthenticatedAdminFaqsRoute
+  '/admin/installments': typeof AuthenticatedAdminInstallmentsRoute
+  '/admin/invoices': typeof AuthenticatedAdminInvoicesRoute
+  '/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/admin/logs': typeof AuthenticatedAdminLogsRoute
+  '/admin/messages': typeof AuthenticatedAdminMessagesRoute
+  '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/admin/tags': typeof AuthenticatedAdminTagsRoute
+  '/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/dashboard/files': typeof AuthenticatedDashboardFilesRoute
+  '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
+  '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
+  '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/admin': typeof AuthenticatedAdminIndexRoute
+  '/dashboard': typeof AuthenticatedDashboardIndexRoute
+  '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
+  '/admin/analytics/behavior': typeof AuthenticatedAdminAnalyticsBehaviorRoute
+  '/admin/analytics/conversions': typeof AuthenticatedAdminAnalyticsConversionsRoute
+  '/admin/analytics/forms': typeof AuthenticatedAdminAnalyticsFormsRoute
+  '/admin/analytics/industries': typeof AuthenticatedAdminAnalyticsIndustriesRoute
+  '/admin/analytics/journeys': typeof AuthenticatedAdminAnalyticsJourneysRoute
+  '/admin/analytics/pages': typeof AuthenticatedAdminAnalyticsPagesRoute
+  '/admin/analytics/search': typeof AuthenticatedAdminAnalyticsSearchRoute
+  '/admin/analytics/services': typeof AuthenticatedAdminAnalyticsServicesRoute
+  '/admin/content/case_study': typeof AuthenticatedAdminContentCase_studyRoute
+  '/admin/content/industry': typeof AuthenticatedAdminContentIndustryRoute
+  '/admin/content/integration': typeof AuthenticatedAdminContentIntegrationRoute
+  '/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
+  '/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
+  '/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
+  '/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
+  '/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
+  '/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
+  '/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/admin/analytics': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/admin/projects': typeof AuthenticatedAdminProjectsIndexRoute
+  '/dashboard/projects': typeof AuthenticatedDashboardProjectsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
   '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
@@ -170,6 +607,55 @@ export interface FileRoutesById {
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/_authenticated/admin/articles': typeof AuthenticatedAdminArticlesRoute
+  '/_authenticated/admin/authors': typeof AuthenticatedAdminAuthorsRoute
+  '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
+  '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
+  '/_authenticated/admin/faqs': typeof AuthenticatedAdminFaqsRoute
+  '/_authenticated/admin/installments': typeof AuthenticatedAdminInstallmentsRoute
+  '/_authenticated/admin/invoices': typeof AuthenticatedAdminInvoicesRoute
+  '/_authenticated/admin/leads': typeof AuthenticatedAdminLeadsRoute
+  '/_authenticated/admin/logs': typeof AuthenticatedAdminLogsRoute
+  '/_authenticated/admin/messages': typeof AuthenticatedAdminMessagesRoute
+  '/_authenticated/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
+  '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
+  '/_authenticated/admin/tags': typeof AuthenticatedAdminTagsRoute
+  '/_authenticated/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
+  '/_authenticated/dashboard/files': typeof AuthenticatedDashboardFilesRoute
+  '/_authenticated/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
+  '/_authenticated/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
+  '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
+  '/_authenticated/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
+  '/_authenticated/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
+  '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
+  '/_authenticated/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
+  '/_authenticated/admin/analytics/behavior': typeof AuthenticatedAdminAnalyticsBehaviorRoute
+  '/_authenticated/admin/analytics/conversions': typeof AuthenticatedAdminAnalyticsConversionsRoute
+  '/_authenticated/admin/analytics/forms': typeof AuthenticatedAdminAnalyticsFormsRoute
+  '/_authenticated/admin/analytics/industries': typeof AuthenticatedAdminAnalyticsIndustriesRoute
+  '/_authenticated/admin/analytics/journeys': typeof AuthenticatedAdminAnalyticsJourneysRoute
+  '/_authenticated/admin/analytics/pages': typeof AuthenticatedAdminAnalyticsPagesRoute
+  '/_authenticated/admin/analytics/search': typeof AuthenticatedAdminAnalyticsSearchRoute
+  '/_authenticated/admin/analytics/services': typeof AuthenticatedAdminAnalyticsServicesRoute
+  '/_authenticated/admin/content/case_study': typeof AuthenticatedAdminContentCase_studyRoute
+  '/_authenticated/admin/content/industry': typeof AuthenticatedAdminContentIndustryRoute
+  '/_authenticated/admin/content/integration': typeof AuthenticatedAdminContentIntegrationRoute
+  '/_authenticated/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
+  '/_authenticated/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
+  '/_authenticated/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/_authenticated/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
+  '/_authenticated/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
+  '/_authenticated/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
+  '/_authenticated/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
+  '/_authenticated/dashboard/projects/$id': typeof AuthenticatedDashboardProjectsIdRoute
+  '/_authenticated/admin/analytics/': typeof AuthenticatedAdminAnalyticsIndexRoute
+  '/_authenticated/admin/projects/': typeof AuthenticatedAdminProjectsIndexRoute
+  '/_authenticated/dashboard/projects/': typeof AuthenticatedDashboardProjectsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -191,6 +677,55 @@ export interface FileRouteTypes {
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/admin'
+    | '/dashboard'
+    | '/admin/articles'
+    | '/admin/authors'
+    | '/admin/categories'
+    | '/admin/customers'
+    | '/admin/faqs'
+    | '/admin/installments'
+    | '/admin/invoices'
+    | '/admin/leads'
+    | '/admin/logs'
+    | '/admin/messages'
+    | '/admin/payments'
+    | '/admin/roles'
+    | '/admin/settings'
+    | '/admin/tags'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/dashboard/files'
+    | '/dashboard/notifications'
+    | '/dashboard/payments'
+    | '/dashboard/profile'
+    | '/dashboard/requests'
+    | '/dashboard/support'
+    | '/admin/'
+    | '/dashboard/'
+    | '/admin/analytics/acquisition'
+    | '/admin/analytics/behavior'
+    | '/admin/analytics/conversions'
+    | '/admin/analytics/forms'
+    | '/admin/analytics/industries'
+    | '/admin/analytics/journeys'
+    | '/admin/analytics/pages'
+    | '/admin/analytics/search'
+    | '/admin/analytics/services'
+    | '/admin/content/case_study'
+    | '/admin/content/industry'
+    | '/admin/content/integration'
+    | '/admin/content/problem'
+    | '/admin/content/service'
+    | '/admin/content/solution'
+    | '/admin/projects/$id'
+    | '/admin/seo/health'
+    | '/admin/seo/metadata'
+    | '/admin/seo/redirects'
+    | '/dashboard/projects/$id'
+    | '/admin/analytics/'
+    | '/admin/projects/'
+    | '/dashboard/projects/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -210,9 +745,57 @@ export interface FileRouteTypes {
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/admin/articles'
+    | '/admin/authors'
+    | '/admin/categories'
+    | '/admin/customers'
+    | '/admin/faqs'
+    | '/admin/installments'
+    | '/admin/invoices'
+    | '/admin/leads'
+    | '/admin/logs'
+    | '/admin/messages'
+    | '/admin/payments'
+    | '/admin/roles'
+    | '/admin/settings'
+    | '/admin/tags'
+    | '/admin/tickets'
+    | '/admin/users'
+    | '/dashboard/files'
+    | '/dashboard/notifications'
+    | '/dashboard/payments'
+    | '/dashboard/profile'
+    | '/dashboard/requests'
+    | '/dashboard/support'
+    | '/admin'
+    | '/dashboard'
+    | '/admin/analytics/acquisition'
+    | '/admin/analytics/behavior'
+    | '/admin/analytics/conversions'
+    | '/admin/analytics/forms'
+    | '/admin/analytics/industries'
+    | '/admin/analytics/journeys'
+    | '/admin/analytics/pages'
+    | '/admin/analytics/search'
+    | '/admin/analytics/services'
+    | '/admin/content/case_study'
+    | '/admin/content/industry'
+    | '/admin/content/integration'
+    | '/admin/content/problem'
+    | '/admin/content/service'
+    | '/admin/content/solution'
+    | '/admin/projects/$id'
+    | '/admin/seo/health'
+    | '/admin/seo/metadata'
+    | '/admin/seo/redirects'
+    | '/dashboard/projects/$id'
+    | '/admin/analytics'
+    | '/admin/projects'
+    | '/dashboard/projects'
   id:
     | '__root__'
     | '/'
+    | '/_authenticated'
     | '/about'
     | '/blog'
     | '/contact'
@@ -229,10 +812,60 @@ export interface FileRouteTypes {
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/_authenticated/admin'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/admin/articles'
+    | '/_authenticated/admin/authors'
+    | '/_authenticated/admin/categories'
+    | '/_authenticated/admin/customers'
+    | '/_authenticated/admin/faqs'
+    | '/_authenticated/admin/installments'
+    | '/_authenticated/admin/invoices'
+    | '/_authenticated/admin/leads'
+    | '/_authenticated/admin/logs'
+    | '/_authenticated/admin/messages'
+    | '/_authenticated/admin/payments'
+    | '/_authenticated/admin/roles'
+    | '/_authenticated/admin/settings'
+    | '/_authenticated/admin/tags'
+    | '/_authenticated/admin/tickets'
+    | '/_authenticated/admin/users'
+    | '/_authenticated/dashboard/files'
+    | '/_authenticated/dashboard/notifications'
+    | '/_authenticated/dashboard/payments'
+    | '/_authenticated/dashboard/profile'
+    | '/_authenticated/dashboard/requests'
+    | '/_authenticated/dashboard/support'
+    | '/_authenticated/admin/'
+    | '/_authenticated/dashboard/'
+    | '/_authenticated/admin/analytics/acquisition'
+    | '/_authenticated/admin/analytics/behavior'
+    | '/_authenticated/admin/analytics/conversions'
+    | '/_authenticated/admin/analytics/forms'
+    | '/_authenticated/admin/analytics/industries'
+    | '/_authenticated/admin/analytics/journeys'
+    | '/_authenticated/admin/analytics/pages'
+    | '/_authenticated/admin/analytics/search'
+    | '/_authenticated/admin/analytics/services'
+    | '/_authenticated/admin/content/case_study'
+    | '/_authenticated/admin/content/industry'
+    | '/_authenticated/admin/content/integration'
+    | '/_authenticated/admin/content/problem'
+    | '/_authenticated/admin/content/service'
+    | '/_authenticated/admin/content/solution'
+    | '/_authenticated/admin/projects/$id'
+    | '/_authenticated/admin/seo/health'
+    | '/_authenticated/admin/seo/metadata'
+    | '/_authenticated/admin/seo/redirects'
+    | '/_authenticated/dashboard/projects/$id'
+    | '/_authenticated/admin/analytics/'
+    | '/_authenticated/admin/projects/'
+    | '/_authenticated/dashboard/projects/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
@@ -258,6 +891,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -372,11 +1012,506 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WhyRycodeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/_authenticated/admin': {
+      id: '/_authenticated/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AuthenticatedAdminRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/admin/': {
+      id: '/_authenticated/admin/'
+      path: '/'
+      fullPath: '/admin/'
+      preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/articles': {
+      id: '/_authenticated/admin/articles'
+      path: '/articles'
+      fullPath: '/admin/articles'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/authors': {
+      id: '/_authenticated/admin/authors'
+      path: '/authors'
+      fullPath: '/admin/authors'
+      preLoaderRoute: typeof AuthenticatedAdminAuthorsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/categories': {
+      id: '/_authenticated/admin/categories'
+      path: '/categories'
+      fullPath: '/admin/categories'
+      preLoaderRoute: typeof AuthenticatedAdminCategoriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/customers': {
+      id: '/_authenticated/admin/customers'
+      path: '/customers'
+      fullPath: '/admin/customers'
+      preLoaderRoute: typeof AuthenticatedAdminCustomersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/faqs': {
+      id: '/_authenticated/admin/faqs'
+      path: '/faqs'
+      fullPath: '/admin/faqs'
+      preLoaderRoute: typeof AuthenticatedAdminFaqsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/installments': {
+      id: '/_authenticated/admin/installments'
+      path: '/installments'
+      fullPath: '/admin/installments'
+      preLoaderRoute: typeof AuthenticatedAdminInstallmentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/invoices': {
+      id: '/_authenticated/admin/invoices'
+      path: '/invoices'
+      fullPath: '/admin/invoices'
+      preLoaderRoute: typeof AuthenticatedAdminInvoicesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/leads': {
+      id: '/_authenticated/admin/leads'
+      path: '/leads'
+      fullPath: '/admin/leads'
+      preLoaderRoute: typeof AuthenticatedAdminLeadsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/logs': {
+      id: '/_authenticated/admin/logs'
+      path: '/logs'
+      fullPath: '/admin/logs'
+      preLoaderRoute: typeof AuthenticatedAdminLogsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/messages': {
+      id: '/_authenticated/admin/messages'
+      path: '/messages'
+      fullPath: '/admin/messages'
+      preLoaderRoute: typeof AuthenticatedAdminMessagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/payments': {
+      id: '/_authenticated/admin/payments'
+      path: '/payments'
+      fullPath: '/admin/payments'
+      preLoaderRoute: typeof AuthenticatedAdminPaymentsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/roles': {
+      id: '/_authenticated/admin/roles'
+      path: '/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AuthenticatedAdminRolesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/settings': {
+      id: '/_authenticated/admin/settings'
+      path: '/settings'
+      fullPath: '/admin/settings'
+      preLoaderRoute: typeof AuthenticatedAdminSettingsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/tags': {
+      id: '/_authenticated/admin/tags'
+      path: '/tags'
+      fullPath: '/admin/tags'
+      preLoaderRoute: typeof AuthenticatedAdminTagsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/tickets': {
+      id: '/_authenticated/admin/tickets'
+      path: '/tickets'
+      fullPath: '/admin/tickets'
+      preLoaderRoute: typeof AuthenticatedAdminTicketsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/dashboard/': {
+      id: '/_authenticated/dashboard/'
+      path: '/'
+      fullPath: '/dashboard/'
+      preLoaderRoute: typeof AuthenticatedDashboardIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/files': {
+      id: '/_authenticated/dashboard/files'
+      path: '/files'
+      fullPath: '/dashboard/files'
+      preLoaderRoute: typeof AuthenticatedDashboardFilesRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/notifications': {
+      id: '/_authenticated/dashboard/notifications'
+      path: '/notifications'
+      fullPath: '/dashboard/notifications'
+      preLoaderRoute: typeof AuthenticatedDashboardNotificationsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/payments': {
+      id: '/_authenticated/dashboard/payments'
+      path: '/payments'
+      fullPath: '/dashboard/payments'
+      preLoaderRoute: typeof AuthenticatedDashboardPaymentsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/profile': {
+      id: '/_authenticated/dashboard/profile'
+      path: '/profile'
+      fullPath: '/dashboard/profile'
+      preLoaderRoute: typeof AuthenticatedDashboardProfileRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/requests': {
+      id: '/_authenticated/dashboard/requests'
+      path: '/requests'
+      fullPath: '/dashboard/requests'
+      preLoaderRoute: typeof AuthenticatedDashboardRequestsRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/support': {
+      id: '/_authenticated/dashboard/support'
+      path: '/support'
+      fullPath: '/dashboard/support'
+      preLoaderRoute: typeof AuthenticatedDashboardSupportRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/admin/analytics/': {
+      id: '/_authenticated/admin/analytics/'
+      path: '/analytics'
+      fullPath: '/admin/analytics/'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/acquisition': {
+      id: '/_authenticated/admin/analytics/acquisition'
+      path: '/analytics/acquisition'
+      fullPath: '/admin/analytics/acquisition'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsAcquisitionRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/behavior': {
+      id: '/_authenticated/admin/analytics/behavior'
+      path: '/analytics/behavior'
+      fullPath: '/admin/analytics/behavior'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsBehaviorRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/conversions': {
+      id: '/_authenticated/admin/analytics/conversions'
+      path: '/analytics/conversions'
+      fullPath: '/admin/analytics/conversions'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsConversionsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/forms': {
+      id: '/_authenticated/admin/analytics/forms'
+      path: '/analytics/forms'
+      fullPath: '/admin/analytics/forms'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsFormsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/industries': {
+      id: '/_authenticated/admin/analytics/industries'
+      path: '/analytics/industries'
+      fullPath: '/admin/analytics/industries'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsIndustriesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/journeys': {
+      id: '/_authenticated/admin/analytics/journeys'
+      path: '/analytics/journeys'
+      fullPath: '/admin/analytics/journeys'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsJourneysRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/pages': {
+      id: '/_authenticated/admin/analytics/pages'
+      path: '/analytics/pages'
+      fullPath: '/admin/analytics/pages'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsPagesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/search': {
+      id: '/_authenticated/admin/analytics/search'
+      path: '/analytics/search'
+      fullPath: '/admin/analytics/search'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsSearchRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/analytics/services': {
+      id: '/_authenticated/admin/analytics/services'
+      path: '/analytics/services'
+      fullPath: '/admin/analytics/services'
+      preLoaderRoute: typeof AuthenticatedAdminAnalyticsServicesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/case_study': {
+      id: '/_authenticated/admin/content/case_study'
+      path: '/content/case_study'
+      fullPath: '/admin/content/case_study'
+      preLoaderRoute: typeof AuthenticatedAdminContentCase_studyRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/industry': {
+      id: '/_authenticated/admin/content/industry'
+      path: '/content/industry'
+      fullPath: '/admin/content/industry'
+      preLoaderRoute: typeof AuthenticatedAdminContentIndustryRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/integration': {
+      id: '/_authenticated/admin/content/integration'
+      path: '/content/integration'
+      fullPath: '/admin/content/integration'
+      preLoaderRoute: typeof AuthenticatedAdminContentIntegrationRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/problem': {
+      id: '/_authenticated/admin/content/problem'
+      path: '/content/problem'
+      fullPath: '/admin/content/problem'
+      preLoaderRoute: typeof AuthenticatedAdminContentProblemRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/service': {
+      id: '/_authenticated/admin/content/service'
+      path: '/content/service'
+      fullPath: '/admin/content/service'
+      preLoaderRoute: typeof AuthenticatedAdminContentServiceRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/content/solution': {
+      id: '/_authenticated/admin/content/solution'
+      path: '/content/solution'
+      fullPath: '/admin/content/solution'
+      preLoaderRoute: typeof AuthenticatedAdminContentSolutionRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/projects/': {
+      id: '/_authenticated/admin/projects/'
+      path: '/projects'
+      fullPath: '/admin/projects/'
+      preLoaderRoute: typeof AuthenticatedAdminProjectsIndexRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/projects/$id': {
+      id: '/_authenticated/admin/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/admin/projects/$id'
+      preLoaderRoute: typeof AuthenticatedAdminProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/seo/health': {
+      id: '/_authenticated/admin/seo/health'
+      path: '/seo/health'
+      fullPath: '/admin/seo/health'
+      preLoaderRoute: typeof AuthenticatedAdminSeoHealthRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/seo/metadata': {
+      id: '/_authenticated/admin/seo/metadata'
+      path: '/seo/metadata'
+      fullPath: '/admin/seo/metadata'
+      preLoaderRoute: typeof AuthenticatedAdminSeoMetadataRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/seo/redirects': {
+      id: '/_authenticated/admin/seo/redirects'
+      path: '/seo/redirects'
+      fullPath: '/admin/seo/redirects'
+      preLoaderRoute: typeof AuthenticatedAdminSeoRedirectsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/dashboard/projects/': {
+      id: '/_authenticated/dashboard/projects/'
+      path: '/projects'
+      fullPath: '/dashboard/projects/'
+      preLoaderRoute: typeof AuthenticatedDashboardProjectsIndexRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/_authenticated/dashboard/projects/$id': {
+      id: '/_authenticated/dashboard/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/dashboard/projects/$id'
+      preLoaderRoute: typeof AuthenticatedDashboardProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
   }
 }
 
+interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminArticlesRoute: typeof AuthenticatedAdminArticlesRoute
+  AuthenticatedAdminAuthorsRoute: typeof AuthenticatedAdminAuthorsRoute
+  AuthenticatedAdminCategoriesRoute: typeof AuthenticatedAdminCategoriesRoute
+  AuthenticatedAdminCustomersRoute: typeof AuthenticatedAdminCustomersRoute
+  AuthenticatedAdminFaqsRoute: typeof AuthenticatedAdminFaqsRoute
+  AuthenticatedAdminInstallmentsRoute: typeof AuthenticatedAdminInstallmentsRoute
+  AuthenticatedAdminInvoicesRoute: typeof AuthenticatedAdminInvoicesRoute
+  AuthenticatedAdminLeadsRoute: typeof AuthenticatedAdminLeadsRoute
+  AuthenticatedAdminLogsRoute: typeof AuthenticatedAdminLogsRoute
+  AuthenticatedAdminMessagesRoute: typeof AuthenticatedAdminMessagesRoute
+  AuthenticatedAdminPaymentsRoute: typeof AuthenticatedAdminPaymentsRoute
+  AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
+  AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
+  AuthenticatedAdminTagsRoute: typeof AuthenticatedAdminTagsRoute
+  AuthenticatedAdminTicketsRoute: typeof AuthenticatedAdminTicketsRoute
+  AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
+  AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
+  AuthenticatedAdminAnalyticsAcquisitionRoute: typeof AuthenticatedAdminAnalyticsAcquisitionRoute
+  AuthenticatedAdminAnalyticsBehaviorRoute: typeof AuthenticatedAdminAnalyticsBehaviorRoute
+  AuthenticatedAdminAnalyticsConversionsRoute: typeof AuthenticatedAdminAnalyticsConversionsRoute
+  AuthenticatedAdminAnalyticsFormsRoute: typeof AuthenticatedAdminAnalyticsFormsRoute
+  AuthenticatedAdminAnalyticsIndustriesRoute: typeof AuthenticatedAdminAnalyticsIndustriesRoute
+  AuthenticatedAdminAnalyticsJourneysRoute: typeof AuthenticatedAdminAnalyticsJourneysRoute
+  AuthenticatedAdminAnalyticsPagesRoute: typeof AuthenticatedAdminAnalyticsPagesRoute
+  AuthenticatedAdminAnalyticsSearchRoute: typeof AuthenticatedAdminAnalyticsSearchRoute
+  AuthenticatedAdminAnalyticsServicesRoute: typeof AuthenticatedAdminAnalyticsServicesRoute
+  AuthenticatedAdminContentCase_studyRoute: typeof AuthenticatedAdminContentCase_studyRoute
+  AuthenticatedAdminContentIndustryRoute: typeof AuthenticatedAdminContentIndustryRoute
+  AuthenticatedAdminContentIntegrationRoute: typeof AuthenticatedAdminContentIntegrationRoute
+  AuthenticatedAdminContentProblemRoute: typeof AuthenticatedAdminContentProblemRoute
+  AuthenticatedAdminContentServiceRoute: typeof AuthenticatedAdminContentServiceRoute
+  AuthenticatedAdminContentSolutionRoute: typeof AuthenticatedAdminContentSolutionRoute
+  AuthenticatedAdminProjectsIdRoute: typeof AuthenticatedAdminProjectsIdRoute
+  AuthenticatedAdminSeoHealthRoute: typeof AuthenticatedAdminSeoHealthRoute
+  AuthenticatedAdminSeoMetadataRoute: typeof AuthenticatedAdminSeoMetadataRoute
+  AuthenticatedAdminSeoRedirectsRoute: typeof AuthenticatedAdminSeoRedirectsRoute
+  AuthenticatedAdminAnalyticsIndexRoute: typeof AuthenticatedAdminAnalyticsIndexRoute
+  AuthenticatedAdminProjectsIndexRoute: typeof AuthenticatedAdminProjectsIndexRoute
+}
+
+const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
+  {
+    AuthenticatedAdminArticlesRoute: AuthenticatedAdminArticlesRoute,
+    AuthenticatedAdminAuthorsRoute: AuthenticatedAdminAuthorsRoute,
+    AuthenticatedAdminCategoriesRoute: AuthenticatedAdminCategoriesRoute,
+    AuthenticatedAdminCustomersRoute: AuthenticatedAdminCustomersRoute,
+    AuthenticatedAdminFaqsRoute: AuthenticatedAdminFaqsRoute,
+    AuthenticatedAdminInstallmentsRoute: AuthenticatedAdminInstallmentsRoute,
+    AuthenticatedAdminInvoicesRoute: AuthenticatedAdminInvoicesRoute,
+    AuthenticatedAdminLeadsRoute: AuthenticatedAdminLeadsRoute,
+    AuthenticatedAdminLogsRoute: AuthenticatedAdminLogsRoute,
+    AuthenticatedAdminMessagesRoute: AuthenticatedAdminMessagesRoute,
+    AuthenticatedAdminPaymentsRoute: AuthenticatedAdminPaymentsRoute,
+    AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
+    AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
+    AuthenticatedAdminTagsRoute: AuthenticatedAdminTagsRoute,
+    AuthenticatedAdminTicketsRoute: AuthenticatedAdminTicketsRoute,
+    AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
+    AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
+    AuthenticatedAdminAnalyticsAcquisitionRoute:
+      AuthenticatedAdminAnalyticsAcquisitionRoute,
+    AuthenticatedAdminAnalyticsBehaviorRoute:
+      AuthenticatedAdminAnalyticsBehaviorRoute,
+    AuthenticatedAdminAnalyticsConversionsRoute:
+      AuthenticatedAdminAnalyticsConversionsRoute,
+    AuthenticatedAdminAnalyticsFormsRoute:
+      AuthenticatedAdminAnalyticsFormsRoute,
+    AuthenticatedAdminAnalyticsIndustriesRoute:
+      AuthenticatedAdminAnalyticsIndustriesRoute,
+    AuthenticatedAdminAnalyticsJourneysRoute:
+      AuthenticatedAdminAnalyticsJourneysRoute,
+    AuthenticatedAdminAnalyticsPagesRoute:
+      AuthenticatedAdminAnalyticsPagesRoute,
+    AuthenticatedAdminAnalyticsSearchRoute:
+      AuthenticatedAdminAnalyticsSearchRoute,
+    AuthenticatedAdminAnalyticsServicesRoute:
+      AuthenticatedAdminAnalyticsServicesRoute,
+    AuthenticatedAdminContentCase_studyRoute:
+      AuthenticatedAdminContentCase_studyRoute,
+    AuthenticatedAdminContentIndustryRoute:
+      AuthenticatedAdminContentIndustryRoute,
+    AuthenticatedAdminContentIntegrationRoute:
+      AuthenticatedAdminContentIntegrationRoute,
+    AuthenticatedAdminContentProblemRoute:
+      AuthenticatedAdminContentProblemRoute,
+    AuthenticatedAdminContentServiceRoute:
+      AuthenticatedAdminContentServiceRoute,
+    AuthenticatedAdminContentSolutionRoute:
+      AuthenticatedAdminContentSolutionRoute,
+    AuthenticatedAdminProjectsIdRoute: AuthenticatedAdminProjectsIdRoute,
+    AuthenticatedAdminSeoHealthRoute: AuthenticatedAdminSeoHealthRoute,
+    AuthenticatedAdminSeoMetadataRoute: AuthenticatedAdminSeoMetadataRoute,
+    AuthenticatedAdminSeoRedirectsRoute: AuthenticatedAdminSeoRedirectsRoute,
+    AuthenticatedAdminAnalyticsIndexRoute:
+      AuthenticatedAdminAnalyticsIndexRoute,
+    AuthenticatedAdminProjectsIndexRoute: AuthenticatedAdminProjectsIndexRoute,
+  }
+
+const AuthenticatedAdminRouteRouteWithChildren =
+  AuthenticatedAdminRouteRoute._addFileChildren(
+    AuthenticatedAdminRouteRouteChildren,
+  )
+
+interface AuthenticatedDashboardRouteRouteChildren {
+  AuthenticatedDashboardFilesRoute: typeof AuthenticatedDashboardFilesRoute
+  AuthenticatedDashboardNotificationsRoute: typeof AuthenticatedDashboardNotificationsRoute
+  AuthenticatedDashboardPaymentsRoute: typeof AuthenticatedDashboardPaymentsRoute
+  AuthenticatedDashboardProfileRoute: typeof AuthenticatedDashboardProfileRoute
+  AuthenticatedDashboardRequestsRoute: typeof AuthenticatedDashboardRequestsRoute
+  AuthenticatedDashboardSupportRoute: typeof AuthenticatedDashboardSupportRoute
+  AuthenticatedDashboardIndexRoute: typeof AuthenticatedDashboardIndexRoute
+  AuthenticatedDashboardProjectsIdRoute: typeof AuthenticatedDashboardProjectsIdRoute
+  AuthenticatedDashboardProjectsIndexRoute: typeof AuthenticatedDashboardProjectsIndexRoute
+}
+
+const AuthenticatedDashboardRouteRouteChildren: AuthenticatedDashboardRouteRouteChildren =
+  {
+    AuthenticatedDashboardFilesRoute: AuthenticatedDashboardFilesRoute,
+    AuthenticatedDashboardNotificationsRoute:
+      AuthenticatedDashboardNotificationsRoute,
+    AuthenticatedDashboardPaymentsRoute: AuthenticatedDashboardPaymentsRoute,
+    AuthenticatedDashboardProfileRoute: AuthenticatedDashboardProfileRoute,
+    AuthenticatedDashboardRequestsRoute: AuthenticatedDashboardRequestsRoute,
+    AuthenticatedDashboardSupportRoute: AuthenticatedDashboardSupportRoute,
+    AuthenticatedDashboardIndexRoute: AuthenticatedDashboardIndexRoute,
+    AuthenticatedDashboardProjectsIdRoute:
+      AuthenticatedDashboardProjectsIdRoute,
+    AuthenticatedDashboardProjectsIndexRoute:
+      AuthenticatedDashboardProjectsIndexRoute,
+  }
+
+const AuthenticatedDashboardRouteRouteWithChildren =
+  AuthenticatedDashboardRouteRoute._addFileChildren(
+    AuthenticatedDashboardRouteRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAdminRouteRoute: typeof AuthenticatedAdminRouteRouteWithChildren
+  AuthenticatedDashboardRouteRoute: typeof AuthenticatedDashboardRouteRouteWithChildren
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAdminRouteRoute: AuthenticatedAdminRouteRouteWithChildren,
+  AuthenticatedDashboardRouteRoute:
+    AuthenticatedDashboardRouteRouteWithChildren,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
   BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
