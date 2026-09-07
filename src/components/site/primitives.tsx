@@ -12,7 +12,9 @@ export function Container({
   children: ReactNode;
 }) {
   return (
-    <div className={cn("mx-auto w-full max-w-[1240px] px-5 sm:px-8", className)}>{children}</div>
+    <div className={cn("mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-12", className)}>
+      {children}
+    </div>
   );
 }
 
@@ -26,16 +28,37 @@ export function Section({
   id?: string;
 }) {
   return (
-    <section id={id} className={cn("py-20 sm:py-28", className)}>
+    <section id={id} className={cn("py-24 sm:py-32", className)}>
       {children}
     </section>
   );
 }
 
+/** Small technical metadata label: `SERVICES / 04`. */
+export function MetaLabel({
+  children,
+  className,
+  index,
+}: {
+  children?: ReactNode;
+  className?: string;
+  index?: number;
+}) {
+  return (
+    <span dir="ltr" className={cn("meta-label inline-flex items-center gap-2", className)}>
+      {typeof index === "number" && (
+        <span className="text-brand">{String(index).padStart(2, "0")}</span>
+      )}
+      {typeof index === "number" && children && <span className="opacity-40">/</span>}
+      {children}
+    </span>
+  );
+}
+
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.14em] text-brand uppercase">
-      <span className="inline-block h-px w-6 bg-brand" />
+    <p className="flex items-center gap-3 text-xs font-semibold tracking-[0.16em] text-brand uppercase">
+      <span className="inline-block h-px w-8 bg-brand" />
       {children}
     </p>
   );
@@ -48,28 +71,19 @@ export function SectionTitle({
   children: ReactNode;
   className?: string;
 }) {
-  return (
-    <h2
-      className={cn(
-        "mt-5 max-w-3xl text-[1.75rem] leading-[1.35] font-bold sm:text-4xl sm:leading-[1.3]",
-        className,
-      )}
-    >
-      {children}
-    </h2>
-  );
+  return <h2 className={cn("display-2 mt-7 max-w-4xl", className)}>{children}</h2>;
 }
 
 export function Lead({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <p className={cn("mt-5 max-w-2xl text-base leading-8 text-muted-foreground", className)}>
+    <p className={cn("mt-6 max-w-2xl text-lg leading-9 text-muted-foreground", className)}>
       {children}
     </p>
   );
 }
 
 const base =
-  "inline-flex items-center justify-center gap-2 rounded-md text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
+  "group inline-flex items-center justify-center gap-3 text-sm font-bold transition-[background-color,border-color,color] duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand";
 
 export function CtaLink({
   to,
@@ -87,15 +101,16 @@ export function CtaLink({
       to={to}
       className={cn(
         base,
-        variant === "primary" && "h-11 bg-brand px-6 text-brand-foreground hover:bg-brand/90",
+        variant === "primary" &&
+          "h-12 rounded-[6px] bg-brand px-7 text-brand-foreground hover:bg-brand/90",
         variant === "outline" &&
-          "h-11 border border-border px-6 text-foreground hover:border-foreground/40 hover:bg-secondary",
+          "h-12 rounded-[6px] border border-foreground/25 px-7 text-foreground hover:border-foreground hover:bg-foreground/5",
         variant === "ghost" && "text-foreground hover:text-brand",
         className,
       )}
     >
       {children}
-      {variant === "ghost" && <ArrowLeft className="size-4" />}
+      <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-1" />
     </Link>
   );
 }
@@ -113,12 +128,36 @@ export function TextLink({
     <Link
       to={to}
       className={cn(
-        "group inline-flex items-center gap-2 text-sm font-semibold text-foreground",
+        "group inline-flex items-center gap-3 text-sm font-bold text-foreground",
         className,
       )}
     >
       <span className="brand-underline">{children}</span>
-      <ArrowLeft className="size-4 text-brand transition-transform group-hover:-translate-x-1 rtl:group-hover:-translate-x-1" />
+      <ArrowSquare />
     </Link>
+  );
+}
+
+/** Reusable square arrow action — the RYCODE control signature. */
+export function ArrowSquare({
+  className,
+  active = false,
+}: {
+  className?: string;
+  active?: boolean;
+}) {
+  return (
+    <span
+      aria-hidden
+      className={cn(
+        "grid size-9 shrink-0 place-items-center rounded-[5px] border transition-[background-color,border-color,color] duration-200",
+        active
+          ? "border-brand bg-brand text-brand-foreground"
+          : "border-current/25 text-current group-hover:border-brand group-hover:bg-brand group-hover:text-brand-foreground",
+        className,
+      )}
+    >
+      <ArrowLeft className="size-4 transition-transform duration-200 group-hover:-translate-x-0.5" />
+    </span>
   );
 }
