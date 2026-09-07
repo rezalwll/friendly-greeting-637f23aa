@@ -30,6 +30,7 @@ import { Route as WhyRycodeRouteImport } from './routes/why-rycode'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
+import { Route as AuthenticatedAdminArticlesRouteImport } from './routes/_authenticated/admin/articles'
 import { Route as AuthenticatedAdminAuthorsRouteImport } from './routes/_authenticated/admin/authors'
 import { Route as AuthenticatedAdminCategoriesRouteImport } from './routes/_authenticated/admin/categories'
 import { Route as AuthenticatedAdminCustomersRouteImport } from './routes/_authenticated/admin/customers'
@@ -40,9 +41,11 @@ import { Route as AuthenticatedAdminLeadsRouteImport } from './routes/_authentic
 import { Route as AuthenticatedAdminLogsRouteImport } from './routes/_authenticated/admin/logs'
 import { Route as AuthenticatedAdminMessagesRouteImport } from './routes/_authenticated/admin/messages'
 import { Route as AuthenticatedAdminPaymentsRouteImport } from './routes/_authenticated/admin/payments'
+import { Route as AuthenticatedAdminRolesRouteImport } from './routes/_authenticated/admin/roles'
 import { Route as AuthenticatedAdminSettingsRouteImport } from './routes/_authenticated/admin/settings'
 import { Route as AuthenticatedAdminTagsRouteImport } from './routes/_authenticated/admin/tags'
 import { Route as AuthenticatedAdminTicketsRouteImport } from './routes/_authenticated/admin/tickets'
+import { Route as AuthenticatedAdminUsersRouteImport } from './routes/_authenticated/admin/users'
 import { Route as AuthenticatedDashboardIndexRouteImport } from './routes/_authenticated/dashboard/index'
 import { Route as AuthenticatedDashboardFilesRouteImport } from './routes/_authenticated/dashboard/files'
 import { Route as AuthenticatedDashboardNotificationsRouteImport } from './routes/_authenticated/dashboard/notifications'
@@ -67,6 +70,7 @@ import { Route as AuthenticatedAdminContentProblemRouteImport } from './routes/_
 import { Route as AuthenticatedAdminContentServiceRouteImport } from './routes/_authenticated/admin/content/service'
 import { Route as AuthenticatedAdminContentSolutionRouteImport } from './routes/_authenticated/admin/content/solution'
 import { Route as AuthenticatedAdminProjectsIndexRouteImport } from './routes/_authenticated/admin/projects/index'
+import { Route as AuthenticatedAdminProjectsIdRouteImport } from './routes/_authenticated/admin/projects/$id'
 import { Route as AuthenticatedAdminSeoHealthRouteImport } from './routes/_authenticated/admin/seo/health'
 import { Route as AuthenticatedAdminSeoMetadataRouteImport } from './routes/_authenticated/admin/seo/metadata'
 import { Route as AuthenticatedAdminSeoRedirectsRouteImport } from './routes/_authenticated/admin/seo/redirects'
@@ -178,6 +182,12 @@ const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AuthenticatedAdminRouteRoute,
 } as any)
+const AuthenticatedAdminArticlesRoute =
+  AuthenticatedAdminArticlesRouteImport.update({
+    id: '/articles',
+    path: '/articles',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminAuthorsRoute =
   AuthenticatedAdminAuthorsRouteImport.update({
     id: '/authors',
@@ -235,6 +245,11 @@ const AuthenticatedAdminPaymentsRoute =
     path: '/payments',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminRolesRoute = AuthenticatedAdminRolesRouteImport.update({
+  id: '/roles',
+  path: '/roles',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedAdminSettingsRoute =
   AuthenticatedAdminSettingsRouteImport.update({
     id: '/settings',
@@ -252,6 +267,11 @@ const AuthenticatedAdminTicketsRoute =
     path: '/tickets',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminUsersRoute = AuthenticatedAdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AuthenticatedAdminRouteRoute,
+} as any)
 const AuthenticatedDashboardIndexRoute =
   AuthenticatedDashboardIndexRouteImport.update({
     id: '/',
@@ -396,6 +416,12 @@ const AuthenticatedAdminProjectsIndexRoute =
     path: '/projects/',
     getParentRoute: () => AuthenticatedAdminRouteRoute,
   } as any)
+const AuthenticatedAdminProjectsIdRoute =
+  AuthenticatedAdminProjectsIdRouteImport.update({
+    id: '/projects/$id',
+    path: '/projects/$id',
+    getParentRoute: () => AuthenticatedAdminRouteRoute,
+  } as any)
 const AuthenticatedAdminSeoHealthRoute =
   AuthenticatedAdminSeoHealthRouteImport.update({
     id: '/seo/health',
@@ -447,6 +473,7 @@ export interface FileRoutesByFullPath {
   '/why-rycode': typeof WhyRycodeRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
@@ -457,9 +484,11 @@ export interface FileRoutesByFullPath {
   '/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/admin/messages': typeof AuthenticatedAdminMessagesRoute
   '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/tags': typeof AuthenticatedAdminTagsRoute
   '/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/dashboard/files': typeof AuthenticatedDashboardFilesRoute
   '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
   '/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
@@ -483,6 +512,7 @@ export interface FileRoutesByFullPath {
   '/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
   '/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
   '/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
   '/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
   '/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
   '/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
@@ -509,6 +539,7 @@ export interface FileRoutesByTo {
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/admin/customers': typeof AuthenticatedAdminCustomersRoute
@@ -519,9 +550,11 @@ export interface FileRoutesByTo {
   '/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/admin/messages': typeof AuthenticatedAdminMessagesRoute
   '/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/admin/tags': typeof AuthenticatedAdminTagsRoute
   '/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/admin/users': typeof AuthenticatedAdminUsersRoute
   '/dashboard/files': typeof AuthenticatedDashboardFilesRoute
   '/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
   '/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
@@ -545,6 +578,7 @@ export interface FileRoutesByTo {
   '/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
   '/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
   '/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
   '/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
   '/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
   '/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
@@ -575,6 +609,7 @@ export interface FileRoutesById {
   '/why-rycode': typeof WhyRycodeRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/_authenticated/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/_authenticated/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
   '/_authenticated/admin/customers': typeof AuthenticatedAdminCustomersRoute
@@ -585,9 +620,11 @@ export interface FileRoutesById {
   '/_authenticated/admin/logs': typeof AuthenticatedAdminLogsRoute
   '/_authenticated/admin/messages': typeof AuthenticatedAdminMessagesRoute
   '/_authenticated/admin/payments': typeof AuthenticatedAdminPaymentsRoute
+  '/_authenticated/admin/roles': typeof AuthenticatedAdminRolesRoute
   '/_authenticated/admin/settings': typeof AuthenticatedAdminSettingsRoute
   '/_authenticated/admin/tags': typeof AuthenticatedAdminTagsRoute
   '/_authenticated/admin/tickets': typeof AuthenticatedAdminTicketsRoute
+  '/_authenticated/admin/users': typeof AuthenticatedAdminUsersRoute
   '/_authenticated/dashboard/files': typeof AuthenticatedDashboardFilesRoute
   '/_authenticated/dashboard/notifications': typeof AuthenticatedDashboardNotificationsRoute
   '/_authenticated/dashboard/payments': typeof AuthenticatedDashboardPaymentsRoute
@@ -611,6 +648,7 @@ export interface FileRoutesById {
   '/_authenticated/admin/content/problem': typeof AuthenticatedAdminContentProblemRoute
   '/_authenticated/admin/content/service': typeof AuthenticatedAdminContentServiceRoute
   '/_authenticated/admin/content/solution': typeof AuthenticatedAdminContentSolutionRoute
+  '/_authenticated/admin/projects/$id': typeof AuthenticatedAdminProjectsIdRoute
   '/_authenticated/admin/seo/health': typeof AuthenticatedAdminSeoHealthRoute
   '/_authenticated/admin/seo/metadata': typeof AuthenticatedAdminSeoMetadataRoute
   '/_authenticated/admin/seo/redirects': typeof AuthenticatedAdminSeoRedirectsRoute
@@ -641,6 +679,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/admin'
     | '/dashboard'
+    | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
     | '/admin/customers'
@@ -651,9 +690,11 @@ export interface FileRouteTypes {
     | '/admin/logs'
     | '/admin/messages'
     | '/admin/payments'
+    | '/admin/roles'
     | '/admin/settings'
     | '/admin/tags'
     | '/admin/tickets'
+    | '/admin/users'
     | '/dashboard/files'
     | '/dashboard/notifications'
     | '/dashboard/payments'
@@ -677,6 +718,7 @@ export interface FileRouteTypes {
     | '/admin/content/problem'
     | '/admin/content/service'
     | '/admin/content/solution'
+    | '/admin/projects/$id'
     | '/admin/seo/health'
     | '/admin/seo/metadata'
     | '/admin/seo/redirects'
@@ -703,6 +745,7 @@ export interface FileRouteTypes {
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
     | '/admin/customers'
@@ -713,9 +756,11 @@ export interface FileRouteTypes {
     | '/admin/logs'
     | '/admin/messages'
     | '/admin/payments'
+    | '/admin/roles'
     | '/admin/settings'
     | '/admin/tags'
     | '/admin/tickets'
+    | '/admin/users'
     | '/dashboard/files'
     | '/dashboard/notifications'
     | '/dashboard/payments'
@@ -739,6 +784,7 @@ export interface FileRouteTypes {
     | '/admin/content/problem'
     | '/admin/content/service'
     | '/admin/content/solution'
+    | '/admin/projects/$id'
     | '/admin/seo/health'
     | '/admin/seo/metadata'
     | '/admin/seo/redirects'
@@ -768,6 +814,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/_authenticated/admin/articles'
     | '/_authenticated/admin/authors'
     | '/_authenticated/admin/categories'
     | '/_authenticated/admin/customers'
@@ -778,9 +825,11 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/logs'
     | '/_authenticated/admin/messages'
     | '/_authenticated/admin/payments'
+    | '/_authenticated/admin/roles'
     | '/_authenticated/admin/settings'
     | '/_authenticated/admin/tags'
     | '/_authenticated/admin/tickets'
+    | '/_authenticated/admin/users'
     | '/_authenticated/dashboard/files'
     | '/_authenticated/dashboard/notifications'
     | '/_authenticated/dashboard/payments'
@@ -804,6 +853,7 @@ export interface FileRouteTypes {
     | '/_authenticated/admin/content/problem'
     | '/_authenticated/admin/content/service'
     | '/_authenticated/admin/content/solution'
+    | '/_authenticated/admin/projects/$id'
     | '/_authenticated/admin/seo/health'
     | '/_authenticated/admin/seo/metadata'
     | '/_authenticated/admin/seo/redirects'
@@ -983,6 +1033,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/articles': {
+      id: '/_authenticated/admin/articles'
+      path: '/articles'
+      fullPath: '/admin/articles'
+      preLoaderRoute: typeof AuthenticatedAdminArticlesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/authors': {
       id: '/_authenticated/admin/authors'
       path: '/authors'
@@ -1053,6 +1110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminPaymentsRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/roles': {
+      id: '/_authenticated/admin/roles'
+      path: '/roles'
+      fullPath: '/admin/roles'
+      preLoaderRoute: typeof AuthenticatedAdminRolesRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/settings': {
       id: '/_authenticated/admin/settings'
       path: '/settings'
@@ -1072,6 +1136,13 @@ declare module '@tanstack/react-router' {
       path: '/tickets'
       fullPath: '/admin/tickets'
       preLoaderRoute: typeof AuthenticatedAdminTicketsRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
+    '/_authenticated/admin/users': {
+      id: '/_authenticated/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AuthenticatedAdminUsersRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
     '/_authenticated/dashboard/': {
@@ -1242,6 +1313,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedAdminProjectsIndexRouteImport
       parentRoute: typeof AuthenticatedAdminRouteRoute
     }
+    '/_authenticated/admin/projects/$id': {
+      id: '/_authenticated/admin/projects/$id'
+      path: '/projects/$id'
+      fullPath: '/admin/projects/$id'
+      preLoaderRoute: typeof AuthenticatedAdminProjectsIdRouteImport
+      parentRoute: typeof AuthenticatedAdminRouteRoute
+    }
     '/_authenticated/admin/seo/health': {
       id: '/_authenticated/admin/seo/health'
       path: '/seo/health'
@@ -1281,6 +1359,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AuthenticatedAdminRouteRouteChildren {
+  AuthenticatedAdminArticlesRoute: typeof AuthenticatedAdminArticlesRoute
   AuthenticatedAdminAuthorsRoute: typeof AuthenticatedAdminAuthorsRoute
   AuthenticatedAdminCategoriesRoute: typeof AuthenticatedAdminCategoriesRoute
   AuthenticatedAdminCustomersRoute: typeof AuthenticatedAdminCustomersRoute
@@ -1291,9 +1370,11 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminLogsRoute: typeof AuthenticatedAdminLogsRoute
   AuthenticatedAdminMessagesRoute: typeof AuthenticatedAdminMessagesRoute
   AuthenticatedAdminPaymentsRoute: typeof AuthenticatedAdminPaymentsRoute
+  AuthenticatedAdminRolesRoute: typeof AuthenticatedAdminRolesRoute
   AuthenticatedAdminSettingsRoute: typeof AuthenticatedAdminSettingsRoute
   AuthenticatedAdminTagsRoute: typeof AuthenticatedAdminTagsRoute
   AuthenticatedAdminTicketsRoute: typeof AuthenticatedAdminTicketsRoute
+  AuthenticatedAdminUsersRoute: typeof AuthenticatedAdminUsersRoute
   AuthenticatedAdminIndexRoute: typeof AuthenticatedAdminIndexRoute
   AuthenticatedAdminAnalyticsAcquisitionRoute: typeof AuthenticatedAdminAnalyticsAcquisitionRoute
   AuthenticatedAdminAnalyticsBehaviorRoute: typeof AuthenticatedAdminAnalyticsBehaviorRoute
@@ -1310,6 +1391,7 @@ interface AuthenticatedAdminRouteRouteChildren {
   AuthenticatedAdminContentProblemRoute: typeof AuthenticatedAdminContentProblemRoute
   AuthenticatedAdminContentServiceRoute: typeof AuthenticatedAdminContentServiceRoute
   AuthenticatedAdminContentSolutionRoute: typeof AuthenticatedAdminContentSolutionRoute
+  AuthenticatedAdminProjectsIdRoute: typeof AuthenticatedAdminProjectsIdRoute
   AuthenticatedAdminSeoHealthRoute: typeof AuthenticatedAdminSeoHealthRoute
   AuthenticatedAdminSeoMetadataRoute: typeof AuthenticatedAdminSeoMetadataRoute
   AuthenticatedAdminSeoRedirectsRoute: typeof AuthenticatedAdminSeoRedirectsRoute
@@ -1319,6 +1401,7 @@ interface AuthenticatedAdminRouteRouteChildren {
 
 const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren =
   {
+    AuthenticatedAdminArticlesRoute: AuthenticatedAdminArticlesRoute,
     AuthenticatedAdminAuthorsRoute: AuthenticatedAdminAuthorsRoute,
     AuthenticatedAdminCategoriesRoute: AuthenticatedAdminCategoriesRoute,
     AuthenticatedAdminCustomersRoute: AuthenticatedAdminCustomersRoute,
@@ -1329,9 +1412,11 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
     AuthenticatedAdminLogsRoute: AuthenticatedAdminLogsRoute,
     AuthenticatedAdminMessagesRoute: AuthenticatedAdminMessagesRoute,
     AuthenticatedAdminPaymentsRoute: AuthenticatedAdminPaymentsRoute,
+    AuthenticatedAdminRolesRoute: AuthenticatedAdminRolesRoute,
     AuthenticatedAdminSettingsRoute: AuthenticatedAdminSettingsRoute,
     AuthenticatedAdminTagsRoute: AuthenticatedAdminTagsRoute,
     AuthenticatedAdminTicketsRoute: AuthenticatedAdminTicketsRoute,
+    AuthenticatedAdminUsersRoute: AuthenticatedAdminUsersRoute,
     AuthenticatedAdminIndexRoute: AuthenticatedAdminIndexRoute,
     AuthenticatedAdminAnalyticsAcquisitionRoute:
       AuthenticatedAdminAnalyticsAcquisitionRoute,
@@ -1363,6 +1448,7 @@ const AuthenticatedAdminRouteRouteChildren: AuthenticatedAdminRouteRouteChildren
       AuthenticatedAdminContentServiceRoute,
     AuthenticatedAdminContentSolutionRoute:
       AuthenticatedAdminContentSolutionRoute,
+    AuthenticatedAdminProjectsIdRoute: AuthenticatedAdminProjectsIdRoute,
     AuthenticatedAdminSeoHealthRoute: AuthenticatedAdminSeoHealthRoute,
     AuthenticatedAdminSeoMetadataRoute: AuthenticatedAdminSeoMetadataRoute,
     AuthenticatedAdminSeoRedirectsRoute: AuthenticatedAdminSeoRedirectsRoute,
