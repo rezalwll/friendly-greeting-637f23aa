@@ -1,4 +1,23 @@
-export type NavLink = { label: string; href: string };
+export type AppPath =
+  | "/"
+  | "/services"
+  | "/solutions"
+  | "/problems"
+  | "/industries"
+  | "/projects"
+  | "/blog"
+  | "/about"
+  | "/why-rycode"
+  | "/process"
+  | "/technologies"
+  | "/contact"
+  | "/faq"
+  | "/start-project"
+  | "/technical-review"
+  | "/seo-audit"
+  | "/login";
+
+export type NavLink = { label: string; href: AppPath };
 export type NavGroup = { title: string; items: NavLink[] };
 
 export const serviceGroups: NavGroup[] = [
