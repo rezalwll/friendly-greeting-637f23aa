@@ -30,6 +30,7 @@ import { Route as WhyRycodeRouteImport } from './routes/why-rycode'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminArticlesRouteImport } from './routes/_authenticated/admin/articles'
 import { Route as AuthenticatedAdminAuthorsRouteImport } from './routes/_authenticated/admin/authors'
@@ -181,6 +182,11 @@ const AuthenticatedDashboardRouteRoute =
 const ServicesIndexRoute = ServicesIndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
   getParentRoute: () => ServicesRoute,
 } as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
@@ -479,6 +485,7 @@ export interface FileRoutesByFullPath {
   '/why-rycode': typeof WhyRycodeRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
@@ -545,6 +552,7 @@ export interface FileRoutesByTo {
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/services/$slug': typeof ServicesSlugRoute
   '/services': typeof ServicesIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
@@ -616,6 +624,7 @@ export interface FileRoutesById {
   '/why-rycode': typeof WhyRycodeRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/services/$slug': typeof ServicesSlugRoute
   '/services/': typeof ServicesIndexRoute
   '/_authenticated/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/_authenticated/admin/authors': typeof AuthenticatedAdminAuthorsRoute
@@ -687,6 +696,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/admin'
     | '/dashboard'
+    | '/services/$slug'
     | '/services/'
     | '/admin/articles'
     | '/admin/authors'
@@ -753,6 +763,7 @@ export interface FileRouteTypes {
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/services/$slug'
     | '/services'
     | '/admin/articles'
     | '/admin/authors'
@@ -823,6 +834,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/services/$slug'
     | '/services/'
     | '/_authenticated/admin/articles'
     | '/_authenticated/admin/authors'
@@ -1041,6 +1053,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/services/'
       preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
       parentRoute: typeof ServicesRoute
     }
     '/_authenticated/admin/': {
@@ -1527,10 +1546,12 @@ const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 interface ServicesRouteChildren {
+  ServicesSlugRoute: typeof ServicesSlugRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
 const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesSlugRoute: ServicesSlugRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 
