@@ -152,7 +152,7 @@ export function DataTable<T extends { id: string | number }>({
   columns: Column<T>[];
   loading?: boolean | undefined;
   error?: unknown;
-  empty: { title: string; description?: string };
+  empty: { title: string; description?: string | undefined };
 }) {
   if (loading) return <LoadingState />;
   if (error) return <ErrorState message={error instanceof Error ? error.message : undefined} />;

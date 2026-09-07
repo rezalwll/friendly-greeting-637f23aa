@@ -65,17 +65,17 @@ function ArticlesPage() {
   const save = useMutation({
     mutationFn: async () => {
       const payload = {
-        title_fa: draft["title_fa"],
+        title_fa: draft["title_fa"] ?? "",
         title_en: draft["title_en"] || null,
-        slug: draft["slug"],
+        slug: draft["slug"] ?? "",
         excerpt_fa: draft["excerpt_fa"] || null,
         excerpt_en: draft["excerpt_en"] || null,
         body_fa: draft["body_fa"] || null,
         body_en: draft["body_en"] || null,
         seo_title: draft["seo_title"] || null,
         seo_description: draft["seo_description"] || null,
-        status: draft["status"] as never,
-        translation_state: draft["translation_state"] as never,
+        status: (draft["status"] ?? "draft") as never,
+        translation_state: (draft["translation_state"] ?? "missing") as never,
         category_id: draft["category_id"] || null,
         author_id: draft["author_id"] || null,
         published_at: draft["status"] === "published" ? new Date().toISOString() : null,

@@ -22,7 +22,7 @@ function AdminProjectsPage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("projects")
-        .select("*, profiles:client_id(full_name,email)")
+        .select("*")
         .order("updated_at", { ascending: false });
       if (error) throw new Error(error.message);
       return data;
@@ -141,8 +141,8 @@ function AdminProjectsPage() {
               key: "client",
               header: "مشتری",
               cell: (row) =>
-                (row.profiles as { full_name: string | null; email: string | null } | null)
-                  ?.full_name ?? "—",
+                (clients.data ?? []).find((client) => client.id === row.client_id)?.full_name ??
+                "—",
             },
             {
               key: "status",

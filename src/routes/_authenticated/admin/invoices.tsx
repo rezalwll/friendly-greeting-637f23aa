@@ -21,7 +21,7 @@ function InvoicesPage() {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("invoices")
-        .select("*, profiles:client_id(full_name,email)")
+        .select("*")
         .order("created_at", { ascending: false });
       if (error) throw new Error(error.message);
       return data;
@@ -57,10 +57,9 @@ function InvoicesPage() {
 
   const setStatus = useMutation({
     mutationFn: async ({ id, status }: { id: string; status: string }) => {
-      const { error } = await supabase
-        .from("invoices")
-        .update({ status: status as never, issued_at: status === "issued" ? new Date().toISOString() : undefined })
-        .eq("id", id);
+      const patch: Record<string, unknown> = { status };
+      if (status === "issued") patch["issued_at"] = new Date().toISOString();
+      const { error } = await supabase.from("invoices").update(patch as never).eq("id", id);
       if (error) throw new Error(error.message);
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin-invoices"] }),
@@ -164,7 +163,8 @@ function InvoicesPage() {
               key: "client",
               header: "مشتری",
               cell: (row) =>
-                (row.profiles as { full_name: string | null } | null)?.full_name ?? "—",
+                (clients.data ?? []).find((client) => client.id === row.client_id)?.full_name ??
+                "—",
             },
             { key: "amount", header: "مبلغ", cell: (row) => formatAmount(row.total_amount) },
             { key: "due", header: "سررسید", cell: (row) => formatDate(row.due_date) },
