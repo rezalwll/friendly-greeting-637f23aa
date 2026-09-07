@@ -67,7 +67,7 @@ function AdminProjectDetail() {
 
   const patch = useMutation({
     mutationFn: async (values: Record<string, unknown>) => {
-      const { error } = await supabase.from("projects").update(values).eq("id", id);
+      const { error } = await supabase.from("projects").update(values as never).eq("id", id);
       if (error) throw new Error(error.message);
     },
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ["admin-project", id] }),

@@ -52,7 +52,7 @@ export function WorkspaceShell({
             <Link
               key={String(item.to)}
               to={item.to}
-              activeOptions={{ exact: item.exact }}
+              activeOptions={{ exact: Boolean(item.exact) }}
               onClick={() => setOpen(false)}
               className="block rounded-md px-2 py-1.5 text-sm text-muted-foreground transition-colors hover:bg-muted hover:text-foreground data-[status=active]:bg-muted data-[status=active]:font-medium data-[status=active]:text-foreground"
             >
@@ -119,8 +119,8 @@ export function PageHeader({
   actions,
 }: {
   title: string;
-  description?: string;
-  actions?: ReactNode;
+  description?: string | undefined;
+  actions?: ReactNode | undefined;
 }) {
   return (
     <div className="mb-6 flex flex-wrap items-end justify-between gap-3">

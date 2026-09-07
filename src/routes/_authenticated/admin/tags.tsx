@@ -21,8 +21,8 @@ function TagsPage() {
           { name: "slug", label: "نشانی (slug)", required: true },
         ]}
         columns={[
-          { key: "name", header: "نام", cell: (row) => String(row.name_fa ?? "") },
-          { key: "slug", header: "نشانی", cell: (row) => String(row.slug ?? "") },
+          { key: "name", header: "نام", cell: (row) => String(row["name_fa"] ?? "") },
+          { key: "slug", header: "نشانی", cell: (row) => String(row["slug"] ?? "") },
         ]}
       />
     </>

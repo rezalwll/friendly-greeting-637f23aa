@@ -23,8 +23,8 @@ function AuthorsPage() {
           { name: "avatar_url", label: "نشانی تصویر" },
         ]}
         columns={[
-          { key: "name", header: "نام", cell: (row) => String(row.name_fa ?? "") },
-          { key: "en", header: "English", cell: (row) => String(row.name_en ?? "—") },
+          { key: "name", header: "نام", cell: (row) => String(row["name_fa"] ?? "") },
+          { key: "en", header: "English", cell: (row) => String(row["name_en"] ?? "—") },
         ]}
       />
     </>

@@ -31,14 +31,14 @@ function InstallmentsPage() {
       const rows = data ?? [];
       return {
         overdue: rows
-          .filter((row) => row.status === "overdue")
-          .reduce((sum, row) => sum + Number(row.amount), 0),
+          .filter((row) => row["status"] === "overdue")
+          .reduce((sum, row) => sum + Number(row["amount"]), 0),
         upcoming: rows
-          .filter((row) => row.status === "upcoming" || row.status === "due")
-          .reduce((sum, row) => sum + Number(row.amount), 0),
+          .filter((row) => row["status"] === "upcoming" || row.status === "due")
+          .reduce((sum, row) => sum + Number(row["amount"]), 0),
         paid: rows
-          .filter((row) => row.status === "paid")
-          .reduce((sum, row) => sum + Number(row.amount), 0),
+          .filter((row) => row["status"] === "paid")
+          .reduce((sum, row) => sum + Number(row["amount"]), 0),
       };
     },
   });
@@ -115,10 +115,10 @@ function InstallmentsPage() {
           { name: "internal_note", label: "یادداشت داخلی", type: "textarea" },
         ]}
         columns={[
-          { key: "label", header: "قسط", cell: (row) => String(row.label ?? "") },
-          { key: "amount", header: "مبلغ", cell: (row) => formatAmount(Number(row.amount ?? 0)) },
-          { key: "due", header: "سررسید", cell: (row) => String(row.due_date ?? "—") },
-          { key: "status", header: "وضعیت", cell: (row) => String(row.status ?? "") },
+          { key: "label", header: "قسط", cell: (row) => String(row["label"] ?? "") },
+          { key: "amount", header: "مبلغ", cell: (row) => formatAmount(Number(row["amount"] ?? 0)) },
+          { key: "due", header: "سررسید", cell: (row) => String(row["due_date"] ?? "—") },
+          { key: "status", header: "وضعیت", cell: (row) => String(row["status"] ?? "") },
         ]}
       />
     </>

@@ -41,10 +41,10 @@ function FaqsPage() {
           },
         ]}
         columns={[
-          { key: "q", header: "پرسش", cell: (row) => String(row.question_fa ?? "") },
-          { key: "context", header: "بستر", cell: (row) => String(row.context ?? "—") },
-          { key: "status", header: "وضعیت", cell: (row) => String(row.status ?? "") },
-          { key: "position", header: "ترتیب", cell: (row) => String(row.position ?? 0) },
+          { key: "q", header: "پرسش", cell: (row) => String(row["question_fa"] ?? "") },
+          { key: "context", header: "بستر", cell: (row) => String(row["context"] ?? "—") },
+          { key: "status", header: "وضعیت", cell: (row) => String(row["status"] ?? "") },
+          { key: "position", header: "ترتیب", cell: (row) => String(row["position"] ?? 0) },
         ]}
       />
     </>

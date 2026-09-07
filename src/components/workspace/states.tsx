@@ -13,7 +13,7 @@ const toneClasses: Record<Tone, string> = {
   danger: "bg-destructive/10 text-destructive border-destructive/25",
 };
 
-export function StatusBadge({ tone = "neutral", children }: { tone?: Tone; children: ReactNode }) {
+export function StatusBadge({ tone = "neutral", children }: { tone?: Tone | undefined; children: ReactNode }) {
   return (
     <span
       className={cn(
@@ -33,11 +33,11 @@ export function Panel({
   children,
   className,
 }: {
-  title?: ReactNode;
-  description?: ReactNode;
-  action?: ReactNode;
+  title?: ReactNode | undefined;
+  description?: ReactNode | undefined;
+  action?: ReactNode | undefined;
   children?: ReactNode;
-  className?: string;
+  className?: string | undefined;
 }) {
   return (
     <section className={cn("rounded-xl border border-border bg-card", className)}>
@@ -63,8 +63,8 @@ export function EmptyState({
   action,
 }: {
   title: string;
-  description?: string;
-  action?: ReactNode;
+  description?: string | undefined;
+  action?: ReactNode | undefined;
 }) {
   return (
     <div className="flex flex-col items-center justify-center rounded-lg border border-dashed border-border px-6 py-12 text-center">
@@ -87,7 +87,7 @@ export function LoadingState({ rows = 4 }: { rows?: number }) {
   );
 }
 
-export function ErrorState({ message, onRetry }: { message?: string; onRetry?: () => void }) {
+export function ErrorState({ message, onRetry }: { message?: string | undefined; onRetry?: () => void }) {
   return (
     <div className="rounded-lg border border-destructive/30 bg-destructive/5 px-5 py-6 text-center">
       <p className="text-sm font-medium text-destructive">اطلاعات بارگذاری نشد</p>
@@ -115,8 +115,8 @@ export function Metric({
 }: {
   label: string;
   value: ReactNode;
-  hint?: string;
-  tone?: Tone;
+  hint?: string | undefined;
+  tone?: Tone | undefined;
 }) {
   return (
     <div className="rounded-xl border border-border bg-card px-4 py-4">
@@ -138,7 +138,7 @@ export type Column<T> = {
   key: string;
   header: string;
   cell: (row: T) => ReactNode;
-  className?: string;
+  className?: string | undefined;
 };
 
 export function DataTable<T extends { id: string | number }>({
@@ -150,7 +150,7 @@ export function DataTable<T extends { id: string | number }>({
 }: {
   rows: T[] | undefined;
   columns: Column<T>[];
-  loading?: boolean;
+  loading?: boolean | undefined;
   error?: unknown;
   empty: { title: string; description?: string };
 }) {
