@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container, CtaLink, Eyebrow, Lead, SectionTitle } from "@/components/site/primitives";
 
-const title = "درخواست بررسی فنی | رای‌کد";
-const description = "ارسال پروژه برای بررسی فنی: مشکل، آدرس، خطا و میزان فوریت.";
+import { Breadcrumbs, PageHeader, PageShell } from "@/components/site/collection";
+import { LeadForm } from "@/components/site/lead-form";
+
+const title = "درخواست بررسی فنی پروژه | رای‌کد";
+const description =
+  "بررسی فنی رایگان پروژه‌های نیمه‌کاره، کند یا پرباگ؛ گزارش وضعیت و مسیر پیشنهادی رای‌کد.";
 
 export const Route = createFileRoute("/technical-review")({
   head: () => ({
@@ -11,6 +14,8 @@ export const Route = createFileRoute("/technical-review")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
@@ -18,21 +23,25 @@ export const Route = createFileRoute("/technical-review")({
 
 function Page() {
   return (
-    <div className="py-24 sm:py-32">
-      <Container>
-        <Eyebrow>درخواست بررسی فنی</Eyebrow>
-        <SectionTitle>درخواست بررسی فنی</SectionTitle>
-        <Lead>
-          این صفحه در مرحله بعدی با ترکیب اختصاصی خود (Conversion) ساخته می‌شود. ساختار، ناوبری و
-          سیستم طراحی آماده است.
-        </Lead>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <CtaLink to="/" variant="outline">
-            بازگشت به خانه
-          </CtaLink>
+    <PageShell>
+      <div className="mx-auto max-w-3xl">
+        <Breadcrumbs items={[{ label: "بررسی فنی" }]} />
+        <PageHeader
+          eyebrow="بررسی فنی"
+          title="درخواست بررسی فنی"
+          lead="وضعیت پروژه فعلی‌تان را بنویسید؛ نتیجه بررسی به‌صورت گزارش داخلی برای شما آماده می‌شود."
+        />
+        <div className="mt-10">
+          <LeadForm
+            leadType="technical_review"
+            fields={["name", "company", "phone", "email", "summary"]}
+            startedEvent="technical_review_started"
+            completedEvent="technical_review_completed"
+            submitLabel="ثبت درخواست بررسی"
+            successTitle="درخواست بررسی فنی ثبت شد"
+          />
         </div>
-      </Container>
-    </div>
+      </div>
+    </PageShell>
   );
 }

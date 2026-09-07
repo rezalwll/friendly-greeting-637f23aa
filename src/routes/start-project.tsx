@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container, CtaLink, Eyebrow, Lead, SectionTitle } from "@/components/site/primitives";
 
-const title = "شروع پروژه | فرم چندمرحله‌ای رای‌کد";
-const description = "درخواست شروع پروژه در رای‌کد: نوع پروژه، وضعیت فعلی، جزئیات، زمان و بودجه.";
+import { Breadcrumbs, PageHeader, PageShell } from "@/components/site/collection";
+import { LeadForm } from "@/components/site/lead-form";
+
+const title = "شروع پروژه با رای‌کد | ثبت درخواست ساخت یا توسعه";
+const description =
+  "فرم شروع پروژه رای‌کد؛ نیاز خود را ثبت کنید تا مسیر فنی، زمان‌بندی و مراحل پرداخت مشخص شود.";
 
 export const Route = createFileRoute("/start-project")({
   head: () => ({
@@ -11,6 +14,8 @@ export const Route = createFileRoute("/start-project")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
@@ -18,21 +23,25 @@ export const Route = createFileRoute("/start-project")({
 
 function Page() {
   return (
-    <div className="py-24 sm:py-32">
-      <Container>
-        <Eyebrow>شروع پروژه</Eyebrow>
-        <SectionTitle>شروع پروژه</SectionTitle>
-        <Lead>
-          این صفحه در مرحله بعدی با ترکیب اختصاصی خود (Conversion) ساخته می‌شود. ساختار، ناوبری و
-          سیستم طراحی آماده است.
-        </Lead>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <CtaLink to="/" variant="outline">
-            بازگشت به خانه
-          </CtaLink>
+    <PageShell>
+      <div className="mx-auto max-w-3xl">
+        <Breadcrumbs items={[{ label: "شروع پروژه" }]} />
+        <PageHeader
+          eyebrow="شروع پروژه"
+          title="پروژه‌تان را شروع کنیم"
+          lead="فرم را کامل کنید؛ درخواست شما مستقیم وارد سامانه داخلی رای‌کد می‌شود و در پنل مدیریت پیگیری خواهد شد."
+        />
+        <div className="mt-10">
+          <LeadForm
+            leadType="project_request"
+            fields={["name", "company", "phone", "email", "service", "budget", "summary"]}
+            startedEvent="project_form_started"
+            completedEvent="project_form_completed"
+            submitLabel="ثبت درخواست پروژه"
+            successTitle="درخواست پروژه ثبت شد"
+          />
         </div>
-      </Container>
-    </div>
+      </div>
+    </PageShell>
   );
 }

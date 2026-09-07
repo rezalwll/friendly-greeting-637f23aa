@@ -1,38 +1,5 @@
-import { createFileRoute } from "@tanstack/react-router";
-import { Container, CtaLink, Eyebrow, Lead, SectionTitle } from "@/components/site/primitives";
-
-const title = "بلاگ رای‌کد | طراحی سایت، سئو، وردپرس و برنامه‌نویسی";
-const description = "مقاله‌ها و راهنماهای رای‌کد درباره ساخت، رشد و نگهداری محصولات دیجیتال.";
+import { createFileRoute, Outlet } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/blog")({
-  head: () => ({
-    meta: [
-      { title },
-      { name: "description", content: description },
-      { property: "og:title", content: title },
-      { property: "og:description", content: description },
-    ],
-  }),
-  component: Page,
+  component: () => <Outlet />,
 });
-
-function Page() {
-  return (
-    <div className="py-24 sm:py-32">
-      <Container>
-        <Eyebrow>بلاگ</Eyebrow>
-        <SectionTitle>بلاگ</SectionTitle>
-        <Lead>
-          این صفحه در مرحله بعدی با ترکیب اختصاصی خود (Content System) ساخته می‌شود. ساختار، ناوبری و
-          سیستم طراحی آماده است.
-        </Lead>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <CtaLink to="/" variant="outline">
-            بازگشت به خانه
-          </CtaLink>
-        </div>
-      </Container>
-    </div>
-  );
-}

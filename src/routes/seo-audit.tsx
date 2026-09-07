@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Container, CtaLink, Eyebrow, Lead, SectionTitle } from "@/components/site/primitives";
 
-const title = "درخواست SEO Audit | رای‌کد";
-const description = "درخواست بررسی سئوی سایت: آدرس، صنعت، نوع سایت، هدف و مشکل فعلی.";
+import { Breadcrumbs, PageHeader, PageShell } from "@/components/site/collection";
+import { LeadForm } from "@/components/site/lead-form";
+
+const title = "درخواست SEO Audit | بررسی سئو سایت توسط رای‌کد";
+const description =
+  "درخواست بررسی سئوی سایت؛ ساختار، سرعت، محتوا و مشکلات ایندکس به‌صورت گزارش داخلی بررسی می‌شود.";
 
 export const Route = createFileRoute("/seo-audit")({
   head: () => ({
@@ -11,6 +14,8 @@ export const Route = createFileRoute("/seo-audit")({
       { name: "description", content: description },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
   }),
   component: Page,
@@ -18,21 +23,25 @@ export const Route = createFileRoute("/seo-audit")({
 
 function Page() {
   return (
-    <div className="py-24 sm:py-32">
-      <Container>
-        <Eyebrow>درخواست SEO Audit</Eyebrow>
-        <SectionTitle>درخواست SEO Audit</SectionTitle>
-        <Lead>
-          این صفحه در مرحله بعدی با ترکیب اختصاصی خود (Conversion) ساخته می‌شود. ساختار، ناوبری و
-          سیستم طراحی آماده است.
-        </Lead>
-        <div className="mt-10 flex flex-wrap gap-3">
-          <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <CtaLink to="/" variant="outline">
-            بازگشت به خانه
-          </CtaLink>
+    <PageShell>
+      <div className="mx-auto max-w-3xl">
+        <Breadcrumbs items={[{ label: "SEO Audit" }]} />
+        <PageHeader
+          eyebrow="سئو"
+          title="درخواست SEO Audit"
+          lead="نشانی سایت و مشکل فعلی‌تان را بنویسید. بررسی به‌صورت دستی و داخلی انجام می‌شود؛ هیچ ابزار بیرونی به سایت شما وصل نمی‌شود."
+        />
+        <div className="mt-10">
+          <LeadForm
+            leadType="seo_audit"
+            fields={["name", "company", "phone", "email", "summary"]}
+            startedEvent="seo_audit_started"
+            completedEvent="seo_audit_completed"
+            submitLabel="ثبت درخواست سئو"
+            successTitle="درخواست SEO Audit ثبت شد"
+          />
         </div>
-      </Container>
-    </div>
+      </div>
+    </PageShell>
   );
 }

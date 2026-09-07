@@ -29,6 +29,18 @@ import { Route as TechnologiesRouteImport } from './routes/technologies'
 import { Route as WhyRycodeRouteImport } from './routes/why-rycode'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
+import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as ProblemsIndexRouteImport } from './routes/problems.index'
+import { Route as ProblemsSlugRouteImport } from './routes/problems.$slug'
+import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
+import { Route as ProjectsSlugRouteImport } from './routes/projects.$slug'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
+import { Route as SolutionsIndexRouteImport } from './routes/solutions.index'
+import { Route as SolutionsSlugRouteImport } from './routes/solutions.$slug'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminArticlesRouteImport } from './routes/_authenticated/admin/articles'
 import { Route as AuthenticatedAdminAuthorsRouteImport } from './routes/_authenticated/admin/authors'
@@ -53,6 +65,7 @@ import { Route as AuthenticatedDashboardPaymentsRouteImport } from './routes/_au
 import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard/profile'
 import { Route as AuthenticatedDashboardRequestsRouteImport } from './routes/_authenticated/dashboard/requests'
 import { Route as AuthenticatedDashboardSupportRouteImport } from './routes/_authenticated/dashboard/support'
+import { Route as ApiPublicSitemapRouteImport } from './routes/api/public/sitemap'
 import { Route as AuthenticatedAdminAnalyticsIndexRouteImport } from './routes/_authenticated/admin/analytics/index'
 import { Route as AuthenticatedAdminAnalyticsAcquisitionRouteImport } from './routes/_authenticated/admin/analytics/acquisition'
 import { Route as AuthenticatedAdminAnalyticsBehaviorRouteImport } from './routes/_authenticated/admin/analytics/behavior'
@@ -177,6 +190,66 @@ const AuthenticatedDashboardRouteRoute =
     path: '/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
+const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IndustriesRoute,
+} as any)
+const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => IndustriesRoute,
+} as any)
+const ProblemsIndexRoute = ProblemsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProblemsRoute,
+} as any)
+const ProblemsSlugRoute = ProblemsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProblemsRoute,
+} as any)
+const ProjectsIndexRoute = ProjectsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const ProjectsSlugRoute = ProjectsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ProjectsRoute,
+} as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const ServicesSlugRoute = ServicesSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => ServicesRoute,
+} as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SolutionsRoute,
+} as any)
+const SolutionsSlugRoute = SolutionsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => SolutionsRoute,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -314,6 +387,11 @@ const AuthenticatedDashboardSupportRoute =
     path: '/support',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const ApiPublicSitemapRoute = ApiPublicSitemapRouteImport.update({
+  id: '/api/public/sitemap',
+  path: '/api/public/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminAnalyticsIndexRoute =
   AuthenticatedAdminAnalyticsIndexRouteImport.update({
     id: '/analytics/',
@@ -456,23 +534,35 @@ const AuthenticatedDashboardProjectsIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/industries': typeof IndustriesRoute
+  '/industries': typeof IndustriesRouteWithChildren
   '/login': typeof LoginRoute
-  '/problems': typeof ProblemsRoute
+  '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
-  '/projects': typeof ProjectsRoute
+  '/projects': typeof ProjectsRouteWithChildren
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/solutions': typeof SolutionsRouteWithChildren
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/problems/$slug': typeof ProblemsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/problems/': typeof ProblemsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -495,6 +585,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -524,21 +615,27 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/industries': typeof IndustriesRoute
   '/login': typeof LoginRoute
-  '/problems': typeof ProblemsRoute
   '/process': typeof ProcessRoute
-  '/projects': typeof ProjectsRoute
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/problems/$slug': typeof ProblemsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/blog': typeof BlogIndexRoute
+  '/industries': typeof IndustriesIndexRoute
+  '/problems': typeof ProblemsIndexRoute
+  '/projects': typeof ProjectsIndexRoute
+  '/services': typeof ServicesIndexRoute
+  '/solutions': typeof SolutionsIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -561,6 +658,7 @@ export interface FileRoutesByTo {
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -592,23 +690,35 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRoute
+  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/industries': typeof IndustriesRoute
+  '/industries': typeof IndustriesRouteWithChildren
   '/login': typeof LoginRoute
-  '/problems': typeof ProblemsRoute
+  '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
-  '/projects': typeof ProjectsRoute
+  '/projects': typeof ProjectsRouteWithChildren
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
-  '/solutions': typeof SolutionsRoute
+  '/services': typeof ServicesRouteWithChildren
+  '/solutions': typeof SolutionsRouteWithChildren
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/blog/$slug': typeof BlogSlugRoute
+  '/industries/$slug': typeof IndustriesSlugRoute
+  '/problems/$slug': typeof ProblemsSlugRoute
+  '/projects/$slug': typeof ProjectsSlugRoute
+  '/services/$slug': typeof ServicesSlugRoute
+  '/solutions/$slug': typeof SolutionsSlugRoute
+  '/blog/': typeof BlogIndexRoute
+  '/industries/': typeof IndustriesIndexRoute
+  '/problems/': typeof ProblemsIndexRoute
+  '/projects/': typeof ProjectsIndexRoute
+  '/services/': typeof ServicesIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
   '/_authenticated/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/_authenticated/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -631,6 +741,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/_authenticated/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/_authenticated/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -679,6 +790,18 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/admin'
     | '/dashboard'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/problems/$slug'
+    | '/projects/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
+    | '/blog/'
+    | '/industries/'
+    | '/problems/'
+    | '/projects/'
+    | '/services/'
+    | '/solutions/'
     | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
@@ -701,6 +824,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/requests'
     | '/dashboard/support'
+    | '/api/public/sitemap'
     | '/admin/'
     | '/dashboard/'
     | '/admin/analytics/acquisition'
@@ -730,21 +854,27 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/faq'
-    | '/industries'
     | '/login'
-    | '/problems'
     | '/process'
-    | '/projects'
     | '/seo-audit'
-    | '/services'
-    | '/solutions'
     | '/start-project'
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/problems/$slug'
+    | '/projects/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
+    | '/blog'
+    | '/industries'
+    | '/problems'
+    | '/projects'
+    | '/services'
+    | '/solutions'
     | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
@@ -767,6 +897,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/requests'
     | '/dashboard/support'
+    | '/api/public/sitemap'
     | '/admin'
     | '/dashboard'
     | '/admin/analytics/acquisition'
@@ -814,6 +945,18 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/blog/$slug'
+    | '/industries/$slug'
+    | '/problems/$slug'
+    | '/projects/$slug'
+    | '/services/$slug'
+    | '/solutions/$slug'
+    | '/blog/'
+    | '/industries/'
+    | '/problems/'
+    | '/projects/'
+    | '/services/'
+    | '/solutions/'
     | '/_authenticated/admin/articles'
     | '/_authenticated/admin/authors'
     | '/_authenticated/admin/categories'
@@ -836,6 +979,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/profile'
     | '/_authenticated/dashboard/requests'
     | '/_authenticated/dashboard/support'
+    | '/api/public/sitemap'
     | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
     | '/_authenticated/admin/analytics/acquisition'
@@ -867,21 +1011,22 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  BlogRoute: typeof BlogRoute
+  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  IndustriesRoute: typeof IndustriesRoute
+  IndustriesRoute: typeof IndustriesRouteWithChildren
   LoginRoute: typeof LoginRoute
-  ProblemsRoute: typeof ProblemsRoute
+  ProblemsRoute: typeof ProblemsRouteWithChildren
   ProcessRoute: typeof ProcessRoute
-  ProjectsRoute: typeof ProjectsRoute
+  ProjectsRoute: typeof ProjectsRouteWithChildren
   SeoAuditRoute: typeof SeoAuditRoute
-  ServicesRoute: typeof ServicesRoute
-  SolutionsRoute: typeof SolutionsRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
+  SolutionsRoute: typeof SolutionsRouteWithChildren
   StartProjectRoute: typeof StartProjectRoute
   TechnicalReviewRoute: typeof TechnicalReviewRoute
   TechnologiesRoute: typeof TechnologiesRoute
   WhyRycodeRoute: typeof WhyRycodeRoute
+  ApiPublicSitemapRoute: typeof ApiPublicSitemapRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1025,6 +1170,90 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/industries/': {
+      id: '/industries/'
+      path: '/'
+      fullPath: '/industries/'
+      preLoaderRoute: typeof IndustriesIndexRouteImport
+      parentRoute: typeof IndustriesRoute
+    }
+    '/industries/$slug': {
+      id: '/industries/$slug'
+      path: '/$slug'
+      fullPath: '/industries/$slug'
+      preLoaderRoute: typeof IndustriesSlugRouteImport
+      parentRoute: typeof IndustriesRoute
+    }
+    '/problems/': {
+      id: '/problems/'
+      path: '/'
+      fullPath: '/problems/'
+      preLoaderRoute: typeof ProblemsIndexRouteImport
+      parentRoute: typeof ProblemsRoute
+    }
+    '/problems/$slug': {
+      id: '/problems/$slug'
+      path: '/$slug'
+      fullPath: '/problems/$slug'
+      preLoaderRoute: typeof ProblemsSlugRouteImport
+      parentRoute: typeof ProblemsRoute
+    }
+    '/projects/': {
+      id: '/projects/'
+      path: '/'
+      fullPath: '/projects/'
+      preLoaderRoute: typeof ProjectsIndexRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/projects/$slug': {
+      id: '/projects/$slug'
+      path: '/$slug'
+      fullPath: '/projects/$slug'
+      preLoaderRoute: typeof ProjectsSlugRouteImport
+      parentRoute: typeof ProjectsRoute
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/services/$slug': {
+      id: '/services/$slug'
+      path: '/$slug'
+      fullPath: '/services/$slug'
+      preLoaderRoute: typeof ServicesSlugRouteImport
+      parentRoute: typeof ServicesRoute
+    }
+    '/solutions/': {
+      id: '/solutions/'
+      path: '/'
+      fullPath: '/solutions/'
+      preLoaderRoute: typeof SolutionsIndexRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
+    '/solutions/$slug': {
+      id: '/solutions/$slug'
+      path: '/$slug'
+      fullPath: '/solutions/$slug'
+      preLoaderRoute: typeof SolutionsSlugRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
@@ -1193,6 +1422,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/support'
       preLoaderRoute: typeof AuthenticatedDashboardSupportRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/api/public/sitemap': {
+      id: '/api/public/sitemap'
+      path: '/api/public/sitemap'
+      fullPath: '/api/public/sitemap'
+      preLoaderRoute: typeof ApiPublicSitemapRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/analytics/': {
       id: '/_authenticated/admin/analytics/'
@@ -1509,25 +1745,108 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
+interface IndustriesRouteChildren {
+  IndustriesSlugRoute: typeof IndustriesSlugRoute
+  IndustriesIndexRoute: typeof IndustriesIndexRoute
+}
+
+const IndustriesRouteChildren: IndustriesRouteChildren = {
+  IndustriesSlugRoute: IndustriesSlugRoute,
+  IndustriesIndexRoute: IndustriesIndexRoute,
+}
+
+const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
+  IndustriesRouteChildren,
+)
+
+interface ProblemsRouteChildren {
+  ProblemsSlugRoute: typeof ProblemsSlugRoute
+  ProblemsIndexRoute: typeof ProblemsIndexRoute
+}
+
+const ProblemsRouteChildren: ProblemsRouteChildren = {
+  ProblemsSlugRoute: ProblemsSlugRoute,
+  ProblemsIndexRoute: ProblemsIndexRoute,
+}
+
+const ProblemsRouteWithChildren = ProblemsRoute._addFileChildren(
+  ProblemsRouteChildren,
+)
+
+interface ProjectsRouteChildren {
+  ProjectsSlugRoute: typeof ProjectsSlugRoute
+  ProjectsIndexRoute: typeof ProjectsIndexRoute
+}
+
+const ProjectsRouteChildren: ProjectsRouteChildren = {
+  ProjectsSlugRoute: ProjectsSlugRoute,
+  ProjectsIndexRoute: ProjectsIndexRoute,
+}
+
+const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
+  ProjectsRouteChildren,
+)
+
+interface ServicesRouteChildren {
+  ServicesSlugRoute: typeof ServicesSlugRoute
+  ServicesIndexRoute: typeof ServicesIndexRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesSlugRoute: ServicesSlugRoute,
+  ServicesIndexRoute: ServicesIndexRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
+interface SolutionsRouteChildren {
+  SolutionsSlugRoute: typeof SolutionsSlugRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
+}
+
+const SolutionsRouteChildren: SolutionsRouteChildren = {
+  SolutionsSlugRoute: SolutionsSlugRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
+}
+
+const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
+  SolutionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  BlogRoute: BlogRoute,
+  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  IndustriesRoute: IndustriesRoute,
+  IndustriesRoute: IndustriesRouteWithChildren,
   LoginRoute: LoginRoute,
-  ProblemsRoute: ProblemsRoute,
+  ProblemsRoute: ProblemsRouteWithChildren,
   ProcessRoute: ProcessRoute,
-  ProjectsRoute: ProjectsRoute,
+  ProjectsRoute: ProjectsRouteWithChildren,
   SeoAuditRoute: SeoAuditRoute,
-  ServicesRoute: ServicesRoute,
-  SolutionsRoute: SolutionsRoute,
+  ServicesRoute: ServicesRouteWithChildren,
+  SolutionsRoute: SolutionsRouteWithChildren,
   StartProjectRoute: StartProjectRoute,
   TechnicalReviewRoute: TechnicalReviewRoute,
   TechnologiesRoute: TechnologiesRoute,
   WhyRycodeRoute: WhyRycodeRoute,
+  ApiPublicSitemapRoute: ApiPublicSitemapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
