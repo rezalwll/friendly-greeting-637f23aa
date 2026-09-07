@@ -1,6 +1,6 @@
 import type { LinkProps } from "@tanstack/react-router";
 
-export type To = LinkProps["to"];
+export type To = Exclude<LinkProps["to"], undefined>;
 
 export type NavItem = { label: string; to: To; exact?: boolean };
 export type NavGroup = { label?: string; items: NavItem[] };

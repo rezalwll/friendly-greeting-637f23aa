@@ -32,7 +32,7 @@ function SeoMetadataPage() {
         columns={[
           { key: "path", header: "مسیر", cell: (row) => String(row["path"] ?? "") },
           { key: "title", header: "عنوان", cell: (row) => String(row["title_fa"] ?? "—") },
-          { key: "noindex", header: "noindex", cell: (row) => (row.no_index ? "بله" : "خیر") },
+          { key: "noindex", header: "noindex", cell: (row) => (row["no_index"] ? "بله" : "خیر") },
         ]}
       />
     </>

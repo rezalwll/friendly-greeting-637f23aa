@@ -36,7 +36,7 @@ function RedirectsPage() {
           { key: "old", header: "قدیمی", cell: (row) => String(row["old_url"] ?? "") },
           { key: "new", header: "جدید", cell: (row) => String(row["new_url"] ?? "") },
           { key: "type", header: "نوع", cell: (row) => String(row["type"] ?? "") },
-          { key: "active", header: "فعال", cell: (row) => (row.active ? "بله" : "خیر") },
+          { key: "active", header: "فعال", cell: (row) => (row["active"] ? "بله" : "خیر") },
         ]}
       />
     </>
