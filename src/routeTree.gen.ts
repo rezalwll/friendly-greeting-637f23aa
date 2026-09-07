@@ -65,6 +65,7 @@ import { Route as AuthenticatedDashboardPaymentsRouteImport } from './routes/_au
 import { Route as AuthenticatedDashboardProfileRouteImport } from './routes/_authenticated/dashboard/profile'
 import { Route as AuthenticatedDashboardRequestsRouteImport } from './routes/_authenticated/dashboard/requests'
 import { Route as AuthenticatedDashboardSupportRouteImport } from './routes/_authenticated/dashboard/support'
+import { Route as ApiPublicSitemapRouteImport } from './routes/api/public/sitemap'
 import { Route as AuthenticatedAdminAnalyticsIndexRouteImport } from './routes/_authenticated/admin/analytics/index'
 import { Route as AuthenticatedAdminAnalyticsAcquisitionRouteImport } from './routes/_authenticated/admin/analytics/acquisition'
 import { Route as AuthenticatedAdminAnalyticsBehaviorRouteImport } from './routes/_authenticated/admin/analytics/behavior'
@@ -386,6 +387,11 @@ const AuthenticatedDashboardSupportRoute =
     path: '/support',
     getParentRoute: () => AuthenticatedDashboardRouteRoute,
   } as any)
+const ApiPublicSitemapRoute = ApiPublicSitemapRouteImport.update({
+  id: '/api/public/sitemap',
+  path: '/api/public/sitemap',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AuthenticatedAdminAnalyticsIndexRoute =
   AuthenticatedAdminAnalyticsIndexRouteImport.update({
     id: '/analytics/',
@@ -579,6 +585,7 @@ export interface FileRoutesByFullPath {
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/admin/': typeof AuthenticatedAdminIndexRoute
   '/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -651,6 +658,7 @@ export interface FileRoutesByTo {
   '/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/admin': typeof AuthenticatedAdminIndexRoute
   '/dashboard': typeof AuthenticatedDashboardIndexRoute
   '/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -733,6 +741,7 @@ export interface FileRoutesById {
   '/_authenticated/dashboard/profile': typeof AuthenticatedDashboardProfileRoute
   '/_authenticated/dashboard/requests': typeof AuthenticatedDashboardRequestsRoute
   '/_authenticated/dashboard/support': typeof AuthenticatedDashboardSupportRoute
+  '/api/public/sitemap': typeof ApiPublicSitemapRoute
   '/_authenticated/admin/': typeof AuthenticatedAdminIndexRoute
   '/_authenticated/dashboard/': typeof AuthenticatedDashboardIndexRoute
   '/_authenticated/admin/analytics/acquisition': typeof AuthenticatedAdminAnalyticsAcquisitionRoute
@@ -815,6 +824,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/requests'
     | '/dashboard/support'
+    | '/api/public/sitemap'
     | '/admin/'
     | '/dashboard/'
     | '/admin/analytics/acquisition'
@@ -887,6 +897,7 @@ export interface FileRouteTypes {
     | '/dashboard/profile'
     | '/dashboard/requests'
     | '/dashboard/support'
+    | '/api/public/sitemap'
     | '/admin'
     | '/dashboard'
     | '/admin/analytics/acquisition'
@@ -968,6 +979,7 @@ export interface FileRouteTypes {
     | '/_authenticated/dashboard/profile'
     | '/_authenticated/dashboard/requests'
     | '/_authenticated/dashboard/support'
+    | '/api/public/sitemap'
     | '/_authenticated/admin/'
     | '/_authenticated/dashboard/'
     | '/_authenticated/admin/analytics/acquisition'
@@ -1014,6 +1026,7 @@ export interface RootRouteChildren {
   TechnicalReviewRoute: typeof TechnicalReviewRoute
   TechnologiesRoute: typeof TechnologiesRoute
   WhyRycodeRoute: typeof WhyRycodeRoute
+  ApiPublicSitemapRoute: typeof ApiPublicSitemapRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -1409,6 +1422,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard/support'
       preLoaderRoute: typeof AuthenticatedDashboardSupportRouteImport
       parentRoute: typeof AuthenticatedDashboardRouteRoute
+    }
+    '/api/public/sitemap': {
+      id: '/api/public/sitemap'
+      path: '/api/public/sitemap'
+      fullPath: '/api/public/sitemap'
+      preLoaderRoute: typeof ApiPublicSitemapRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/_authenticated/admin/analytics/': {
       id: '/_authenticated/admin/analytics/'
@@ -1826,6 +1846,7 @@ const rootRouteChildren: RootRouteChildren = {
   TechnicalReviewRoute: TechnicalReviewRoute,
   TechnologiesRoute: TechnologiesRoute,
   WhyRycodeRoute: WhyRycodeRoute,
+  ApiPublicSitemapRoute: ApiPublicSitemapRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
