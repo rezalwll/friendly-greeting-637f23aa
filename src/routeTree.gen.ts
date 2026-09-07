@@ -14,8 +14,10 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as EnRouteImport } from './routes/en'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as IndustriesRouteImport } from './routes/industries'
+import { Route as IntegrationsRouteImport } from './routes/integrations'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as ProblemsRouteImport } from './routes/problems'
 import { Route as ProcessRouteImport } from './routes/process'
@@ -31,8 +33,12 @@ import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authentic
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as EnIndexRouteImport } from './routes/en.index'
+import { Route as EnServicesRouteImport } from './routes/en.services'
 import { Route as IndustriesIndexRouteImport } from './routes/industries.index'
 import { Route as IndustriesSlugRouteImport } from './routes/industries.$slug'
+import { Route as IntegrationsIndexRouteImport } from './routes/integrations.index'
+import { Route as IntegrationsSlugRouteImport } from './routes/integrations.$slug'
 import { Route as ProblemsIndexRouteImport } from './routes/problems.index'
 import { Route as ProblemsSlugRouteImport } from './routes/problems.$slug'
 import { Route as ProjectsIndexRouteImport } from './routes/projects.index'
@@ -114,6 +120,11 @@ const ContactRoute = ContactRouteImport.update({
   path: '/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EnRoute = EnRouteImport.update({
+  id: '/en',
+  path: '/en',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FaqRoute = FaqRouteImport.update({
   id: '/faq',
   path: '/faq',
@@ -122,6 +133,11 @@ const FaqRoute = FaqRouteImport.update({
 const IndustriesRoute = IndustriesRouteImport.update({
   id: '/industries',
   path: '/industries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const IntegrationsRoute = IntegrationsRouteImport.update({
+  id: '/integrations',
+  path: '/integrations',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -200,6 +216,16 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/$slug',
   getParentRoute: () => BlogRoute,
 } as any)
+const EnIndexRoute = EnIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => EnRoute,
+} as any)
+const EnServicesRoute = EnServicesRouteImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => EnRoute,
+} as any)
 const IndustriesIndexRoute = IndustriesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -209,6 +235,16 @@ const IndustriesSlugRoute = IndustriesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => IndustriesRoute,
+} as any)
+const IntegrationsIndexRoute = IntegrationsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => IntegrationsRoute,
+} as any)
+const IntegrationsSlugRoute = IntegrationsSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => IntegrationsRoute,
 } as any)
 const ProblemsIndexRoute = ProblemsIndexRouteImport.update({
   id: '/',
@@ -536,8 +572,10 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
+  '/en': typeof EnRouteWithChildren
   '/faq': typeof FaqRoute
   '/industries': typeof IndustriesRouteWithChildren
+  '/integrations': typeof IntegrationsRouteWithChildren
   '/login': typeof LoginRoute
   '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
@@ -552,13 +590,17 @@ export interface FileRoutesByFullPath {
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/integrations/$slug': typeof IntegrationsSlugRoute
   '/problems/$slug': typeof ProblemsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/en/': typeof EnIndexRoute
   '/industries/': typeof IndustriesIndexRoute
+  '/integrations/': typeof IntegrationsIndexRoute
   '/problems/': typeof ProblemsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -625,13 +667,17 @@ export interface FileRoutesByTo {
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/integrations/$slug': typeof IntegrationsSlugRoute
   '/problems/$slug': typeof ProblemsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/blog': typeof BlogIndexRoute
+  '/en': typeof EnIndexRoute
   '/industries': typeof IndustriesIndexRoute
+  '/integrations': typeof IntegrationsIndexRoute
   '/problems': typeof ProblemsIndexRoute
   '/projects': typeof ProjectsIndexRoute
   '/services': typeof ServicesIndexRoute
@@ -692,8 +738,10 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
+  '/en': typeof EnRouteWithChildren
   '/faq': typeof FaqRoute
   '/industries': typeof IndustriesRouteWithChildren
+  '/integrations': typeof IntegrationsRouteWithChildren
   '/login': typeof LoginRoute
   '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
@@ -708,13 +756,17 @@ export interface FileRoutesById {
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
   '/blog/$slug': typeof BlogSlugRoute
+  '/en/services': typeof EnServicesRoute
   '/industries/$slug': typeof IndustriesSlugRoute
+  '/integrations/$slug': typeof IntegrationsSlugRoute
   '/problems/$slug': typeof ProblemsSlugRoute
   '/projects/$slug': typeof ProjectsSlugRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/$slug': typeof SolutionsSlugRoute
   '/blog/': typeof BlogIndexRoute
+  '/en/': typeof EnIndexRoute
   '/industries/': typeof IndustriesIndexRoute
+  '/integrations/': typeof IntegrationsIndexRoute
   '/problems/': typeof ProblemsIndexRoute
   '/projects/': typeof ProjectsIndexRoute
   '/services/': typeof ServicesIndexRoute
@@ -775,8 +827,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/en'
     | '/faq'
     | '/industries'
+    | '/integrations'
     | '/login'
     | '/problems'
     | '/process'
@@ -791,13 +845,17 @@ export interface FileRouteTypes {
     | '/admin'
     | '/dashboard'
     | '/blog/$slug'
+    | '/en/services'
     | '/industries/$slug'
+    | '/integrations/$slug'
     | '/problems/$slug'
     | '/projects/$slug'
     | '/services/$slug'
     | '/solutions/$slug'
     | '/blog/'
+    | '/en/'
     | '/industries/'
+    | '/integrations/'
     | '/problems/'
     | '/projects/'
     | '/services/'
@@ -864,13 +922,17 @@ export interface FileRouteTypes {
     | '/technologies'
     | '/why-rycode'
     | '/blog/$slug'
+    | '/en/services'
     | '/industries/$slug'
+    | '/integrations/$slug'
     | '/problems/$slug'
     | '/projects/$slug'
     | '/services/$slug'
     | '/solutions/$slug'
     | '/blog'
+    | '/en'
     | '/industries'
+    | '/integrations'
     | '/problems'
     | '/projects'
     | '/services'
@@ -930,8 +992,10 @@ export interface FileRouteTypes {
     | '/about'
     | '/blog'
     | '/contact'
+    | '/en'
     | '/faq'
     | '/industries'
+    | '/integrations'
     | '/login'
     | '/problems'
     | '/process'
@@ -946,13 +1010,17 @@ export interface FileRouteTypes {
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
     | '/blog/$slug'
+    | '/en/services'
     | '/industries/$slug'
+    | '/integrations/$slug'
     | '/problems/$slug'
     | '/projects/$slug'
     | '/services/$slug'
     | '/solutions/$slug'
     | '/blog/'
+    | '/en/'
     | '/industries/'
+    | '/integrations/'
     | '/problems/'
     | '/projects/'
     | '/services/'
@@ -1013,8 +1081,10 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
+  EnRoute: typeof EnRouteWithChildren
   FaqRoute: typeof FaqRoute
   IndustriesRoute: typeof IndustriesRouteWithChildren
+  IntegrationsRoute: typeof IntegrationsRouteWithChildren
   LoginRoute: typeof LoginRoute
   ProblemsRoute: typeof ProblemsRouteWithChildren
   ProcessRoute: typeof ProcessRoute
@@ -1066,6 +1136,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/en': {
+      id: '/en'
+      path: '/en'
+      fullPath: '/en'
+      preLoaderRoute: typeof EnRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/faq': {
       id: '/faq'
       path: '/faq'
@@ -1078,6 +1155,13 @@ declare module '@tanstack/react-router' {
       path: '/industries'
       fullPath: '/industries'
       preLoaderRoute: typeof IndustriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/integrations': {
+      id: '/integrations'
+      path: '/integrations'
+      fullPath: '/integrations'
+      preLoaderRoute: typeof IntegrationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -1185,6 +1269,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof BlogRoute
     }
+    '/en/': {
+      id: '/en/'
+      path: '/'
+      fullPath: '/en/'
+      preLoaderRoute: typeof EnIndexRouteImport
+      parentRoute: typeof EnRoute
+    }
+    '/en/services': {
+      id: '/en/services'
+      path: '/services'
+      fullPath: '/en/services'
+      preLoaderRoute: typeof EnServicesRouteImport
+      parentRoute: typeof EnRoute
+    }
     '/industries/': {
       id: '/industries/'
       path: '/'
@@ -1198,6 +1296,20 @@ declare module '@tanstack/react-router' {
       fullPath: '/industries/$slug'
       preLoaderRoute: typeof IndustriesSlugRouteImport
       parentRoute: typeof IndustriesRoute
+    }
+    '/integrations/': {
+      id: '/integrations/'
+      path: '/'
+      fullPath: '/integrations/'
+      preLoaderRoute: typeof IntegrationsIndexRouteImport
+      parentRoute: typeof IntegrationsRoute
+    }
+    '/integrations/$slug': {
+      id: '/integrations/$slug'
+      path: '/$slug'
+      fullPath: '/integrations/$slug'
+      preLoaderRoute: typeof IntegrationsSlugRouteImport
+      parentRoute: typeof IntegrationsRoute
     }
     '/problems/': {
       id: '/problems/'
@@ -1757,6 +1869,18 @@ const BlogRouteChildren: BlogRouteChildren = {
 
 const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
 
+interface EnRouteChildren {
+  EnServicesRoute: typeof EnServicesRoute
+  EnIndexRoute: typeof EnIndexRoute
+}
+
+const EnRouteChildren: EnRouteChildren = {
+  EnServicesRoute: EnServicesRoute,
+  EnIndexRoute: EnIndexRoute,
+}
+
+const EnRouteWithChildren = EnRoute._addFileChildren(EnRouteChildren)
+
 interface IndustriesRouteChildren {
   IndustriesSlugRoute: typeof IndustriesSlugRoute
   IndustriesIndexRoute: typeof IndustriesIndexRoute
@@ -1769,6 +1893,20 @@ const IndustriesRouteChildren: IndustriesRouteChildren = {
 
 const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
   IndustriesRouteChildren,
+)
+
+interface IntegrationsRouteChildren {
+  IntegrationsSlugRoute: typeof IntegrationsSlugRoute
+  IntegrationsIndexRoute: typeof IntegrationsIndexRoute
+}
+
+const IntegrationsRouteChildren: IntegrationsRouteChildren = {
+  IntegrationsSlugRoute: IntegrationsSlugRoute,
+  IntegrationsIndexRoute: IntegrationsIndexRoute,
+}
+
+const IntegrationsRouteWithChildren = IntegrationsRoute._addFileChildren(
+  IntegrationsRouteChildren,
 )
 
 interface ProblemsRouteChildren {
@@ -1833,8 +1971,10 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
+  EnRoute: EnRouteWithChildren,
   FaqRoute: FaqRoute,
   IndustriesRoute: IndustriesRouteWithChildren,
+  IntegrationsRoute: IntegrationsRouteWithChildren,
   LoginRoute: LoginRoute,
   ProblemsRoute: ProblemsRouteWithChildren,
   ProcessRoute: ProcessRoute,

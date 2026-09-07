@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import { Link } from "@tanstack/react-router";
 import { ArrowLeft, Check } from "lucide-react";
+import { articleListQuery, contentListQuery, publicFaqsQuery } from "@/lib/public-content";
 import {
   Container,
   CtaLink,
@@ -324,6 +327,48 @@ const projects = [
 ];
 
 export function SelectedProjects() {
+  const { data } = useQuery(contentListQuery("case_study", { page: 1, q: "" }));
+  const published = (data?.rows ?? []).slice(0, 3);
+
+  if (published.length > 0) {
+    return (
+      <Section className="bg-surface">
+        <Container>
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <div>
+              <Eyebrow>پروژه‌ها</Eyebrow>
+              <SectionTitle>
+                پروژه فقط چیزی نیست که ساختیم؛ مسئله‌ای است که حل کردیم.
+              </SectionTitle>
+            </div>
+            <TextLink to="/projects">همه پروژه‌ها</TextLink>
+          </div>
+          <div className="mt-12 grid gap-6 lg:grid-cols-3">
+            {published.map((p) => (
+              <Link
+                key={p.id}
+                to="/projects/$slug"
+                params={{ slug: p.slug }}
+                className="flex flex-col border border-border bg-background p-8 transition-colors hover:border-brand/50"
+              >
+                <h3 className="text-lg font-bold leading-8">{p.title_fa}</h3>
+                {p.summary_fa && (
+                  <p className="mt-3 line-clamp-4 text-sm leading-7 text-muted-foreground">
+                    {p.summary_fa}
+                  </p>
+                )}
+                <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-brand">
+                  مطالعه موردی
+                  <ArrowLeft className="size-4" />
+                </span>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </Section>
+    );
+  }
+
   return (
     <Section className="bg-surface">
       <Container>
@@ -518,6 +563,10 @@ export function PaymentSection() {
 /* 12. BLOG -------------------------------------------------------------- */
 
 export function BlogSection() {
+  const { data } = useQuery(articleListQuery({ page: 1, q: "" }));
+  const rows = data?.rows ?? [];
+  const featured = rows[0] ?? null;
+  const latest = rows.slice(1, 5);
   const categories = [
     "طراحی سایت",
     "فروشگاه اینترنتی",
@@ -544,18 +593,50 @@ export function BlogSection() {
         </div>
 
         <div className="mt-12 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
-            <p className="text-sm font-bold">مقاله شاخص</p>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">
-              هنوز مقاله‌ای منتشر نشده است. پس از انتشار، مقاله شاخص در این بخش نمایش داده می‌شود.
-            </p>
-          </div>
-          <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
-            <p className="text-sm font-bold">آخرین مقاله‌ها</p>
-            <p className="mt-3 text-sm leading-7 text-muted-foreground">
-              لیست جدیدترین مقاله‌ها به‌محض انتشار محتوا در این بخش قرار می‌گیرد.
-            </p>
-          </div>
+          {featured ? (
+            <Link
+              to="/blog/$slug"
+              params={{ slug: featured.slug }}
+              className="flex min-h-56 flex-col justify-center border border-border p-10 transition-colors hover:border-brand/50"
+            >
+              <p className="text-xs font-bold tracking-[0.12em] text-brand uppercase">مقاله شاخص</p>
+              <h3 className="mt-4 text-xl font-bold leading-9">{featured.title_fa}</h3>
+              {featured.excerpt_fa && (
+                <p className="mt-3 line-clamp-3 text-sm leading-7 text-muted-foreground">
+                  {featured.excerpt_fa}
+                </p>
+              )}
+            </Link>
+          ) : (
+            <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
+              <p className="text-sm font-bold">مقاله شاخص</p>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                هنوز مقاله‌ای منتشر نشده است. پس از انتشار، مقاله شاخص در این بخش نمایش داده می‌شود.
+              </p>
+            </div>
+          )}
+          {latest.length > 0 ? (
+            <ul className="flex min-h-56 flex-col justify-center divide-y divide-border border border-border px-8">
+              {latest.map((a) => (
+                <li key={a.id}>
+                  <Link
+                    to="/blog/$slug"
+                    params={{ slug: a.slug }}
+                    className="block py-4 text-sm font-semibold leading-7 transition-colors hover:text-brand"
+                  >
+                    {a.title_fa}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
+              <p className="text-sm font-bold">آخرین مقاله‌ها</p>
+              <p className="mt-3 text-sm leading-7 text-muted-foreground">
+                لیست جدیدترین مقاله‌ها به‌محض انتشار محتوا در این بخش قرار می‌گیرد.
+              </p>
+            </div>
+          )}
         </div>
 
         <div className="mt-8 flex flex-wrap gap-2">
@@ -593,6 +674,12 @@ const faqs = [
 
 export function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
+  const { data } = useQuery(publicFaqsQuery());
+  const published = (data ?? []).slice(0, 8);
+  const items =
+    published.length > 0
+      ? published.map((f) => ({ q: f.question_fa, a: f.answer_fa }))
+      : faqs;
   return (
     <Section className="bg-surface">
       <Container>
@@ -602,7 +689,7 @@ export function FaqSection() {
             <SectionTitle className="text-2xl sm:text-3xl">پرسش‌های پرتکرار</SectionTitle>
           </div>
           <div className="border-t border-border">
-            {faqs.map((f, i) => (
+            {items.map((f, i) => (
               <div key={f.q} className="border-b border-border">
                 <button
                   type="button"

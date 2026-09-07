@@ -13,6 +13,7 @@ import appCss from "../styles.css?url";
 import { SiteHeader } from "@/components/site/header";
 import { SiteFooter } from "@/components/site/footer";
 import { reportLovableError } from "../lib/lovable-error-reporting";
+import { dirFor, useLocale } from "@/lib/i18n";
 
 function NotFoundComponent() {
   return (
@@ -96,11 +97,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
-      { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
-        rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&family=Manrope:wght@400;600;700;800&display=swap",
+        rel: "preload",
+        as: "font",
+        type: "font/ttf",
+        href: "/fonts/iranyekan/iranyekan.ttf",
+        crossOrigin: "anonymous",
       },
       {
         rel: "stylesheet",
@@ -116,8 +118,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const locale = useLocale();
+  const dir = dirFor(locale);
   return (
-    <html lang="fa" dir="rtl" suppressHydrationWarning>
+    <html lang={locale} dir={dir} suppressHydrationWarning>
       <head>
         <HeadContent />
         <script
