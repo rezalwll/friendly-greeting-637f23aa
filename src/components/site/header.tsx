@@ -37,12 +37,15 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 border-b transition-colors",
-        scrolled ? "border-border bg-background/85 backdrop-blur-md" : "border-transparent",
+        "sticky top-0 z-50 border-b transition-[background-color,border-color] duration-300",
+        scrolled
+          ? "border-border bg-background/85 backdrop-blur-md"
+          : "border-transparent bg-transparent",
       )}
       onMouseLeave={() => setOpen(null)}
     >
-      <Container className="flex h-[72px] items-center justify-between gap-6">
+      <Container className="flex h-[76px] items-center justify-between gap-6">
+
         <div className="flex items-center gap-8">
           <Link to="/" aria-label="RYCODE" className="shrink-0">
             <Logo />

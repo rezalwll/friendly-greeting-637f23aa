@@ -1,13 +1,14 @@
 import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Check } from "lucide-react";
 import { articleListQuery, contentListQuery, publicFaqsQuery } from "@/lib/public-content";
 import {
+  ArrowSquare,
   Container,
   CtaLink,
   Eyebrow,
   Lead,
+  MetaLabel,
   Section,
   SectionTitle,
   TextLink,
@@ -15,26 +16,24 @@ import {
 import { industries } from "@/lib/nav-content";
 import { cn } from "@/lib/utils";
 
-/* 2. CAPABILITY STRIP -------------------------------------------------- */
+/* 2. CAPABILITY RAIL ---------------------------------------------------- */
 
 export function CapabilityStrip() {
   const items = [
-    "طراحی وب",
-    "فروشگاه اینترنتی",
-    "نرم‌افزار اختصاصی",
-    "یکپارچه‌سازی",
-    "سئو",
-    "پشتیبانی",
+    { fa: "طراحی وب", en: "WEB" },
+    { fa: "فروشگاه اینترنتی", en: "ECOMMERCE" },
+    { fa: "نرم‌افزار اختصاصی", en: "SOFTWARE" },
+    { fa: "یکپارچه‌سازی", en: "INTEGRATION" },
+    { fa: "سئو", en: "SEO" },
+    { fa: "پشتیبانی", en: "SUPPORT" },
   ];
   return (
-    <div className="hairline-y bg-surface">
-      <Container className="flex flex-wrap items-center gap-x-10 gap-y-4 py-6">
-        {items.map((item, i) => (
-          <span key={item} className="flex items-center gap-3 text-sm font-semibold">
-            <span className="font-display text-[0.7rem] text-brand" dir="ltr">
-              0{i + 1}
-            </span>
-            {item}
+    <div className="border-b border-border bg-surface">
+      <Container className="flex flex-wrap items-baseline gap-x-12 gap-y-6 py-10">
+        {items.map((item) => (
+          <span key={item.en} className="flex flex-col gap-1.5">
+            <span className="text-base font-bold">{item.fa}</span>
+            <MetaLabel className="text-muted-foreground">{item.en}</MetaLabel>
           </span>
         ))}
       </Container>
@@ -66,11 +65,10 @@ const paths = [
 ];
 
 export function PathSelector() {
-  const [active, setActive] = useState(0);
-  const current = paths[active]!;
+  const [active, setActive] = useState<number | null>(null);
 
   return (
-    <Section>
+    <Section className="grain">
       <Container>
         <Eyebrow>مسیر شما</Eyebrow>
         <SectionTitle>امروز برای چه چیزی به رای‌کد نیاز دارید؟</SectionTitle>
@@ -78,93 +76,69 @@ export function PathSelector() {
           لازم نیست اسم راه‌حل فنی را بدانید. از چیزی که می‌خواهید بسازید یا مشکلی که دارید شروع
           کنید.
         </Lead>
-
-        <div className="mt-12 grid gap-0 border-t border-border lg:grid-cols-[1fr_1.1fr]">
-          <ul>
-            {paths.map((p, i) => (
-              <li key={p.key}>
-                <button
-                  type="button"
-                  onMouseEnter={() => setActive(i)}
-                  onFocus={() => setActive(i)}
-                  onClick={() => setActive(i)}
-                  className={cn(
-                    "group flex w-full items-center justify-between border-b border-border py-7 text-start transition-colors",
-                    active === i ? "text-foreground" : "text-muted-foreground",
-                  )}
-                >
-                  <span className="flex items-baseline gap-4">
-                    <span
-                      className={cn(
-                        "font-display text-xs",
-                        active === i ? "text-brand" : "text-muted-foreground",
-                      )}
-                      dir="ltr"
-                    >
-                      0{i + 1}
-                    </span>
-                    <span className="text-lg font-bold sm:text-xl">{p.title}</span>
-                  </span>
-                  <ArrowLeft
-                    className={cn(
-                      "size-5 transition-all",
-                      active === i ? "text-brand opacity-100" : "opacity-0",
-                    )}
-                  />
-                </button>
-              </li>
-            ))}
-          </ul>
-
-          <div className="border-b border-border bg-surface p-8 lg:border-s lg:p-12">
-            <p className="text-base leading-8">{current.body}</p>
-            <div className="mt-8">
-              <CtaLink to={current.cta.to}>{current.cta.label}</CtaLink>
-            </div>
-          </div>
-        </div>
       </Container>
+
+      <div className="mt-16 border-t border-border">
+        {paths.map((p, i) => (
+          <Link
+            key={p.key}
+            to={p.cta.to}
+            onMouseEnter={() => setActive(i)}
+            onMouseLeave={() => setActive(null)}
+            onFocus={() => setActive(i)}
+            onBlur={() => setActive(null)}
+            className={cn(
+              "group block border-b border-border transition-colors duration-300",
+              active === i ? "bg-surface" : "bg-transparent",
+            )}
+          >
+            <Container className="flex flex-col gap-5 py-10 sm:py-14 lg:flex-row lg:items-center lg:gap-12">
+              <MetaLabel index={i + 1} className="text-muted-foreground lg:w-20" />
+              <h3 className="display-3 flex-1">{p.title}</h3>
+              <p
+                className={cn(
+                  "max-w-md text-sm leading-8 text-muted-foreground transition-opacity duration-300 lg:opacity-0",
+                  active === i && "lg:opacity-100",
+                )}
+              >
+                {p.body}
+              </p>
+              <ArrowSquare active={active === i} />
+            </Container>
+          </Link>
+        ))}
+      </div>
     </Section>
   );
 }
 
-/* 4. SERVICES ----------------------------------------------------------- */
+/* 4. SERVICES INDEX ----------------------------------------------------- */
 
 const pillars = [
   {
     title: "طراحی و توسعه وب",
     body: "سایت شرکتی، فروشگاه اینترنتی و وب‌اپلیکیشن اختصاصی با ساختار فنی و سئوی درست از روز اول.",
-    span: "lg:col-span-7",
   },
   {
     title: "نرم‌افزار اختصاصی",
     body: "وقتی نرم‌افزار آماده جواب نمی‌دهد: پنل، سامانه و ابزار داخلی متناسب با فرآیند واقعی شما.",
-    span: "lg:col-span-5",
   },
   {
     title: "نجات و توسعه پروژه",
     body: "ادامه دادن پروژه‌ای که متوقف شده، بدون شروع دوباره از صفر.",
-    span: "lg:col-span-5",
   },
   {
     title: "API و یکپارچه‌سازی",
     body: "اتصال سیستم‌ها، انبار، حسابداری و سرویس‌های داخلی به یکدیگر.",
-    span: "lg:col-span-4",
   },
-  {
-    title: "سئو و رشد",
-    body: "سئوی تکنیکال، ساختار محتوا و بهبود Core Web Vitals.",
-    span: "lg:col-span-3",
-  },
+  { title: "سئو و رشد", body: "سئوی تکنیکال، ساختار محتوا و بهبود Core Web Vitals." },
   {
     title: "داده و ابزارهای کسب‌وکار",
     body: "داشبورد، گزارش‌گیری و ابزارهایی که تصمیم‌گیری را ساده می‌کنند.",
-    span: "lg:col-span-6",
   },
   {
     title: "پشتیبانی و توسعه مستمر",
     body: "رابطه‌ای که بعد از تحویل ادامه دارد: نگهداری، بهبود و توسعه تدریجی.",
-    span: "lg:col-span-6",
   },
 ];
 
@@ -172,31 +146,44 @@ export function ServicesEditorial() {
   return (
     <Section className="bg-surface">
       <Container>
-        <div className="flex flex-wrap items-end justify-between gap-6">
-          <div>
-            <Eyebrow>خدمات</Eyebrow>
-            <SectionTitle>یک تیم برای ساخت، توسعه و رشد.</SectionTitle>
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.6fr] lg:items-start">
+          <div className="lg:sticky lg:top-28">
+            <MetaLabel className="text-muted-foreground">SERVICES / 07</MetaLabel>
+            <h2 className="display-2 mt-6">خدمات رای‌کد</h2>
+            <p className="mt-6 max-w-sm text-base leading-8 text-muted-foreground">
+              هفت حوزه کاری که می‌توانند جدا یا کنار هم اجرا شوند.
+            </p>
+            <div className="mt-8">
+              <TextLink to="/services">همه خدمات</TextLink>
+            </div>
           </div>
-          <TextLink to="/services">همه خدمات</TextLink>
-        </div>
 
-        <div className="mt-14 grid gap-px border border-border bg-border lg:grid-cols-12">
-          {pillars.map((p, i) => (
-            <article key={p.title} className={cn("bg-surface p-8 sm:p-10", p.span)}>
-              <span className="font-display text-xs text-brand" dir="ltr">
-                0{i + 1}
-              </span>
-              <h3 className="mt-4 text-xl font-bold">{p.title}</h3>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">{p.body}</p>
-            </article>
-          ))}
+          <ul className="border-t border-border">
+            {pillars.map((p, i) => (
+              <li key={p.title}>
+                <Link
+                  to="/services"
+                  className="group flex items-center gap-6 border-b border-border py-8 transition-colors hover:bg-background"
+                >
+                  <MetaLabel index={i + 1} className="text-muted-foreground" />
+                  <span className="flex-1">
+                    <span className="block text-xl font-bold sm:text-2xl">{p.title}</span>
+                    <span className="mt-2 block max-w-lg text-sm leading-7 text-muted-foreground">
+                      {p.body}
+                    </span>
+                  </span>
+                  <ArrowSquare />
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       </Container>
     </Section>
   );
 }
 
-/* 5. WHAT WE BUILD ------------------------------------------------------ */
+/* 5. WHAT WE BUILD (dark) ----------------------------------------------- */
 
 const systems = [
   { name: "فروشگاه اینترنتی", body: "فروش آنلاین با مدیریت محصول، سفارش و پرداخت متناسب کسب‌وکار." },
@@ -217,83 +204,94 @@ export function SolutionExplorer() {
   const current = systems[active]!;
 
   return (
-    <Section>
+    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
       <Container>
-        <Eyebrow>راهکارها</Eyebrow>
-        <SectionTitle>چه چیزی می‌توانیم برای کسب‌وکار شما بسازیم؟</SectionTitle>
+        <MetaLabel className="text-brand">SOLUTIONS</MetaLabel>
+        <h2 className="display-2 mt-6 max-w-3xl">چه چیزی می‌توانیم برای شما بسازیم؟</h2>
 
-        <div className="mt-12 grid gap-10 lg:grid-cols-[1.4fr_1fr]">
-          <div className="flex flex-wrap gap-2">
+        <div className="mt-14 grid gap-0 border-t border-white/12 lg:grid-cols-[1fr_1fr]">
+          <ul className="lg:border-e lg:border-white/12 lg:pe-10">
             {systems.map((s, i) => (
-              <button
-                key={s.name}
-                type="button"
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
-                className={cn(
-                  "rounded-md border px-4 py-2.5 text-sm font-semibold transition-colors",
-                  active === i
-                    ? "border-brand bg-brand text-brand-foreground"
-                    : "border-border text-foreground/80 hover:border-foreground/30",
-                )}
-              >
-                {s.name}
-              </button>
+              <li key={s.name}>
+                <button
+                  type="button"
+                  onMouseEnter={() => setActive(i)}
+                  onFocus={() => setActive(i)}
+                  onClick={() => setActive(i)}
+                  aria-pressed={active === i}
+                  className={cn(
+                    "flex w-full items-center gap-5 border-b border-white/10 py-5 text-start transition-colors duration-200",
+                    active === i ? "text-brand" : "text-ink-foreground/70 hover:text-ink-foreground",
+                  )}
+                >
+                  <MetaLabel index={i + 1} className="opacity-60" />
+                  <span className="text-lg font-bold sm:text-xl">{s.name}</span>
+                </button>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          <div className="border-s-2 border-brand ps-8">
-            <h3 className="text-2xl font-bold">{current.name}</h3>
-            <p className="mt-4 text-sm leading-8 text-muted-foreground">{current.body}</p>
-            <div className="mt-8">
-              <TextLink to="/solutions">جزئیات راهکارها</TextLink>
+          <div className="border-b border-white/12 px-0 py-12 lg:ps-14">
+            <div className="lg:sticky lg:top-28">
+              <div className="relative aspect-[4/3] w-full border border-white/12">
+                <div className="grid-field absolute inset-0 opacity-20" />
+                <div className="absolute top-8 right-8 h-16 w-16 bg-brand" />
+                <div className="absolute top-8 right-8 h-16 w-16 translate-x-[-28px] translate-y-[28px] border border-white/40" />
+                <div className="absolute bottom-8 left-8 h-px w-1/2 bg-white/25" />
+                <MetaLabel className="absolute bottom-6 left-8 text-white/40">
+                  PREVIEW / {String(active + 1).padStart(2, "0")}
+                </MetaLabel>
+              </div>
+              <h3 className="mt-8 text-2xl font-bold">{current.name}</h3>
+              <p className="mt-4 text-base leading-8 text-ink-foreground/70">{current.body}</p>
+              <div className="mt-8">
+                <TextLink to="/solutions" className="text-ink-foreground">
+                  جزئیات راهکارها
+                </TextLink>
+              </div>
             </div>
           </div>
         </div>
       </Container>
-    </Section>
+    </section>
   );
 }
 
-/* 6. PROJECT RESCUE ----------------------------------------------------- */
+/* 6. PROJECT RESCUE (orange interruption) -------------------------------- */
 
 export function ProjectRescue() {
-  const steps = ["بررسی وضعیت فعلی", "مشخص کردن مسیر ادامه", "توسعه و تحویل"];
+  const steps = ["بررسی", "تصمیم", "ادامه"];
   return (
-    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
+    <section className="bg-brand py-24 text-brand-foreground sm:py-32">
       <Container>
-        <div className="grid gap-14 lg:grid-cols-[1fr_1fr] lg:items-center">
-          <div>
-            <p className="flex items-center gap-2 text-xs font-semibold tracking-[0.14em] text-brand uppercase">
-              <span className="inline-block h-px w-6 bg-brand" />
-              نجات پروژه
-            </p>
-            <h2 className="mt-6 text-[1.8rem] leading-[1.35] font-bold sm:text-4xl sm:leading-[1.3]">
-              پروژه‌ای دارید که جایی در مسیر متوقف شده؟
-            </h2>
-            <p className="mt-6 max-w-xl text-sm leading-8 text-ink-foreground/70">
-              اگر برنامه‌نویس قبلی پروژه را رها کرده، سایت یا نرم‌افزار با خطا روبه‌رو شده، سرعت
-              پایین آمده یا سیستم برای ادامه رشد نیاز به توسعه دارد، لازم نیست همیشه دوباره از صفر
-              شروع کنید.
-            </p>
-            <div className="mt-9">
-              <CtaLink to="/technical-review">ارسال پروژه برای بررسی</CtaLink>
-            </div>
-          </div>
+        <MetaLabel>PROJECT RESCUE</MetaLabel>
+        <h2 className="display-1 mt-8 max-w-[14ch]">
+          پروژه‌ای دارید که جایی در مسیر متوقف شده؟
+        </h2>
 
-          <ol className="relative space-y-0">
+        <div className="mt-16 grid gap-10 border-t border-brand-foreground/25 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
+          <ol className="grid gap-0 sm:grid-cols-3">
             {steps.map((step, i) => (
-              <li
-                key={step}
-                className="flex items-center gap-6 border-t border-white/10 py-8 last:border-b"
-              >
-                <span className="font-display text-3xl text-brand" dir="ltr">
-                  0{i + 1}
-                </span>
-                <span className="text-lg font-semibold">{step}</span>
+              <li key={step} className="border-t border-brand-foreground/25 py-6 sm:border-t-0">
+                <MetaLabel index={i + 1} className="opacity-70" />
+                <p className="mt-3 text-2xl font-bold">{step}</p>
               </li>
             ))}
           </ol>
+          <div className="lg:text-end">
+            <p className="max-w-md text-base leading-8 lg:ms-auto">
+              اگر برنامه‌نویس قبلی پروژه را رها کرده یا سیستم فعلی برای رشد کافی نیست، لازم نیست
+              دوباره از صفر شروع کنید.
+            </p>
+            <div className="mt-8 inline-flex">
+              <CtaLink
+                to="/technical-review"
+                className="bg-brand-foreground text-brand hover:bg-brand-foreground/90"
+              >
+                ارسال پروژه برای بررسی
+              </CtaLink>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
@@ -308,188 +306,256 @@ const projects = [
     industry: "تولید و کارخانه",
     problem: "ثبت سفارش نمایندگان به‌صورت تلفنی و اکسل انجام می‌شد و پیگیری آن دشوار بود.",
     solution: "پنل اختصاصی نمایندگان با قیمت‌گذاری پلکانی، ثبت سفارش و گزارش وضعیت.",
-    services: ["نرم‌افزار اختصاصی", "یکپارچه‌سازی"],
   },
   {
     name: "بازطراحی فروشگاه اینترنتی",
     industry: "خودرو و لوازم یدکی",
     problem: "ساختار دسته‌بندی و سرعت سایت مانع رشد ترافیک ارگانیک بود.",
     solution: "بازسازی معماری اطلاعات، بهبود Core Web Vitals و سئوی فروشگاهی.",
-    services: ["فروشگاه اینترنتی", "سئو تکنیکال"],
   },
   {
     name: "پرتال خدمات پس از فروش",
     industry: "تجهیزات صنعتی",
     problem: "درخواست‌های گارانتی و پشتیبانی در کانال‌های پراکنده گم می‌شد.",
     solution: "سامانه ثبت محصول، گارانتی و تیکتینگ با داشبورد داخلی.",
-    services: ["سامانه گارانتی", "تیکتینگ"],
   },
 ];
+
+function CaseVisual({ index }: { index: number }) {
+  return (
+    <div className="relative aspect-[16/10] w-full overflow-hidden border border-border bg-surface-2">
+      <div className="grid-field absolute inset-0 opacity-60" />
+      <div className="absolute top-10 right-10 h-28 w-28 bg-brand transition-transform duration-500 group-hover:scale-105" />
+      <div className="absolute top-10 right-10 h-28 w-28 translate-x-[-44px] translate-y-[44px] border border-foreground/30" />
+      <span
+        dir="ltr"
+        className="absolute bottom-4 left-6 text-[5rem] leading-none font-extrabold text-foreground/8"
+      >
+        {String(index).padStart(2, "0")}
+      </span>
+    </div>
+  );
+}
 
 export function SelectedProjects() {
   const { data } = useQuery(contentListQuery("case_study", { page: 1, q: "" }));
   const published = (data?.rows ?? []).slice(0, 3);
 
-  if (published.length > 0) {
-    return (
-      <Section className="bg-surface">
-        <Container>
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <div>
-              <Eyebrow>پروژه‌ها</Eyebrow>
-              <SectionTitle>
-                پروژه فقط چیزی نیست که ساختیم؛ مسئله‌ای است که حل کردیم.
-              </SectionTitle>
-            </div>
-            <TextLink to="/projects">همه پروژه‌ها</TextLink>
-          </div>
-          <div className="mt-12 grid gap-6 lg:grid-cols-3">
-            {published.map((p) => (
-              <Link
-                key={p.id}
-                to="/projects/$slug"
-                params={{ slug: p.slug }}
-                className="flex flex-col border border-border bg-background p-8 transition-colors hover:border-brand/50"
-              >
-                <h3 className="text-lg font-bold leading-8">{p.title_fa}</h3>
-                {p.summary_fa && (
-                  <p className="mt-3 line-clamp-4 text-sm leading-7 text-muted-foreground">
-                    {p.summary_fa}
-                  </p>
-                )}
-                <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-brand">
-                  مطالعه موردی
-                  <ArrowLeft className="size-4" />
-                </span>
-              </Link>
-            ))}
-          </div>
-        </Container>
-      </Section>
-    );
-  }
-
   return (
-    <Section className="bg-surface">
+    <Section className="grain">
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow>پروژه‌ها</Eyebrow>
-            <SectionTitle>
+            <MetaLabel className="text-muted-foreground">SELECTED WORK</MetaLabel>
+            <h2 className="display-2 mt-6 max-w-3xl">
               پروژه فقط چیزی نیست که ساختیم؛ مسئله‌ای است که حل کردیم.
-            </SectionTitle>
+            </h2>
           </div>
           <TextLink to="/projects">همه پروژه‌ها</TextLink>
         </div>
 
-        <div className="mt-12 grid gap-6 lg:grid-cols-3">
-          {projects.map((p) => (
-            <article key={p.name} className="flex flex-col border border-border bg-background p-8">
-              <span className="w-fit border border-brand px-2 py-1 text-[0.65rem] font-bold text-brand">
-                پروژه مفهومی
-              </span>
-              <h3 className="mt-5 text-lg font-bold">{p.name}</h3>
-              <p className="mt-1 text-xs text-muted-foreground">{p.industry}</p>
-              <dl className="mt-6 space-y-4 text-sm">
-                <div>
-                  <dt className="text-xs font-bold text-brand">مسئله</dt>
-                  <dd className="mt-1 leading-7 text-muted-foreground">{p.problem}</dd>
-                </div>
-                <div>
-                  <dt className="text-xs font-bold text-brand">راه‌حل</dt>
-                  <dd className="mt-1 leading-7 text-muted-foreground">{p.solution}</dd>
-                </div>
-              </dl>
-              <div className="mt-auto flex flex-wrap gap-2 pt-6">
-                {p.services.map((s) => (
-                  <span key={s} className="bg-secondary px-2.5 py-1 text-xs text-muted-foreground">
-                    {s}
-                  </span>
-                ))}
-              </div>
-            </article>
-          ))}
+        <div className="mt-16 border-t border-border">
+          {published.length > 0
+            ? published.map((p, i) => (
+                <Link
+                  key={p.id}
+                  to="/projects/$slug"
+                  params={{ slug: p.slug }}
+                  className="group grid gap-8 border-b border-border py-14 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16 lg:even:[direction:inherit]"
+                >
+                  <div className={cn(i % 2 === 1 && "lg:order-2")}>
+                    <CaseVisual index={i + 1} />
+                  </div>
+                  <div>
+                    <MetaLabel index={i + 1} className="text-muted-foreground">
+                      CASE STUDY
+                    </MetaLabel>
+                    <h3 className="display-3 mt-5">{p.title_fa}</h3>
+                    {p.summary_fa && (
+                      <p className="mt-5 max-w-lg text-base leading-8 text-muted-foreground">
+                        {p.summary_fa}
+                      </p>
+                    )}
+                    <span className="mt-8 inline-flex items-center gap-3 text-sm font-bold">
+                      مطالعه موردی
+                      <ArrowSquare />
+                    </span>
+                  </div>
+                </Link>
+              ))
+            : projects.map((p, i) => (
+                <article
+                  key={p.name}
+                  className="group grid gap-8 border-b border-border py-14 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16"
+                >
+                  <div className={cn(i % 2 === 1 && "lg:order-2")}>
+                    <CaseVisual index={i + 1} />
+                  </div>
+                  <div>
+                    <MetaLabel index={i + 1} className="text-muted-foreground">
+                      {p.industry}
+                    </MetaLabel>
+                    <h3 className="display-3 mt-5">{p.name}</h3>
+                    <dl className="mt-6 space-y-5 text-sm">
+                      <div>
+                        <dt className="meta-label text-brand">PROBLEM</dt>
+                        <dd className="mt-2 max-w-lg leading-8 text-muted-foreground">
+                          {p.problem}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="meta-label text-brand">SOLUTION</dt>
+                        <dd className="mt-2 max-w-lg leading-8 text-muted-foreground">
+                          {p.solution}
+                        </dd>
+                      </div>
+                    </dl>
+                  </div>
+                </article>
+              ))}
         </div>
-        <p className="mt-6 text-xs text-muted-foreground">
-          نمونه‌های بالا پروژه‌های مفهومی برای نمایش نوع مسئله و راه‌حل هستند و شامل نام مشتری یا
-          آمار واقعی نیستند.
-        </p>
+
+        {published.length === 0 && (
+          <p className="mt-6 text-xs text-muted-foreground">
+            نمونه‌های بالا پروژه‌های مفهومی برای نمایش نوع مسئله و راه‌حل هستند و شامل نام مشتری یا
+            آمار واقعی نیستند.
+          </p>
+        )}
       </Container>
     </Section>
   );
 }
 
-/* 8. INDUSTRIES --------------------------------------------------------- */
+/* 8. INDUSTRIES MATRIX --------------------------------------------------- */
+
+const capabilityColumns = ["WEB", "SOFTWARE", "SEO", "DATA"] as const;
+
+function capabilitiesFor(index: number): boolean[] {
+  // Deterministic, presentational coverage map derived from list order.
+  const patterns = [
+    [true, true, true, false],
+    [true, true, true, true],
+    [true, false, true, false],
+    [true, true, false, true],
+  ];
+  return patterns[index % patterns.length]!;
+}
 
 export function IndustriesSection() {
   return (
-    <Section>
+    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr]">
+        <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow>صنایع</Eyebrow>
-            <SectionTitle>تکنولوژی باید با مدل کسب‌وکار هماهنگ باشد.</SectionTitle>
-            <Lead>
-              مدل فروش، زنجیره تامین و مشتری در هر صنعت متفاوت است؛ راهکار فنی هم باید متفاوت باشد.
-            </Lead>
-            <div className="mt-8">
-              <TextLink to="/industries">مشاهده همه صنایع</TextLink>
-            </div>
+            <MetaLabel className="text-brand">INDUSTRIES</MetaLabel>
+            <h2 className="display-2 mt-6 max-w-2xl">
+              تکنولوژی باید با مدل کسب‌وکار هماهنگ باشد.
+            </h2>
           </div>
-
-          <ul className="border-t border-border">
-            {industries.map((name) => (
-              <li key={name}>
-                <a
-                  href="/industries"
-                  className="group flex items-center justify-between border-b border-border py-5 text-base font-semibold transition-colors hover:text-brand"
-                >
-                  {name}
-                  <ArrowLeft className="size-4 opacity-0 transition-opacity group-hover:opacity-100" />
-                </a>
-              </li>
-            ))}
-          </ul>
+          <TextLink to="/industries" className="text-ink-foreground">
+            همه صنایع
+          </TextLink>
         </div>
+
+        <div className="mt-14 hidden border-t border-white/12 lg:block">
+          <div className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] border-b border-white/12 py-4">
+            <span />
+            {capabilityColumns.map((c) => (
+              <MetaLabel key={c} className="text-white/45">
+                {c}
+              </MetaLabel>
+            ))}
+          </div>
+          {industries.map((name, i) => (
+            <Link
+              key={name}
+              to="/industries"
+              className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] items-center border-b border-white/10 py-5 transition-colors hover:bg-white/5"
+            >
+              <span className="text-base font-semibold">{name}</span>
+              {capabilitiesFor(i).map((on, j) => (
+                <span key={capabilityColumns[j]} className="text-sm">
+                  {on ? (
+                    <span className="inline-block size-2 rounded-full bg-brand" />
+                  ) : (
+                    <span className="inline-block size-2 rounded-full bg-white/15" />
+                  )}
+                </span>
+              ))}
+            </Link>
+          ))}
+        </div>
+
+        <ul className="mt-12 border-t border-white/12 lg:hidden">
+          {industries.map((name, i) => (
+            <li key={name}>
+              <Link
+                to="/industries"
+                className="flex items-center justify-between gap-4 border-b border-white/10 py-5"
+              >
+                <span className="text-base font-semibold">{name}</span>
+                <span className="flex items-center gap-1.5">
+                  {capabilitiesFor(i).map((on, j) => (
+                    <span
+                      key={capabilityColumns[j]}
+                      className={cn(
+                        "inline-block size-1.5 rounded-full",
+                        on ? "bg-brand" : "bg-white/15",
+                      )}
+                    />
+                  ))}
+                </span>
+              </Link>
+            </li>
+          ))}
+        </ul>
       </Container>
-    </Section>
+    </section>
   );
 }
 
-/* 9. WHY RYCODE --------------------------------------------------------- */
+/* 9. WHY RYCODE ---------------------------------------------------------- */
 
 const whyItems = [
   {
-    title: "مسئله قبل از ابزار",
+    title: "مسئله قبل از ابزار.",
     body: "اول مسئله کسب‌وکار را می‌فهمیم، بعد درباره تکنولوژی تصمیم می‌گیریم.",
   },
   {
-    title: "همیشه لازم نیست از صفر شروع کنید",
+    title: "همیشه لازم نیست از صفر شروع کنید.",
     body: "اگر پروژه فعلی قابل نجات باشد، همان را توسعه می‌دهیم.",
   },
   {
-    title: "توسعه و SEO در یک مسیر",
+    title: "توسعه و سئو در یک مسیر.",
     body: "ساختار فنی و دیده‌شدن در جستجو از ابتدا کنار هم دیده می‌شوند.",
   },
-  { title: "مالکیت روشن", body: "کد، دسترسی‌ها و داده‌ها متعلق به شماست." },
-  { title: "رابطه بعد از تحویل", body: "تحویل پایان کار نیست؛ نقطه شروع نگهداری و توسعه است." },
+  { title: "مالکیت روشن.", body: "کد، دسترسی‌ها و داده‌ها متعلق به شماست." },
+  {
+    title: "رابطه بعد از تحویل.",
+    body: "تحویل پایان کار نیست؛ نقطه شروع نگهداری و توسعه است.",
+  },
 ];
 
 export function WhyRycode() {
   return (
-    <Section className="bg-surface">
+    <Section className="grain bg-surface">
       <Container>
-        <Eyebrow>چرا رای‌کد</Eyebrow>
-        <SectionTitle>تصمیم فنی خوب از فهم درست مسئله شروع می‌شود.</SectionTitle>
-
-        <div className="mt-12 grid gap-x-16 gap-y-0 lg:grid-cols-2">
-          {whyItems.map((item) => (
-            <div key={item.title} className="flex gap-4 border-b border-border py-7">
-              <Check className="mt-1 size-4 shrink-0 text-brand" />
-              <div>
-                <h3 className="text-base font-bold">{item.title}</h3>
-                <p className="mt-2 text-sm leading-7 text-muted-foreground">{item.body}</p>
+        <MetaLabel className="text-muted-foreground">WHY RYCODE</MetaLabel>
+        <div className="mt-14 border-t border-border">
+          {whyItems.map((item, i) => (
+            <div
+              key={item.title}
+              className={cn(
+                "grid gap-6 border-b border-border py-14 lg:grid-cols-2 lg:items-start lg:gap-16",
+              )}
+            >
+              <div className={cn(i % 2 === 1 && "lg:order-2")}>
+                <MetaLabel index={i + 1} className="text-brand" />
+                <h3 className="display-3 mt-5 max-w-[16ch]">{item.title}</h3>
               </div>
+              <p className="max-w-md text-base leading-9 text-muted-foreground lg:pt-14">
+                {item.body}
+              </p>
             </div>
           ))}
         </div>
@@ -498,28 +564,41 @@ export function WhyRycode() {
   );
 }
 
-/* 10. PROCESS ----------------------------------------------------------- */
+/* 10. PROCESS ------------------------------------------------------------ */
+
+const stages = [
+  { fa: "شناخت", en: "DISCOVER" },
+  { fa: "تعریف", en: "DEFINE" },
+  { fa: "طراحی", en: "DESIGN" },
+  { fa: "توسعه", en: "BUILD" },
+  { fa: "تست", en: "TEST" },
+  { fa: "انتشار", en: "LAUNCH" },
+  { fa: "بهبود", en: "IMPROVE" },
+];
 
 export function ProcessSection() {
-  const stages = ["شناخت", "تعریف", "طراحی", "توسعه", "تست", "انتشار", "بهبود"];
   return (
     <Section>
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow>فرآیند</Eyebrow>
-            <SectionTitle>مسیری که هر پروژه طی می‌کند.</SectionTitle>
+            <MetaLabel className="text-muted-foreground">PROCESS</MetaLabel>
+            <h2 className="display-2 mt-6">مسیری که هر پروژه طی می‌کند.</h2>
           </div>
           <TextLink to="/process">جزئیات فرآیند</TextLink>
         </div>
 
-        <ol className="mt-14 grid grid-cols-2 gap-px bg-border sm:grid-cols-4 lg:grid-cols-7">
+        <ol className="mt-16 border-t border-border">
           {stages.map((stage, i) => (
-            <li key={stage} className="bg-background p-6">
-              <span className="font-display text-xs text-brand" dir="ltr">
-                0{i + 1}
+            <li
+              key={stage.en}
+              className="flex items-baseline gap-6 border-b border-border py-7 sm:gap-12"
+            >
+              <span dir="ltr" className="text-3xl font-extrabold text-foreground/15 sm:text-5xl">
+                {String(i + 1).padStart(2, "0")}
               </span>
-              <p className="mt-3 text-sm font-bold">{stage}</p>
+              <span className="flex-1 text-xl font-bold sm:text-2xl">{stage.fa}</span>
+              <MetaLabel className="text-muted-foreground">{stage.en}</MetaLabel>
             </li>
           ))}
         </ol>
@@ -528,27 +607,20 @@ export function ProcessSection() {
   );
 }
 
-/* 11. PAYMENT ----------------------------------------------------------- */
+/* 11. PAYMENT ------------------------------------------------------------ */
 
 export function PaymentSection() {
   return (
-    <Section className="bg-surface">
+    <Section className="bg-brand-soft">
       <Container>
-        <div className="grid gap-12 border border-border bg-background p-10 sm:p-14 lg:grid-cols-[1fr_1fr]">
-          <div>
-            <Eyebrow>پرداخت</Eyebrow>
-            <SectionTitle className="text-2xl sm:text-3xl">
-              پرداخت پروژه می‌تواند با مراحل اجرا هماهنگ باشد.
-            </SectionTitle>
-          </div>
-          <div className="text-sm leading-8 text-muted-foreground">
+        <div className="grid gap-12 lg:grid-cols-[1.2fr_1fr] lg:items-end">
+          <h2 className="display-2 max-w-[14ch]">
+            پرداخت پروژه می‌تواند با مراحل اجرا هماهنگ باشد.
+          </h2>
+          <div className="text-base leading-9 text-muted-foreground">
             <p>
-              در پروژه‌های واجد شرایط، هزینه می‌تواند به مراحل مشخص اجرا تقسیم شود؛ هر مرحله پس از
-              تحویل و تایید خروجی آن مرحله تسویه می‌شود.
-            </p>
-            <p className="mt-4">
-              شرایط پرداخت مرحله‌ای بسته به دامنه، مدت و ریسک فنی پروژه در جلسه شناخت بررسی و در
-              قرارداد ثبت می‌شود.
+              در پروژه‌های واجد شرایط، هزینه به مراحل مشخص اجرا تقسیم می‌شود؛ هر مرحله پس از تحویل و
+              تایید خروجی همان مرحله تسویه می‌شود.
             </p>
             <div className="mt-8">
               <TextLink to="/start-project">بررسی شرایط پرداخت مرحله‌ای</TextLink>
@@ -560,98 +632,83 @@ export function PaymentSection() {
   );
 }
 
-/* 12. BLOG -------------------------------------------------------------- */
+/* 12. BLOG --------------------------------------------------------------- */
 
 export function BlogSection() {
   const { data } = useQuery(articleListQuery({ page: 1, q: "" }));
   const rows = data?.rows ?? [];
   const featured = rows[0] ?? null;
-  const latest = rows.slice(1, 5);
-  const categories = [
-    "طراحی سایت",
-    "فروشگاه اینترنتی",
-    "سئو",
-    "وردپرس",
-    "برنامه‌نویسی",
-    "رفع مشکلات",
-    "کسب‌وکار دیجیتال",
-    "راهنماها",
-    "مقایسه‌ها",
-  ];
+  const latest = rows.slice(1, 6);
 
   return (
     <Section>
       <Container>
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
-            <Eyebrow>بلاگ</Eyebrow>
-            <SectionTitle>
+            <MetaLabel className="text-muted-foreground">JOURNAL</MetaLabel>
+            <h2 className="display-2 mt-6 max-w-3xl">
               درباره ساخت، رشد و نگهداری محصولات دیجیتال می‌نویسیم.
-            </SectionTitle>
+            </h2>
           </div>
           <TextLink to="/blog">همه مقاله‌ها</TextLink>
         </div>
 
-        <div className="mt-12 grid gap-8 lg:grid-cols-[1.3fr_1fr]">
-          {featured ? (
-            <Link
-              to="/blog/$slug"
-              params={{ slug: featured.slug }}
-              className="flex min-h-56 flex-col justify-center border border-border p-10 transition-colors hover:border-brand/50"
-            >
-              <p className="text-xs font-bold tracking-[0.12em] text-brand uppercase">مقاله شاخص</p>
-              <h3 className="mt-4 text-xl font-bold leading-9">{featured.title_fa}</h3>
+        {featured ? (
+          <Link
+            to="/blog/$slug"
+            params={{ slug: featured.slug }}
+            className="group mt-14 grid gap-10 border-y border-border py-12 lg:grid-cols-[1fr_1fr] lg:items-center"
+          >
+            <div className="relative aspect-[16/9] overflow-hidden border border-border bg-surface-2">
+              <div className="grid-field absolute inset-0 opacity-50" />
+              <div className="absolute bottom-0 left-0 h-1.5 w-1/3 bg-brand" />
+            </div>
+            <div>
+              <MetaLabel className="text-brand">FEATURED</MetaLabel>
+              <h3 className="display-3 mt-5">{featured.title_fa}</h3>
               {featured.excerpt_fa && (
-                <p className="mt-3 line-clamp-3 text-sm leading-7 text-muted-foreground">
+                <p className="mt-5 line-clamp-3 max-w-lg text-base leading-8 text-muted-foreground">
                   {featured.excerpt_fa}
                 </p>
               )}
-            </Link>
-          ) : (
-            <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
-              <p className="text-sm font-bold">مقاله شاخص</p>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                هنوز مقاله‌ای منتشر نشده است. پس از انتشار، مقاله شاخص در این بخش نمایش داده می‌شود.
-              </p>
+              <span className="mt-8 inline-flex items-center gap-3 text-sm font-bold">
+                خواندن مقاله
+                <ArrowSquare />
+              </span>
             </div>
-          )}
-          {latest.length > 0 ? (
-            <ul className="flex min-h-56 flex-col justify-center divide-y divide-border border border-border px-8">
-              {latest.map((a) => (
-                <li key={a.id}>
-                  <Link
-                    to="/blog/$slug"
-                    params={{ slug: a.slug }}
-                    className="block py-4 text-sm font-semibold leading-7 transition-colors hover:text-brand"
-                  >
-                    {a.title_fa}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <div className="flex min-h-56 flex-col justify-center border border-dashed border-border p-10">
-              <p className="text-sm font-bold">آخرین مقاله‌ها</p>
-              <p className="mt-3 text-sm leading-7 text-muted-foreground">
-                لیست جدیدترین مقاله‌ها به‌محض انتشار محتوا در این بخش قرار می‌گیرد.
-              </p>
-            </div>
-          )}
-        </div>
+          </Link>
+        ) : (
+          <div className="mt-14 border-y border-dashed border-border py-16">
+            <MetaLabel className="text-muted-foreground">FEATURED</MetaLabel>
+            <p className="mt-5 max-w-xl text-base leading-8 text-muted-foreground">
+              هنوز مقاله‌ای منتشر نشده است. پس از انتشار، مقاله شاخص در این بخش نمایش داده می‌شود.
+            </p>
+          </div>
+        )}
 
-        <div className="mt-8 flex flex-wrap gap-2">
-          {categories.map((c) => (
-            <span key={c} className="border border-border px-3 py-1.5 text-xs text-muted-foreground">
-              {c}
-            </span>
-          ))}
-        </div>
+        {latest.length > 0 && (
+          <ul>
+            {latest.map((a, i) => (
+              <li key={a.id}>
+                <Link
+                  to="/blog/$slug"
+                  params={{ slug: a.slug }}
+                  className="group flex items-center gap-6 border-b border-border py-7 transition-colors hover:text-brand"
+                >
+                  <MetaLabel index={i + 2} className="text-muted-foreground" />
+                  <span className="flex-1 text-lg font-bold leading-8">{a.title_fa}</span>
+                  <ArrowSquare />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </Container>
     </Section>
   );
 }
 
-/* 13. FAQ --------------------------------------------------------------- */
+/* 13. FAQ ---------------------------------------------------------------- */
 
 const faqs = [
   {
@@ -677,61 +734,69 @@ export function FaqSection() {
   const { data } = useQuery(publicFaqsQuery());
   const published = (data ?? []).slice(0, 8);
   const items =
-    published.length > 0
-      ? published.map((f) => ({ q: f.question_fa, a: f.answer_fa }))
-      : faqs;
+    published.length > 0 ? published.map((f) => ({ q: f.question_fa, a: f.answer_fa })) : faqs;
+
   return (
     <Section className="bg-surface">
       <Container>
-        <div className="grid gap-12 lg:grid-cols-[0.7fr_1.3fr]">
-          <div>
-            <Eyebrow>سوالات متداول</Eyebrow>
-            <SectionTitle className="text-2xl sm:text-3xl">پرسش‌های پرتکرار</SectionTitle>
-          </div>
-          <div className="border-t border-border">
-            {items.map((f, i) => (
-              <div key={f.q} className="border-b border-border">
-                <button
-                  type="button"
-                  onClick={() => setOpen(open === i ? null : i)}
-                  className="flex w-full items-center justify-between gap-6 py-6 text-start text-base font-bold"
-                  aria-expanded={open === i}
+        <MetaLabel className="text-muted-foreground">FAQ</MetaLabel>
+        <h2 className="display-2 mt-6">پرسش‌های پرتکرار</h2>
+
+        <div className="mt-14 border-t border-border">
+          {items.map((f, i) => (
+            <div key={f.q} className="border-b border-border">
+              <button
+                type="button"
+                onClick={() => setOpen(open === i ? null : i)}
+                className="flex w-full items-center justify-between gap-8 py-8 text-start"
+                aria-expanded={open === i}
+              >
+                <span
+                  className={cn(
+                    "text-xl font-bold sm:text-2xl",
+                    open === i ? "text-brand" : "text-foreground",
+                  )}
                 >
                   {f.q}
-                  <span className="text-brand">{open === i ? "−" : "+"}</span>
-                </button>
-                {open === i && (
-                  <p className="pb-6 text-sm leading-8 text-muted-foreground">{f.a}</p>
-                )}
-              </div>
-            ))}
-          </div>
+                </span>
+                <span
+                  aria-hidden
+                  className={cn(
+                    "grid size-9 shrink-0 place-items-center rounded-[5px] border text-lg transition-colors",
+                    open === i ? "border-brand bg-brand text-brand-foreground" : "border-border",
+                  )}
+                >
+                  {open === i ? "−" : "+"}
+                </span>
+              </button>
+              {open === i && (
+                <p className="max-w-3xl pb-8 text-base leading-9 text-muted-foreground">{f.a}</p>
+              )}
+            </div>
+          ))}
         </div>
       </Container>
     </Section>
   );
 }
 
-/* 14. FINAL CTA --------------------------------------------------------- */
+/* 14. FINAL CTA ---------------------------------------------------------- */
 
 export function FinalCta() {
   return (
-    <section className="bg-ink py-24 text-ink-foreground sm:py-32">
-      <Container className="text-center">
-        <h2 className="mx-auto max-w-2xl text-[1.9rem] leading-[1.35] font-extrabold sm:text-[2.6rem] sm:leading-[1.25]">
+    <section className="bg-ink py-28 text-ink-foreground sm:py-40">
+      <Container>
+        <MetaLabel className="text-brand">START HERE</MetaLabel>
+        <h2 className="display-1 mt-8 max-w-[15ch]">
           پروژه‌ای در ذهن دارید؟
           <br />
-          یا <span className="text-brand">مشکلی</span> دارید که باید حل شود؟
+          یا <span className="text-brand">مشکلی</span> که باید حل شود؟
         </h2>
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <div className="mt-14 flex flex-wrap items-center gap-8 border-t border-white/12 pt-10">
           <CtaLink to="/start-project">شروع پروژه</CtaLink>
-          <CtaLink
-            to="/technical-review"
-            variant="outline"
-            className="border-white/20 text-ink-foreground hover:border-white/50 hover:bg-white/5"
-          >
+          <TextLink to="/technical-review" className="text-ink-foreground">
             درخواست بررسی فنی
-          </CtaLink>
+          </TextLink>
         </div>
       </Container>
     </section>
