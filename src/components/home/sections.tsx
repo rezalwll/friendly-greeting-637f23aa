@@ -273,7 +273,7 @@ export function ProjectRescue() {
           <ol className="grid gap-0 sm:grid-cols-3">
             {steps.map((step, i) => (
               <li key={step} className="border-t border-brand-foreground/25 py-6 sm:border-t-0">
-                <MetaLabel index={i + 1}>{step}</MetaLabel>
+                <MetaLabel index={i + 1} className="opacity-70" />
                 <p className="mt-3 text-2xl font-bold">{step}</p>
               </li>
             ))}
