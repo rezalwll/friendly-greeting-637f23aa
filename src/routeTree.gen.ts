@@ -12,17 +12,11 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AboutRouteImport } from './routes/about'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FaqRouteImport } from './routes/faq'
-import { Route as IndustriesRouteImport } from './routes/industries'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as ProblemsRouteImport } from './routes/problems'
 import { Route as ProcessRouteImport } from './routes/process'
-import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as SeoAuditRouteImport } from './routes/seo-audit'
-import { Route as ServicesRouteImport } from './routes/services'
-import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as StartProjectRouteImport } from './routes/start-project'
 import { Route as TechnicalReviewRouteImport } from './routes/technical-review'
 import { Route as TechnologiesRouteImport } from './routes/technologies'
@@ -104,11 +98,6 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -119,19 +108,9 @@ const FaqRoute = FaqRouteImport.update({
   path: '/faq',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndustriesRoute = IndustriesRouteImport.update({
-  id: '/industries',
-  path: '/industries',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProblemsRoute = ProblemsRouteImport.update({
-  id: '/problems',
-  path: '/problems',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProcessRoute = ProcessRouteImport.update({
@@ -139,24 +118,9 @@ const ProcessRoute = ProcessRouteImport.update({
   path: '/process',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProjectsRoute = ProjectsRouteImport.update({
-  id: '/projects',
-  path: '/projects',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SeoAuditRoute = SeoAuditRouteImport.update({
   id: '/seo-audit',
   path: '/seo-audit',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesRoute = ServicesRouteImport.update({
-  id: '/services',
-  path: '/services',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SolutionsRoute = SolutionsRouteImport.update({
-  id: '/solutions',
-  path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StartProjectRoute = StartProjectRouteImport.update({
@@ -534,17 +498,11 @@ const AuthenticatedDashboardProjectsIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/industries': typeof IndustriesRouteWithChildren
   '/login': typeof LoginRoute
-  '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
-  '/projects': typeof ProjectsRouteWithChildren
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/solutions': typeof SolutionsRouteWithChildren
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
@@ -690,17 +648,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/about': typeof AboutRoute
-  '/blog': typeof BlogRouteWithChildren
   '/contact': typeof ContactRoute
   '/faq': typeof FaqRoute
-  '/industries': typeof IndustriesRouteWithChildren
   '/login': typeof LoginRoute
-  '/problems': typeof ProblemsRouteWithChildren
   '/process': typeof ProcessRoute
-  '/projects': typeof ProjectsRouteWithChildren
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRouteWithChildren
-  '/solutions': typeof SolutionsRouteWithChildren
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
@@ -773,17 +725,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/faq'
-    | '/industries'
     | '/login'
-    | '/problems'
     | '/process'
-    | '/projects'
     | '/seo-audit'
-    | '/services'
-    | '/solutions'
     | '/start-project'
     | '/technical-review'
     | '/technologies'
@@ -928,17 +874,11 @@ export interface FileRouteTypes {
     | '/'
     | '/_authenticated'
     | '/about'
-    | '/blog'
     | '/contact'
     | '/faq'
-    | '/industries'
     | '/login'
-    | '/problems'
     | '/process'
-    | '/projects'
     | '/seo-audit'
-    | '/services'
-    | '/solutions'
     | '/start-project'
     | '/technical-review'
     | '/technologies'
@@ -1011,17 +951,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AboutRoute: typeof AboutRoute
-  BlogRoute: typeof BlogRouteWithChildren
   ContactRoute: typeof ContactRoute
   FaqRoute: typeof FaqRoute
-  IndustriesRoute: typeof IndustriesRouteWithChildren
   LoginRoute: typeof LoginRoute
-  ProblemsRoute: typeof ProblemsRouteWithChildren
   ProcessRoute: typeof ProcessRoute
-  ProjectsRoute: typeof ProjectsRouteWithChildren
   SeoAuditRoute: typeof SeoAuditRoute
-  ServicesRoute: typeof ServicesRouteWithChildren
-  SolutionsRoute: typeof SolutionsRouteWithChildren
   StartProjectRoute: typeof StartProjectRoute
   TechnicalReviewRoute: typeof TechnicalReviewRoute
   TechnologiesRoute: typeof TechnologiesRoute
@@ -1052,13 +986,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -1073,25 +1000,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FaqRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/industries': {
-      id: '/industries'
-      path: '/industries'
-      fullPath: '/industries'
-      preLoaderRoute: typeof IndustriesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/problems': {
-      id: '/problems'
-      path: '/problems'
-      fullPath: '/problems'
-      preLoaderRoute: typeof ProblemsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/process': {
@@ -1101,32 +1014,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProcessRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/projects': {
-      id: '/projects'
-      path: '/projects'
-      fullPath: '/projects'
-      preLoaderRoute: typeof ProjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/seo-audit': {
       id: '/seo-audit'
       path: '/seo-audit'
       fullPath: '/seo-audit'
       preLoaderRoute: typeof SeoAuditRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/services': {
-      id: '/services'
-      path: '/services'
-      fullPath: '/services'
-      preLoaderRoute: typeof ServicesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/solutions': {
-      id: '/solutions'
-      path: '/solutions'
-      fullPath: '/solutions'
-      preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/start-project': {
@@ -1745,103 +1637,15 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
-interface BlogRouteChildren {
-  BlogSlugRoute: typeof BlogSlugRoute
-  BlogIndexRoute: typeof BlogIndexRoute
-}
-
-const BlogRouteChildren: BlogRouteChildren = {
-  BlogSlugRoute: BlogSlugRoute,
-  BlogIndexRoute: BlogIndexRoute,
-}
-
-const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
-
-interface IndustriesRouteChildren {
-  IndustriesSlugRoute: typeof IndustriesSlugRoute
-  IndustriesIndexRoute: typeof IndustriesIndexRoute
-}
-
-const IndustriesRouteChildren: IndustriesRouteChildren = {
-  IndustriesSlugRoute: IndustriesSlugRoute,
-  IndustriesIndexRoute: IndustriesIndexRoute,
-}
-
-const IndustriesRouteWithChildren = IndustriesRoute._addFileChildren(
-  IndustriesRouteChildren,
-)
-
-interface ProblemsRouteChildren {
-  ProblemsSlugRoute: typeof ProblemsSlugRoute
-  ProblemsIndexRoute: typeof ProblemsIndexRoute
-}
-
-const ProblemsRouteChildren: ProblemsRouteChildren = {
-  ProblemsSlugRoute: ProblemsSlugRoute,
-  ProblemsIndexRoute: ProblemsIndexRoute,
-}
-
-const ProblemsRouteWithChildren = ProblemsRoute._addFileChildren(
-  ProblemsRouteChildren,
-)
-
-interface ProjectsRouteChildren {
-  ProjectsSlugRoute: typeof ProjectsSlugRoute
-  ProjectsIndexRoute: typeof ProjectsIndexRoute
-}
-
-const ProjectsRouteChildren: ProjectsRouteChildren = {
-  ProjectsSlugRoute: ProjectsSlugRoute,
-  ProjectsIndexRoute: ProjectsIndexRoute,
-}
-
-const ProjectsRouteWithChildren = ProjectsRoute._addFileChildren(
-  ProjectsRouteChildren,
-)
-
-interface ServicesRouteChildren {
-  ServicesSlugRoute: typeof ServicesSlugRoute
-  ServicesIndexRoute: typeof ServicesIndexRoute
-}
-
-const ServicesRouteChildren: ServicesRouteChildren = {
-  ServicesSlugRoute: ServicesSlugRoute,
-  ServicesIndexRoute: ServicesIndexRoute,
-}
-
-const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
-  ServicesRouteChildren,
-)
-
-interface SolutionsRouteChildren {
-  SolutionsSlugRoute: typeof SolutionsSlugRoute
-  SolutionsIndexRoute: typeof SolutionsIndexRoute
-}
-
-const SolutionsRouteChildren: SolutionsRouteChildren = {
-  SolutionsSlugRoute: SolutionsSlugRoute,
-  SolutionsIndexRoute: SolutionsIndexRoute,
-}
-
-const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
-  SolutionsRouteChildren,
-)
-
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AboutRoute: AboutRoute,
-  BlogRoute: BlogRouteWithChildren,
   ContactRoute: ContactRoute,
   FaqRoute: FaqRoute,
-  IndustriesRoute: IndustriesRouteWithChildren,
   LoginRoute: LoginRoute,
-  ProblemsRoute: ProblemsRouteWithChildren,
   ProcessRoute: ProcessRoute,
-  ProjectsRoute: ProjectsRouteWithChildren,
   SeoAuditRoute: SeoAuditRoute,
-  ServicesRoute: ServicesRouteWithChildren,
-  SolutionsRoute: SolutionsRouteWithChildren,
   StartProjectRoute: StartProjectRoute,
   TechnicalReviewRoute: TechnicalReviewRoute,
   TechnologiesRoute: TechnologiesRoute,
