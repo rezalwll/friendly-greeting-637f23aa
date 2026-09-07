@@ -72,11 +72,11 @@ function BrandField() {
         style={{ transform: `translate3d(${offset.x * 8}px, ${offset.y * 8}px, 0)` }}
       />
       <div
-        className="absolute bottom-[16%] left-[6%] hidden h-24 w-24 bg-brand lg:block"
+        className="absolute top-[34%] left-[3%] hidden h-20 w-20 bg-brand lg:block"
         style={{ transform: `translate3d(${offset.x * -14}px, ${offset.y * -10}px, 0)` }}
       />
       <div
-        className="absolute top-[22%] left-[14%] hidden h-40 w-40 border border-foreground/30 lg:block"
+        className="absolute top-[18%] left-[12%] hidden h-36 w-36 border border-foreground/30 lg:block"
         style={{ transform: `translate3d(${offset.x * -6}px, ${offset.y * 12}px, 0)` }}
       />
       <div
