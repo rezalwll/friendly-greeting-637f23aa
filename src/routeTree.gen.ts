@@ -29,6 +29,7 @@ import { Route as TechnologiesRouteImport } from './routes/technologies'
 import { Route as WhyRycodeRouteImport } from './routes/why-rycode'
 import { Route as AuthenticatedAdminRouteRouteImport } from './routes/_authenticated/admin/route'
 import { Route as AuthenticatedDashboardRouteRouteImport } from './routes/_authenticated/dashboard/route'
+import { Route as ServicesIndexRouteImport } from './routes/services.index'
 import { Route as AuthenticatedAdminIndexRouteImport } from './routes/_authenticated/admin/index'
 import { Route as AuthenticatedAdminArticlesRouteImport } from './routes/_authenticated/admin/articles'
 import { Route as AuthenticatedAdminAuthorsRouteImport } from './routes/_authenticated/admin/authors'
@@ -177,6 +178,11 @@ const AuthenticatedDashboardRouteRoute =
     path: '/dashboard',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const ServicesIndexRoute = ServicesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ServicesRoute,
+} as any)
 const AuthenticatedAdminIndexRoute = AuthenticatedAdminIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -465,7 +471,7 @@ export interface FileRoutesByFullPath {
   '/process': typeof ProcessRoute
   '/projects': typeof ProjectsRoute
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/solutions': typeof SolutionsRoute
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
@@ -473,6 +479,7 @@ export interface FileRoutesByFullPath {
   '/why-rycode': typeof WhyRycodeRoute
   '/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/services/': typeof ServicesIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -533,12 +540,12 @@ export interface FileRoutesByTo {
   '/process': typeof ProcessRoute
   '/projects': typeof ProjectsRoute
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
   '/solutions': typeof SolutionsRoute
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
   '/technologies': typeof TechnologiesRoute
   '/why-rycode': typeof WhyRycodeRoute
+  '/services': typeof ServicesIndexRoute
   '/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -601,7 +608,7 @@ export interface FileRoutesById {
   '/process': typeof ProcessRoute
   '/projects': typeof ProjectsRoute
   '/seo-audit': typeof SeoAuditRoute
-  '/services': typeof ServicesRoute
+  '/services': typeof ServicesRouteWithChildren
   '/solutions': typeof SolutionsRoute
   '/start-project': typeof StartProjectRoute
   '/technical-review': typeof TechnicalReviewRoute
@@ -609,6 +616,7 @@ export interface FileRoutesById {
   '/why-rycode': typeof WhyRycodeRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRouteRouteWithChildren
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRouteRouteWithChildren
+  '/services/': typeof ServicesIndexRoute
   '/_authenticated/admin/articles': typeof AuthenticatedAdminArticlesRoute
   '/_authenticated/admin/authors': typeof AuthenticatedAdminAuthorsRoute
   '/_authenticated/admin/categories': typeof AuthenticatedAdminCategoriesRoute
@@ -679,6 +687,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/admin'
     | '/dashboard'
+    | '/services/'
     | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
@@ -739,12 +748,12 @@ export interface FileRouteTypes {
     | '/process'
     | '/projects'
     | '/seo-audit'
-    | '/services'
     | '/solutions'
     | '/start-project'
     | '/technical-review'
     | '/technologies'
     | '/why-rycode'
+    | '/services'
     | '/admin/articles'
     | '/admin/authors'
     | '/admin/categories'
@@ -814,6 +823,7 @@ export interface FileRouteTypes {
     | '/why-rycode'
     | '/_authenticated/admin'
     | '/_authenticated/dashboard'
+    | '/services/'
     | '/_authenticated/admin/articles'
     | '/_authenticated/admin/authors'
     | '/_authenticated/admin/categories'
@@ -876,7 +886,7 @@ export interface RootRouteChildren {
   ProcessRoute: typeof ProcessRoute
   ProjectsRoute: typeof ProjectsRoute
   SeoAuditRoute: typeof SeoAuditRoute
-  ServicesRoute: typeof ServicesRoute
+  ServicesRoute: typeof ServicesRouteWithChildren
   SolutionsRoute: typeof SolutionsRoute
   StartProjectRoute: typeof StartProjectRoute
   TechnicalReviewRoute: typeof TechnicalReviewRoute
@@ -1025,6 +1035,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/dashboard'
       preLoaderRoute: typeof AuthenticatedDashboardRouteRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/services/': {
+      id: '/services/'
+      path: '/'
+      fullPath: '/services/'
+      preLoaderRoute: typeof ServicesIndexRouteImport
+      parentRoute: typeof ServicesRoute
     }
     '/_authenticated/admin/': {
       id: '/_authenticated/admin/'
@@ -1509,6 +1526,18 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
 const AuthenticatedRouteRouteWithChildren =
   AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
+interface ServicesRouteChildren {
+  ServicesIndexRoute: typeof ServicesIndexRoute
+}
+
+const ServicesRouteChildren: ServicesRouteChildren = {
+  ServicesIndexRoute: ServicesIndexRoute,
+}
+
+const ServicesRouteWithChildren = ServicesRoute._addFileChildren(
+  ServicesRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
@@ -1522,7 +1551,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProcessRoute: ProcessRoute,
   ProjectsRoute: ProjectsRoute,
   SeoAuditRoute: SeoAuditRoute,
-  ServicesRoute: ServicesRoute,
+  ServicesRoute: ServicesRouteWithChildren,
   SolutionsRoute: SolutionsRoute,
   StartProjectRoute: StartProjectRoute,
   TechnicalReviewRoute: TechnicalReviewRoute,
