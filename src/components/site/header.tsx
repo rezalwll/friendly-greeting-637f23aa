@@ -82,14 +82,15 @@ export function SiteHeader() {
         </div>
 
         <div className="flex items-center gap-2">
-          <button
-            type="button"
+          <Link
+            to="/en"
             className="hidden items-center gap-1.5 rounded-full border border-border px-3 py-1.5 text-xs font-semibold text-muted-foreground transition-colors hover:text-foreground md:inline-flex"
-            aria-label="تغییر زبان"
+            aria-label="Switch to English"
+            hrefLang="en"
           >
             <Globe className="size-3.5" />
-            FA / EN
-          </button>
+            EN
+          </Link>
           <ThemeToggle className="hidden md:inline-flex" />
           <Link
             to="/login"
