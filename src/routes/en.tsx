@@ -8,9 +8,9 @@ export const Route = createFileRoute("/en")({
 
 const nav = [
   { to: "/en", label: "Home", exact: true },
-  { to: "/en/services", label: "Services" },
-  { to: "/en/about", label: "About" },
-  { to: "/en/contact", label: "Contact" },
+  { to: "/en/services", label: "Services", exact: false },
+  { to: "/en/about", label: "About", exact: false },
+  { to: "/en/contact", label: "Contact", exact: false },
 ] as const;
 
 function EnglishLayout() {
@@ -23,7 +23,7 @@ function EnglishLayout() {
               <Link
                 key={n.to}
                 to={n.to}
-                activeOptions={{ exact: n.exact ?? false }}
+                activeOptions={{ exact: n.exact }}
                 activeProps={{ className: "font-bold text-brand" }}
                 className="text-muted-foreground transition-colors hover:text-foreground"
               >
