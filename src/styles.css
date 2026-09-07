@@ -245,6 +245,52 @@
   background-size: 72px 72px;
 }
 
+/* Editorial display scale — typography is the primary design element. */
+@utility display-1 {
+  font-size: clamp(2.9rem, 7.4vw, 7rem);
+  line-height: 1.06;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+@utility display-2 {
+  font-size: clamp(2rem, 4.4vw, 4.25rem);
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+}
+
+@utility display-3 {
+  font-size: clamp(1.5rem, 2.6vw, 2.4rem);
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+/* Small technical metadata language: 01 / BUILD */
+@utility meta-label {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+/* Paper-like noise so light surfaces never read as sterile template white. */
+@utility grain {
+  position: relative;
+  isolation: isolate;
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0.4;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+  }
+}
+
+
 @utility reveal {
   animation: rycode-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
