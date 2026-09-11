@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useRef, useState } from "react";
 import { Container, CtaLink, MetaLabel, TextLink } from "@/components/site/primitives";
 
