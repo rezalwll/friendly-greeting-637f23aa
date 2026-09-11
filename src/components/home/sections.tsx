@@ -1,7 +1,7 @@
+"use client";
+
 import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "@tanstack/react-router";
-import { articleListQuery, contentListQuery, publicFaqsQuery } from "@/lib/public-content";
+import { Link } from "@/i18n/navigation";
 import {
   ArrowSquare,
   Container,
@@ -82,7 +82,7 @@ export function PathSelector() {
         {paths.map((p, i) => (
           <Link
             key={p.key}
-            to={p.cta.to}
+            href={p.cta.to}
             onMouseEnter={() => setActive(i)}
             onMouseLeave={() => setActive(null)}
             onFocus={() => setActive(i)}
@@ -162,7 +162,7 @@ export function ServicesEditorial() {
             {pillars.map((p, i) => (
               <li key={p.title}>
                 <Link
-                  to="/services"
+                  href="/services"
                   className="group flex items-center gap-6 border-b border-border py-8 transition-colors hover:bg-background"
                 >
                   <MetaLabel index={i + 1} className="text-muted-foreground" />
@@ -186,7 +186,10 @@ export function ServicesEditorial() {
 /* 5. WHAT WE BUILD (dark) ----------------------------------------------- */
 
 const systems = [
-  { name: "فروشگاه اینترنتی", body: "فروش آنلاین با مدیریت محصول، سفارش و پرداخت متناسب کسب‌وکار." },
+  {
+    name: "فروشگاه اینترنتی",
+    body: "فروش آنلاین با مدیریت محصول، سفارش و پرداخت متناسب کسب‌وکار.",
+  },
   { name: "CRM", body: "مدیریت سرنخ، مشتری و پیگیری فروش در یک جای واحد." },
   { name: "سامانه سفارش‌گیری", body: "ثبت و پیگیری سفارش برای تیم فروش، نمایندگان یا مشتریان." },
   { name: "پنل مشتری", body: "دسترسی مشتری به سفارش‌ها، صورتحساب‌ها و درخواست‌ها." },
@@ -221,7 +224,9 @@ export function SolutionExplorer() {
                   aria-pressed={active === i}
                   className={cn(
                     "flex w-full items-center gap-5 border-b border-white/10 py-5 text-start transition-colors duration-200",
-                    active === i ? "text-brand" : "text-ink-foreground/70 hover:text-ink-foreground",
+                    active === i
+                      ? "text-brand"
+                      : "text-ink-foreground/70 hover:text-ink-foreground",
                   )}
                 >
                   <MetaLabel index={i + 1} className="opacity-60" />
@@ -265,9 +270,7 @@ export function ProjectRescue() {
     <section className="bg-brand py-24 text-brand-foreground sm:py-32">
       <Container>
         <MetaLabel>PROJECT RESCUE</MetaLabel>
-        <h2 className="display-1 mt-8 max-w-[14ch]">
-          پروژه‌ای دارید که جایی در مسیر متوقف شده؟
-        </h2>
+        <h2 className="display-1 mt-8 max-w-[14ch]">پروژه‌ای دارید که جایی در مسیر متوقف شده؟</h2>
 
         <div className="mt-16 grid gap-10 border-t border-brand-foreground/25 pt-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-end">
           <ol className="grid gap-0 sm:grid-cols-3">
@@ -338,8 +341,12 @@ function CaseVisual({ index }: { index: number }) {
 }
 
 export function SelectedProjects() {
-  const { data } = useQuery(contentListQuery("case_study", { page: 1, q: "" }));
-  const published = (data?.rows ?? []).slice(0, 3);
+  const published: {
+    id: string;
+    slug: string;
+    title_fa: string;
+    summary_fa: string | null;
+  }[] = [];
 
   return (
     <Section className="grain">
@@ -359,8 +366,7 @@ export function SelectedProjects() {
             ? published.map((p, i) => (
                 <Link
                   key={p.id}
-                  to="/projects/$slug"
-                  params={{ slug: p.slug }}
+                  href={`/projects/${p.slug}`}
                   className="group grid gap-8 border-b border-border py-14 lg:grid-cols-[1.4fr_1fr] lg:items-center lg:gap-16 lg:even:[direction:inherit]"
                 >
                   <div className={cn(i % 2 === 1 && "lg:order-2")}>
@@ -448,9 +454,7 @@ export function IndustriesSection() {
         <div className="flex flex-wrap items-end justify-between gap-6">
           <div>
             <MetaLabel className="text-brand">INDUSTRIES</MetaLabel>
-            <h2 className="display-2 mt-6 max-w-2xl">
-              تکنولوژی باید با مدل کسب‌وکار هماهنگ باشد.
-            </h2>
+            <h2 className="display-2 mt-6 max-w-2xl">تکنولوژی باید با مدل کسب‌وکار هماهنگ باشد.</h2>
           </div>
           <TextLink to="/industries" className="text-ink-foreground">
             همه صنایع
@@ -469,7 +473,7 @@ export function IndustriesSection() {
           {industries.map((name, i) => (
             <Link
               key={name}
-              to="/industries"
+              href="/industries"
               className="grid grid-cols-[1.6fr_repeat(4,minmax(0,1fr))] items-center border-b border-white/10 py-5 transition-colors hover:bg-white/5"
             >
               <span className="text-base font-semibold">{name}</span>
@@ -490,7 +494,7 @@ export function IndustriesSection() {
           {industries.map((name, i) => (
             <li key={name}>
               <Link
-                to="/industries"
+                href="/industries"
                 className="flex items-center justify-between gap-4 border-b border-white/10 py-5"
               >
                 <span className="text-base font-semibold">{name}</span>
@@ -635,8 +639,12 @@ export function PaymentSection() {
 /* 12. BLOG --------------------------------------------------------------- */
 
 export function BlogSection() {
-  const { data } = useQuery(articleListQuery({ page: 1, q: "" }));
-  const rows = data?.rows ?? [];
+  const rows: {
+    id: string;
+    slug: string;
+    title_fa: string;
+    excerpt_fa: string | null;
+  }[] = [];
   const featured = rows[0] ?? null;
   const latest = rows.slice(1, 6);
 
@@ -655,8 +663,7 @@ export function BlogSection() {
 
         {featured ? (
           <Link
-            to="/blog/$slug"
-            params={{ slug: featured.slug }}
+            href={`/blog/${featured.slug}`}
             className="group mt-14 grid gap-10 border-y border-border py-12 lg:grid-cols-[1fr_1fr] lg:items-center"
           >
             <div className="relative aspect-[16/9] overflow-hidden border border-border bg-surface-2">
@@ -691,8 +698,7 @@ export function BlogSection() {
             {latest.map((a, i) => (
               <li key={a.id}>
                 <Link
-                  to="/blog/$slug"
-                  params={{ slug: a.slug }}
+                  href={`/blog/${a.slug}`}
                   className="group flex items-center gap-6 border-b border-border py-7 transition-colors hover:text-brand"
                 >
                   <MetaLabel index={i + 2} className="text-muted-foreground" />
@@ -731,10 +737,7 @@ const faqs = [
 
 export function FaqSection() {
   const [open, setOpen] = useState<number | null>(0);
-  const { data } = useQuery(publicFaqsQuery());
-  const published = (data ?? []).slice(0, 8);
-  const items =
-    published.length > 0 ? published.map((f) => ({ q: f.question_fa, a: f.answer_fa })) : faqs;
+  const items = faqs;
 
   return (
     <Section className="bg-surface">

@@ -1,7 +1,5 @@
 @import "tailwindcss" source(none);
 @source "../src";
-@import "tw-animate-css";
-
 @custom-variant dark (&:is(.dark *));
 
 /* Local IranYekan — no external font service. */
@@ -289,7 +287,6 @@
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
   }
 }
-
 
 @utility reveal {
   animation: rycode-reveal 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
